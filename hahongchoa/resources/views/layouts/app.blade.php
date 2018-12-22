@@ -14,35 +14,32 @@
     <script src="{{asset('js/jquery-slim.min.js') }}"></script>
     <script src="{{asset('js/bootstrap.min.js') }}" defer></script>
     <script src="{{asset('js/popper.min.js') }} " defer></script>
+    <script src="{{asset('js/multipleitem.js') }} " defer></script>
+    <script src="{{asset('js/dropzone.js') }} "></script>
+
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="slick/slick.min.js"></script>
+
+
 @stack('scripts')
 
 <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Mitr" rel="stylesheet">
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="slick/slick-theme.css"/>
+
+
+
 </head>
 
 <body>
 @include('layouts.navbar')
 @yield('nav')
-
-<main class="container">
-    @include('layouts.search')
-    @yield('search')
-    @yield('orderfilter')
-    @include('layouts.card-list-room')
-    <div class="col">
-        <div class="row">
-            @for($d = 0; $d<6; $d++  )
-                @yield('room')
-            @endfor
-        </div>
-    </div>
-</main>
-<footer>
-    @include('layouts.footer')
-    @yield('footer')
-</footer>
+@yield('content')
 </body>
 </html>

@@ -1,5 +1,5 @@
-@section('room')
-    <div class="col-3 card p-1 mt-2 border-0" style="height:auto;">
+@section('cardzone')
+    <div class="col-3 card p-1 mt-2 border-0" style="height:auto; width: 100%">
         <div class="">
             <div class="card-img bg-dark" style="height:164px; width: 100%">
                 {{--<img src="" alt="" height="164px">--}}
