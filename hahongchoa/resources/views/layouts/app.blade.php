@@ -34,12 +34,19 @@
     <link rel="stylesheet" type="text/css" href="slick/slick-theme.css"/>
 
 
-
 </head>
 
 <body>
 @include('layouts.navbar')
-@yield('nav')
+
+{{--{{Request::route()->getName()}}--}}
+{{--@if(Request::route()->getName() == "search.index")--}}
+
+    {{--@yield('searchnav')--}}
+{{--@else--}}
+    @yield('nav')
+{{--@endif--}}
+
 @yield('content')
 </body>
 </html>

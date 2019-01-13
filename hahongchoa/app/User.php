@@ -24,6 +24,8 @@ class User extends Authenticatable
         'password',
         'telephone',
         'remember_token',
+        'url_facebook',
+        'line_qrcode',
         'email'
     ];
 

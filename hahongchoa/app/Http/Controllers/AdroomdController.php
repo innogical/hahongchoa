@@ -3,10 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Adroom;
+use App\Facilitys;
 use App\Imageroom;
 use Faker\Provider\Image;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+
+//use Intervention\Image\Image;
 
 class AdroomdController extends Controller
 {
@@ -20,11 +25,15 @@ class AdroomdController extends Controller
         //
         $listzone = ['สวนสาธารณะ', 'แหล่งต่างชาติ', 'ห้างสรรพสินค้า', 'แนวรถไฟฟ้า', 'ตลาดนัดกลางคืน'];
         $lifestyle = ['นักศึกษา', 'บุคคลทั่วไป'];
-        $promise = ['3เดือน', 'ุ6เดือน', '1ปี'];
+        $promise = ['3เดือน', '6เดือน', '1ปี'];
         $bts = ['หมอชิต', 'สะพานควาย	', 'อารีย์', 'สนามเป้า', 'อนุสาวรีย์ชัยสมรภูมิ', 'พญาไท', 'ราชเทวี', 'สยาม', ' ชิดลม',
             'เพลินจิต', 'นานา', 'อโศก', 'พร้อมพงษ์', ' ทองหล่อ', 'เอกมัย', 'พระโขนง', ' อ่อนนุช', 'บางจาก', ' ปุณณวิถี', ' อุดมสุข', 'บางนา', 'แบริ่ง', 'สนามกีฬา', 'ราชดำริ', ' ศาลาแดง', 'ช่องนนทรี', 'สุรศักดิ์', 'สะพานตากสิน', 'กรุงธนบุรี', 'วงเวียนใหญ่', 'โพธิ์นิมิตร', 'ตลาดพลู', 'วุฒากาศ', 'บางหว้า', 'สำโรง'
         ];
-        return view('createroom', compact('listzone', 'promise', 'bts', 'lifestyle'));
+
+        $icon = ['cctv.svg', 'elavator.svg', 'fitness.svg', 'food.svg', 'furniture.svg', 'park.svg', 'pet.svg', 'skytrian.svg', 'swim.svg', 'washing_machine.svg', 'wifi.svg'];
+
+
+        return view('createroom', compact('listzone', 'promise', 'bts', 'lifestyle', 'icon'));
 
     }
 
@@ -33,8 +42,7 @@ class AdroomdController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public
-    function create()
+    public function create()
     {
         //
     }
@@ -60,23 +68,16 @@ class AdroomdController extends Controller
         $bts = $request->bts;
         $detail = $request->detail;
         $hilight = $request->hilight;
-
         $amoutLife = $request->amoutLife;
-        $file_dropzzone = $request->file;
-
-        $enagy = $request->enagy;
-        $middle_val = $request->middle_val;
-        $insurance = $request->insurance;
-        $water = $request->water;
+        $file_dropzzone[] = $request->file;
         $promise = $request->promise;
-        $internet = $request->internet;
         $lat = $request->lat;
         $lng = $request->lng;
-        $user_token = $request->user_token;
-//
+        $user_token = Auth::user()->getRememberToken();
+        $facilitys = $request->facility;
+
 
         $Addroom = new Adroom();
-        $AddImageroom = new Imageroom();
 
         $Addroom->stylelife_id = $lifestyle;
         $Addroom->user_token = $user_token;
@@ -91,40 +92,45 @@ class AdroomdController extends Controller
         $Addroom->lng = $lng;
         $Addroom->detail = $detail;
         $Addroom->hilight = $hilight;
-
+        $Addroom->amoutroom = $amoutroom;
+        $Addroom->price = $price;
 //
-        foreach ($file_dropzzone as $key => $itemfile) {
-            $item[$key] = $itemfile->getClientOriginalName();
-        }
-
-        if (count($item)) {
-
-            foreach ($item as $key => $item_s) {
-//            $str_val = $item_s;
-//                echo $item_s . "<br>";
-                $AddImageroom->pathimg = $item_s;
-                $AddImageroom->save();
-            }
-
-
-        }
-//
-//        $loop_val_img = json_encode($item);
-//        for ($i = 0; $i<= $loop_val_img; $i++){
-//            echo $loop_val_img[$i];
-//        }
-//        return
-//
-//        if (count($item) > 1) {
-//            $string_item = implode(',', $item);
-//        }
-//        $item_toconvert = $string_item;
 
 
         $Addroom->save();
+        $id = $Addroom->id;
+//
 
-//        dd($item);
-//        return $item;
+        foreach ($request->file as $image) {
+            $name = $image->getClientOriginalName();
+            $image->move(public_path() . '/images/', $name);
+            $data[] = $name;
+//todo:: Resize เมื่องานทุกอย่างเสร็จแล้ว
+
+        }
+        foreach ($data as $nameimg) {
+            // loop image room
+            $AddImageroom = new Imageroom();
+            $AddImageroom->roomId = $id;
+            $AddImageroom->pathimg = $nameimg;
+            $AddImageroom->save();
+
+        }
+
+        $cutComma = rtrim($facilitys, ",");
+        $FacilityExpolore = explode(",", $cutComma);
+        foreach ($FacilityExpolore as $a_facitltiy) {
+            //my echo code
+
+            $facility_model = new Facilitys();
+            $facility_model->room_id = $id;
+            $facility_model->facility_id = $a_facitltiy;
+            $facility_model->save();
+
+
+//            echo $imageExtractFinal.'<br>';
+        }
+
         return redirect('/managerroom')->with('success');
     }
 

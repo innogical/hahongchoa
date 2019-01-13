@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Register;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -43,15 +44,24 @@ class RegisterController extends Controller
         $pass = $request->password;
         $username = $request->usersurname;
         $phone = $request->telphone;
+        $urlfacebook = $request->urlfacebook;
+        $linelink = $request->linelink;
         $hashpass = md5($pass);
 
-        DB::table('user')->insert([
-            'username' => $username,
-            'password' => $pass,
-            'telephone' => $phone,
-            'remember_token' => $hashpass,
-            'email' => $email
-        ]);
+//        DB::table('user')->insert([
+//            'username' => $username,
+//            'password' => $pass,
+//            'telephone' => $phone,
+//            'remember_token' => $hashpass,
+//            'email' => $email
+//        ]);
+        $Adduser = new User();
+
+        $Adduser->username = $username;
+        $Adduser->password = $pass;
+        $Adduser->telephone = $phone;
+        $Adduser->remember_token = $hashpass;
+        $Adduser->remember_token = $hashpass;
 
         return redirect('/login')->with('success');
 

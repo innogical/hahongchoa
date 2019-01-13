@@ -8,7 +8,7 @@
         {{--@yield('slide-item')--}}
         @include('component.box-zone')
         @yield('zone')
-        @include('component.card-list-zone')
+        @include('component.card-list-smartsearch')
         <div class="container">
             <div class="col">
                 <div class="row">

@@ -10,13 +10,12 @@
         </div>
 
 
-        @include('component.card-list-zone')
+        @include('component.myroom-card')
         <div class="col-12">
             <div class="row">
-                    @for($i = 0; $i <6; $i++)
-                        @yield('cardzone')
-
-            @endfor
+                    {{--@for($i = 0; $i <6; $i++)--}}
+                        @yield('myroom')
+            {{--@endfor--}}
             </div>
         </div>
     </div>

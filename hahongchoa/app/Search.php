@@ -1,12 +1,19 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: innovate
+ * Date: 2019-01-06
+ * Time: 17:13
+ */
 
 namespace App;
 
+
 use Illuminate\Database\Eloquent\Model;
 
-class Adroom extends Model
+class Search extends Model
 {
-    public $table = "room";
+    public $table = "searchlocation";
     public $primaryKey = "id";
 
 
@@ -17,21 +24,10 @@ class Adroom extends Model
      */
     protected $fillable = [
 
-        'stylelife_id',
-        'user_token',
-        'name',
-        'address',
-        'lease_id',
-        'btsstation_id',
-        'zone_id',
-        'size',
-        'personLive',
+        'namelocation',
+        'type',
         'lat',
-        'lng',
-        'detail',
-        'hilight',
-        'amoutroom',
-        'price'
+        'lng'
     ];
 
     /**
@@ -39,5 +35,6 @@ class Adroom extends Model
      *
      * @var array
      */
+
 
 }

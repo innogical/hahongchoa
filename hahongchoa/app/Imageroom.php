@@ -8,9 +8,10 @@ class Imageroom extends Model
 {
     //
     public $table = "imageRoom";
-    public $primaryKey = "roomId";
+    public $primaryKey = "img_id";
 
     protected $fillable = [
+        'roomId',
         'pathimg'
     ];
 

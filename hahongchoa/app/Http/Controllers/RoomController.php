@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Adroom;
-use App\Imageroom;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class ManagerprofileController extends Controller
+class RoomController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,15 +16,7 @@ class ManagerprofileController extends Controller
     public function index()
     {
         //
-
-        $myrooms = DB::table('room')
-           ->join('imageRoom','roomid','=','room.id')
-//            ->join('user', 'user.remember_token', '=', 'room.user_token') //แก้ tokent
-            ->join('zone', 'zone.id', '=', 'room.zone_id')
-            ->get();
-
-//        dd($myroom);
-        return view('managerroom',compact('myrooms'));
+        return view('welcome');
     }
 
     /**
@@ -52,21 +43,24 @@ class ManagerprofileController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Imageroom $profile
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Imageroom $profile)
+    public function show($id)
     {
         //
+//dd($id);
+
+        return view('detailroom', compact('id'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Imageroom $profile
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Imageroom $profile)
+    public function edit($id)
     {
         //
     }
@@ -75,10 +69,10 @@ class ManagerprofileController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  \App\Imageroom $profile
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Imageroom $profile)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -86,11 +80,25 @@ class ManagerprofileController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Imageroom $profile
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Imageroom $profile)
+    public function destroy($id)
     {
         //
+    }
+
+    function listroom()
+    {
+
+        $listrooms = DB::table('room')
+            ->select('*', 'bts_station.lat AS btsstation_lat', 'bts_station.lng AS btsstation_lng')
+            ->join('bts_station', 'bts_station.id', '=', 'room.btsstation_id')
+            ->join('imageRoom', 'imageRoom.roomid', '=', 'room.id')
+            ->join('zone', 'zone.id', '=', 'room.zone_id')
+            ->get();
+
+
+        return view('welcome',compact('listrooms'));
     }
 }

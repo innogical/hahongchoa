@@ -11,14 +11,15 @@
                     <div class="form-group">
                         <label for="exampleInputEmail1">Email address</label>
                         <input type="email" class="form-control" name="mail" aria-describedby="emailHelp"
-                               placeholder="Enter email" required>
-                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
-                            else.
+                               placeholder="Email" required>
+                        <small id="emailHelp" class="form-text text-muted">กรุณากรอก Email
                         </small>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Password</label>
                         <input type="password" class="form-control" placeholder="Password" name="pass" required>
+                        <small id="emailHelp" class="form-text text-muted">กรุณากรอก Password
+
                     </div>
 
                     <button type="submit" class="btn btn-light-blue justify-content-center float-right mb-2">

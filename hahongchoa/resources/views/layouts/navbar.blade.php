@@ -1,14 +1,13 @@
 @section('nav')
 
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-light shadow" style="padding: 0;height: 70px">
+        <nav class="navbar navbar-expand-md navbar-light bg-light shadow p-1" style="padding: 0;height: 70px">
             <div class="container" style="padding: 0">
                 <a class="navbar-brand" href="{{ url('/') }}">
 
-                    <img src="{{asset('img_view/logo.png')}}" width="70" height="auto" alt="logo">
+                    <img src="{{asset('img_view/logo.png')}}" width="120" height="auto" alt="logo">
                 </a>
-                <a class="navbar-brand" href="#">
-                </a>
+
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent"
                         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -22,10 +21,10 @@
                     </ul>
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
-                        <li><a class="  {{ Request::is('/') ? 'color-light-orenge' : 'nav-link' }} "
-                               href="{{url('/')}}">หน้าแรก</a></li>
-                        <li><a class="  {{ Request:: is('http://127.0.0.1:8000/zone') ? 'color-light-orenge ' : 'nav-link' }} "
-                               href="{{ url('/zone') }}">พื้นที่</a></li>
+                        {{--<li><a class="  {{ Request::is('/') ? 'color-light-orenge' : 'nav-link' }} "--}}
+                               {{--href="{{url('/')}}">หน้าแรก</a></li>--}}
+                        {{--<li><a class="  {{ Request:: is('http://127.0.0.1:8000/zone') ? 'color-light-orenge ' : 'nav-link' }} "--}}
+                               {{--href="{{ url('/zone') }}">พื้นที่</a></li>--}}
 
                         @if(\Illuminate\Support\Facades\Auth::User())
 
@@ -40,7 +39,8 @@
                                 </ul>
                             </div>
                         @else
-                            <li><a class="nav-link" href="{{url('/login')}}">เข้าสู่ระบบ</a></li>
+                            {{--<li><a class="nav-link" href="{{url('/login')}}">เข้าสู่ระบบ</a></li>--}}
+                            <li><a class="nav-link" href="{{url('/login')}}">ลงประกาศห้อง</a></li>
 
                         @endif
 
