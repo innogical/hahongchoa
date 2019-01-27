@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-6 img-fluid border mt-2" style="height: 538px">
                 <img class="d-block w-100"
-                     src="https://subtitle-index.org/medias/tt1726286/12167894744347163852/Mobile+Suit+Gundam+00%3A+A+Wakening+Of+The+Trailblazer"
+                     src="{{asset('images_rooms/image4.jpg')}}"
                 {{--<img src="" alt="">--}}
 
             </div>

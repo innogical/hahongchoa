@@ -56,12 +56,15 @@ class RegisterController extends Controller
 //            'email' => $email
 //        ]);
         $Adduser = new User();
-
+        $Adduser->email = $email;
         $Adduser->username = $username;
         $Adduser->password = $pass;
         $Adduser->telephone = $phone;
         $Adduser->remember_token = $hashpass;
-        $Adduser->remember_token = $hashpass;
+        $Adduser->url_facebook = $urlfacebook;
+        $Adduser->line_qrcode = $linelink;
+        $Adduser->save();
+
 
         return redirect('/login')->with('success');
 

@@ -13,24 +13,6 @@
 
 Auth::routes();
 
-//Route::get('/', function () {
-//    return view('welcome');
-//});
-
-
-//Route::get('/zone', function () {
-//    return view('zone');
-//});
-
-//
-//Route::get('/register', function () {
-//    return view('manager-register');
-//});
-//
-
-
-
-
 Route::get('/logout','LoginController@logout');
 Route::get('/', 'RoomController@listroom');
 
@@ -42,7 +24,7 @@ Route::resource('/register', 'RegisterController');
 Route::resource('/loginend', 'LoginController');
 Route::resource('/managerroom', 'ManagerprofileController');
 Route::resource('/adroom','AdroomdController');
-Route::resource('/search','SearchController');
+Route::resource('/ห้องเช่าติดรถไฟฟ้า','SearchController');
 
 
 Route::get('/home', 'HomeController@index')->name('home');

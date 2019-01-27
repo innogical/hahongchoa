@@ -9,6 +9,7 @@ use Faker\Provider\Image;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 
 //use Intervention\Image\Image;
@@ -23,17 +24,17 @@ class AdroomdController extends Controller
     public function index()
     {
         //
-        $listzone = ['สวนสาธารณะ', 'แหล่งต่างชาติ', 'ห้างสรรพสินค้า', 'แนวรถไฟฟ้า', 'ตลาดนัดกลางคืน'];
         $lifestyle = ['นักศึกษา', 'บุคคลทั่วไป'];
         $promise = ['3เดือน', '6เดือน', '1ปี'];
         $bts = ['หมอชิต', 'สะพานควาย	', 'อารีย์', 'สนามเป้า', 'อนุสาวรีย์ชัยสมรภูมิ', 'พญาไท', 'ราชเทวี', 'สยาม', ' ชิดลม',
             'เพลินจิต', 'นานา', 'อโศก', 'พร้อมพงษ์', ' ทองหล่อ', 'เอกมัย', 'พระโขนง', ' อ่อนนุช', 'บางจาก', ' ปุณณวิถี', ' อุดมสุข', 'บางนา', 'แบริ่ง', 'สนามกีฬา', 'ราชดำริ', ' ศาลาแดง', 'ช่องนนทรี', 'สุรศักดิ์', 'สะพานตากสิน', 'กรุงธนบุรี', 'วงเวียนใหญ่', 'โพธิ์นิมิตร', 'ตลาดพลู', 'วุฒากาศ', 'บางหว้า', 'สำโรง'
         ];
 
-        $icon = ['cctv.svg', 'elavator.svg', 'fitness.svg', 'food.svg', 'furniture.svg', 'park.svg', 'pet.svg', 'skytrian.svg', 'swim.svg', 'washing_machine.svg', 'wifi.svg'];
+        $icon = ['cctv.svg', 'elavator.svg', 'fitness.svg', 'food.svg', 'furniture.svg', 'park.svg', 'pet.svg', 'skytrian.svg', 'swim.svg', 'washing.svg', 'wifi.svg'];
+//        $listzone = $this->Zonebts_near();
+//        dd($listzone);
 
-
-        return view('createroom', compact('listzone', 'promise', 'bts', 'lifestyle', 'icon'));
+        return view('createroom', compact( 'promise', 'bts', 'lifestyle', 'icon','zone'));
 
     }
 
@@ -73,18 +74,18 @@ class AdroomdController extends Controller
         $promise = $request->promise;
         $lat = $request->lat;
         $lng = $request->lng;
-        $user_token = Auth::user()->getRememberToken();
+        $user_token = \Illuminate\Support\Facades\Auth::user()->id;
         $facilitys = $request->facility;
 
 
         $Addroom = new Adroom();
 
         $Addroom->stylelife_id = $lifestyle;
-        $Addroom->user_token = $user_token;
+        $Addroom->user_id = $user_token;
         $Addroom->name = $namecondo;
         $Addroom->address = $address;
         $Addroom->lease_id = $promise;
-        $Addroom->btsstation_id = $bts;
+        $Addroom->btsstation_id = $zonearea;
         $Addroom->zone_id = $zonearea;
         $Addroom->size = $sizeroom;
         $Addroom->personLive = $amoutLife;
@@ -95,15 +96,12 @@ class AdroomdController extends Controller
         $Addroom->amoutroom = $amoutroom;
         $Addroom->price = $price;
 //
-
-
         $Addroom->save();
         $id = $Addroom->id;
 //
-
         foreach ($request->file as $image) {
             $name = $image->getClientOriginalName();
-            $image->move(public_path() . '/images/', $name);
+            $image->move(public_path() . '/images_rooms/', $name);
             $data[] = $name;
 //todo:: Resize เมื่องานทุกอย่างเสร็จแล้ว
 
@@ -182,4 +180,13 @@ class AdroomdController extends Controller
     {
         //
     }
+
+    function Zonebts_near()
+    {
+
+        $bts_lists = DB::table('zone')->get();
+        return $bts_lists;
+
+    }
+
 }

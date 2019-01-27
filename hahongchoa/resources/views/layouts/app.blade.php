@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Hongchoa</title>
+    <title>Hongchao</title>
 
     <!-- Scripts -->
     <script src="{{asset('js/jquery-slim.min.js') }}"></script>
@@ -16,6 +16,7 @@
     <script src="{{asset('js/popper.min.js') }} " defer></script>
     <script src="{{asset('js/multipleitem.js') }} " defer></script>
     <script src="{{asset('js/dropzone.js') }} "></script>
+    <script src="{{asset('js/Slideimg.js') }} "></script>
 
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 

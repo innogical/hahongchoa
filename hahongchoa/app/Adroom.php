@@ -18,7 +18,7 @@ class Adroom extends Model
     protected $fillable = [
 
         'stylelife_id',
-        'user_token',
+        'user_id',
         'name',
         'address',
         'lease_id',

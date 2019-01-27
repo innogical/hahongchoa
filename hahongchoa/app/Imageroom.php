@@ -11,7 +11,7 @@ class Imageroom extends Model
     public $primaryKey = "img_id";
 
     protected $fillable = [
-        'roomId',
+        'roomid',
         'pathimg'
     ];
 
@@ -20,7 +20,5 @@ class Imageroom extends Model
      *
      * @var array
      */
-    protected $hidden = [
-        'password', 'remember_token'
-    ];
+
 }

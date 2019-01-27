@@ -49,7 +49,7 @@ class LoginController extends Controller
             Auth::login($check);
             return redirect('/managerroom');
         } else {
-            return redirect('/login')->with('failure');
+            return redirect('/login')->withErrors('loginfail','ไม่มีข้อมูลในระบบ');
         }
     }
 

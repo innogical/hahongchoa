@@ -13,6 +13,7 @@ class RoomController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         //
@@ -50,7 +51,7 @@ class RoomController extends Controller
     {
         //
 //dd($id);
-
+//        return $id;
         return view('detailroom', compact('id'));
     }
 
@@ -99,6 +100,19 @@ class RoomController extends Controller
             ->get();
 
 
-        return view('welcome',compact('listrooms'));
+
+        $zone = $this->Zonebts_near();
+
+        return view('welcome', compact('listrooms','zone'));
     }
+
+    function Zonebts_near()
+    {
+
+        $bts_lists = DB::table('bts_station')->get();
+        return $bts_lists;
+
+    }
+
+
 }

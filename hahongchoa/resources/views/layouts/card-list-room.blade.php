@@ -64,8 +64,8 @@
                     <img class="setad position-absolute" src="{{asset('/icon/comp_ad.png')}}" alt="Ad" >
                     <button type="submit" class=" btn btn_green btn-compare position-absolute">เปรียบเทียบ</button>
 
-                    <img src="{{asset('/images/'.$room->pathimg)}}" alt="{{$room->pathimg}}" width="100%" height="164px">
-                    {{--<img src="{{asset('/images/')}}" alt="{{$room->pathimg}}">--}}
+                    <img src="{{asset('/images_rooms/'.$room->pathimg)}}" alt="{{$room->pathimg}}" width="100%" height="164px">
+                    {{--<img src="{{asset('/images_rooms/')}}" alt="{{$room->pathimg}}">--}}
 
                 </div>
 

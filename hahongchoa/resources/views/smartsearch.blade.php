@@ -1,88 +1,97 @@
 @extends('layouts.app')
 @section('content')
-
     <nav class="navbar navbar-expand-md navbar-light p-1 bg-light shadow" style="padding: 0;height: auto">
         <div class="container" style="padding: 0">
-            <div class="col-12">
-                <form action="/search" method="post">
+            <div class="col align-content-center" style="height: 80px;">
+                <form action="/ห้องเช่าติดรถไฟฟ้า" method="post">
                     @csrf
-                    <div class="row justify-content-center">
-                        <div class=" col-1">
-                            <p class="color-dark-blue-fond mt-3">คำค้นหา</p>
-                        </div>
-                        <input type="text" name="wordsearch" class="border-0 col-6 shadow mt-2"
-                               placeholder="สถานที่ทำงาน / มหาวิทยาลัย" value="{{$lifestyle_location}}"
-                               style="height: 40px">
-                    </div>
+                    {{--<div class="row justify-content-center">--}}
+                        {{--<div class=" col-1">--}}
+                            {{--<p class="color-dark-blue-fond mt-3">คำค้นหา</p>--}}
+                        {{--</div>--}}
+                        {{--<input type="text" name="lifestyleplace" class="border-0 col-6 shadow mt-2"--}}
+                               {{--placeholder="สถานที่ทำงาน / มหาวิทยาลัย" value="{{$lifestyle_location}}"--}}
+                               {{--style="height: 40px">--}}
+                    {{--</div>--}}
 
                     <div class="row mt-1 justify-content-center">
-                        <div class="card-body col-2  ">
+                        <div class="card-body col-2 ">
                             <div class="row border mt-2">
                                 <div class="col-auto  mt-2">
                                     ราคาเริ่มต้น
                                 </div>
-                                <input type="text" value="{{$price_low}}" class="col-4 border-0" name="start_price"
+                                <input type="text" value="{{$price_low}}" class="col-4 border-0" name="price_low"
                                        style="height: 40px">
                             </div>
                         </div>
 
-                        <div class="card-body col-2  ">
+                        <div class="card-body col-2 ">
                             <div class="row border mt-2">
                                 <div class="col-auto  mt-2">
-                                    ราคาสูงสุด
+                                    ถึง
                                 </div>
-                                <input type="text" value="{{$price_high}}" class="col-4 border-0" name="end_price"
+                                <input type="text" value="{{$price_high}}" class="col-6 border-0" name="price_high"
                                        style="height: 40px">
                             </div>
                         </div>
 
-                        <div class="card-body col-2  ">
+                        <div class="card-body col-2 ">
                             <div class="row border mt-2">
+
+                                {{--<input type="text" value="{{$person_live}}" class="col-4 border-0" name="people_life"--}}
+                                {{--style="height: 40px">--}}
+
+                                <select id="inputState" class="form-control col" name="person_live">
+                                    <option value="{{$person_live}}" selected>{{$person_live}}</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
                                 <div class="col-auto  mt-2">
-                                    จำนวนคน
+                                    คน
                                 </div>
-                                <input type="text" value="{{$person_live}}" class="col-4 border-0" name="people_life"
-                                       style="height: 40px">
                             </div>
                         </div>
 
 
-                        <div class="card-body col-2  ">
-                            <div class="row border mt-2">
-                                <select id="inputState" class="form-control col" name="zone">
-                                    {{--@foreach($zone as $index=> $zone_name)--}}
-                                    <option value="{{$area_zone}}" selected>{{$area_zone}}</option>
-                                    {{--<option value="{{$index+1}}">{{$zone_name}}</option>--}}
-                                    {{--@endforeach--}}
+                        <div class="card-body col-2">
+                            <div class=" border mt-2">
+                                <select id="inputState" class="form-control col" name="area_zone">
+                                    {{--<option value="{{$area_zone}}" selected>{{$area_zone}}</option>--}}
+                                    @foreach($zone_bts as $a_zone)
+                                        <option value="{{$a_zone->id}}">{{$a_zone-> name_station }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
 
 
-                        <div class="card-body col-2 pl-0 pr-0 ml-0 mr-0">
-                            <input type="text" value="{{$optioncar}}" hidden id="chose_optioncar" onload="">
-                            <div class="row  mt-2 justify-content-center">
+                        <div class="card-body col-1 pl-0 pr-0 ml-0 mr-0">
+                            <input type="text" value="{{$optioncar}}" hidden id="optioncar">
+                            <div class="row  mt-2">
                                 <div class="">
                                     <label class="btn border" id="radio_car0">
-                                        <img src="{{asset('/icon/nocar.svg' )}}" alt="">
+                                        <img src="{{asset('/icon/nocar.svg' )}}" alt="nocar">
                                         <input type="radio" value="nothavecar"
                                                name="optioncar" class="invisible" onclick="optionCar()">
                                     </label>
 
                                 </div>
                                 <div class="ml-2">
-                                    <label class="btn border" id="radio_car0">
-                                        <img src="{{asset('/icon/havecar.svg' )}}" alt="">
-                                        <input type="radio" value="nothavecar"
+                                    <label class="btn border" id="radio_car1">
+                                        <img src="{{asset('/icon/havecar.svg' )}}" alt="havecar">
+                                        <input type="radio" value="havecar"
                                                name="optioncar" class="invisible" onclick="optionCar()">
                                     </label>
                                 </div>
                             </div>
                         </div>
-
-                        {{--@endforeach--}}
-                        <div class="card-body col-1 mt-2 ">
-                            <button type="submit" class="btn color-higiht-orange-btn" style="height: 40px">ค้นหา
+                        <div class=" col-1 mt-4 ">
+                            <button type="submit" class="btn color-higiht-orange-btn" style="height: 40px">
+                                <img src="{{asset('/icon/search.svg')}}" style="width: 30px; height: auto;" alt="">
+                                ค้นหาห้องว่างใกล้คุณ
                             </button>
                         </div>
                     </div>
@@ -101,11 +110,7 @@
                 <h4 class="color-dark-blue-fond">ผลการค้นหา</h4>
             </div>
             <div class="row">
-
-                {{--@for($i = 0; $i <6; $i++)--}}
                 @yield('cardzone')
-                {{--@endfor--}}
-
             </div>
         </div>
     </div>
@@ -113,8 +118,13 @@
         @include('layouts.footer')
         @yield('footer')
     </footer>
+
     <script>
-        window.onload = smartSearch();
+        $(document).ready(function () {
+            // executes when HTML-Document is loaded and DOM is ready
+            // alert("document is ready");
+            smartSearch()
+        });
     </script>
 
 

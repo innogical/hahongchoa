@@ -38,6 +38,12 @@
 
 
     </div>
+
+
+    <script>
+    // swal("hi");
+    </script>
+
     <footer>
         @include('layouts.footer')
         @yield('footer')

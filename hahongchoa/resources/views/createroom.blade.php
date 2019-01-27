@@ -2,6 +2,8 @@
 @section('content')
     <div class="container">
         <h4 class="color-dark-blue-fond mt-2 text-left">ประกาศห้องว่าง</h4>
+
+
         <form action="/adroom" method="post" enctype="multipart/form-data" class="Dropzone">
             @csrf
             <div class="row">
@@ -17,16 +19,19 @@
 
                 <div class="col-6 mt-2">
                     <select id="inputState" class="form-control" name="zonearea">
-                        @foreach($listzone as $index=>$namezone)
+                        <option value="1" selected>ใกล้รถไฟฟ้า</option>
+                        @foreach($bts as $index=>$namezone)
                             <option value="{{$index+1}}">{{$namezone}}</option>
                         @endforeach
                     </select>
 
                     {{--<input type="text" class="form-control" name="sizeroom" placeholder="ขนาดห้อง">--}}
                 </div>
+
                 <div class="col-6 mt-2">
                     <select id="inputState" class="form-control" name="lifestyle">
-                        @foreach($lifestyle as $index=> $lifestyle_name)
+                        <option value="1" selected>Lifestyle</option>
+                    @foreach($lifestyle as $index=> $lifestyle_name)
                             <option value="{{$index+1}}">{{$lifestyle_name}}</option>
                         @endforeach
                     </select>
@@ -43,21 +48,21 @@
                     </select>
                 </div>
 
-                <div class="col-6 mt-2">
+                <div class="col mt-2">
                     <input type="text" class="form-control" placeholder="รายละเอียด" name="detail">
                 </div>
                 {{--<div class="col-6 mt-2">--}}
                 {{--<input type="text" class="form-control" placeholder="จุดเด่น" name="hilight">--}}
                 {{--</div>--}}
 
-                <div class="col-6 mt-2">
+                {{--<div class="col-6 mt-2">--}}
 
-                    <select id="inputState" class="form-control" name="bts">
-                        @foreach($bts as $index=> $list_brs)
-                            <option value="{{$index+1}}">{{$list_brs}}</option>
-                        @endforeach
-                    </select>
-                </div>
+                    {{--<select id="inputState" class="form-control" name="bts">--}}
+                        {{--@foreach($bts as $index=> $list_brs)--}}
+                            {{--<option value="{{$index+1}}">{{$list_brs}}</option>--}}
+                        {{--@endforeach--}}
+                    {{--</select>--}}
+                {{--</div>--}}
 
             </div>
             <div class="row">
@@ -87,20 +92,21 @@
                     </div>
                 </div>
             </div>
-            <input type="file" name="filescan" class="col-12 border mt-2 " style="height: 40px;">
+            {{--<input type="file" name="filescan" class="col-12 border mt-2 " style="height: 40px;">--}}
             <div class="text-left mt-2">
                 <h6 class="color-dark-blue-fond">สิ่งอำนวยความสะดวก</h6>
             </div>
 
             <div class="row">
-
                 @foreach($icon as $index => $a_icon  )
-                    <div class="col-1" id="btn_facility">
+                    <div class="col-1 text-center" id="btn_facility">
                         <label class="btn border" id="border_faci{{$index}}">
                             <img src="{{asset('/icon/'.$a_icon )}}" alt="">
                             <input type="checkbox" value="{{$index}}" id="btnCheckbox{{$index}}"
                                    name="options_facility" class="invisible" onclick="selectbtnCheckbox()">
                         </label>
+                        <p class="color-dark-blue-fond text-center">{{str_replace(".svg","",$a_icon)}}</p>
+
                     </div>
                 @endforeach
             </div>
@@ -109,7 +115,7 @@
             <div class="text-left mt-2">
                 <h6 class="color-dark-blue-fond">แผนที่</h6>
             </div>
-            <div id="map" style="height: 384px" ></div>
+            <div id="map" style="height: 384px"></div>
 
             <input type="text" id="inputLat" name="lat" hidden>
             <input type="text" id="inputLng" name="lng" hidden>
@@ -119,7 +125,8 @@
 
                 <button type="reset" class="btn btn-primary color-dark-blue-fond mt-2 border-0">ล้างค่า</button>
 
-                <button type="submit" class="btn btn-primary mt-2 btn-light-blue text-right border-0" id="comfiem_addroom">ยืนยัน
+                <button type="submit" class="btn btn-primary mt-2 btn-light-blue text-right border-0"
+                        id="comfiem_addroom">ยืนยัน
                 </button>
             </div>
 

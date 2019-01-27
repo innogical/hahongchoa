@@ -21,8 +21,9 @@ class SearchController extends Controller
     {
         //
 
-        $zone = ['สวนสาธารณะ', 'แหล่งต่างชาติ', 'ห้างสรรพสินค้า', 'แนวรถไฟฟ้า', 'ตลาดนัดกลางคืน'];
         $icon = ['havecar.svg', 'nocar.svg'];
+        $zone = $this->zoneBts();
+
 
         return view('smartsearch', compact('zone', 'icon'));
     }
@@ -59,56 +60,65 @@ class SearchController extends Controller
         $mylocation_lng = $request->mylocation_lng;
 
 
-//        dd($optioncar,$lifestyle_location);
+        $notfound = "notfound";
+
+
+        // location form search
         $search = DB::table('searchlocation')
             ->where('namelocation', 'like', '%' . $lifestyle_location . '%')
-            ->get();
-
-        foreach ($search as $search_item) {
-
-// location form search
-            $place_lat_away = $search_item->lat;
-            $place_lng_away = $search_item->lng;
+            ->first();
 
 
-        }
-        $roomlists = $this->getListRoom();
+        if ($search != null) {
 
-
-//        dd($roomlists);
-
-
-        $calRoute = [];
-
-        foreach ($roomlists as $list_room) {
-            $nameRoom = $list_room->name;
-            $size = $list_room->size;
-            $personLive = $list_room->personLive;
-            $room_lat = $list_room->lat;
-            $room_lng = $list_room->lng;
-
-            array_push($calRoute, $this->calRouteAndTime($place_lat_away, $place_lng_away, $room_lat, $room_lng));
-        }
-//        dd($calRoute);
-//
-
-        $result = $roomlists->map(function ($item, $key) use ($calRoute) {
-
-            foreach ($calRoute as $subItem) {
-                $item->distance = $subItem[0];
-                $item->time = $subItem[1];
-            }
-            return $item;
-        });
-
-//        dd($result);
-
-        if ($result) {
-            return view('smartsearch',
-                compact('result','lifestyle_location','price_low','price_high','person_live','area_zone','optioncar'));
+            $search_lat_away = $search->lat;
+            $search_lng_away = $search->lng;
         } else {
-            return "ไม่มีข้อมูลการค้นหา";
+            return redirect('/')->with(['data' => $notfound]);
         }
+
+        // location form search
+
+
+        $zone_bts = $this->getBtsstationlist();
+//        dd($zone_bts);
+
+
+        if ($optioncar == "nothavecar") {
+//ไม่มีรถ
+
+            $listRoom = $this->getListRoom($person_live, $price_low, $price_high);
+//            dd($listRoom);
+
+
+            $pot_station_bts = $this->getBtsstationlist();
+
+            foreach ($pot_station_bts as $bts) {
+                $place_lat_away = $bts->lat;
+                $place_lng_away = $bts->lng;
+            }
+
+            $val_roomFormlistroom = $this->nothavecar($listRoom, $place_lat_away, $place_lng_away);
+            $result = $val_roomFormlistroom;
+//            dd($result);
+        } else {
+            //มีรถ
+//            $mylocation_lat = $request->mylocation_lat;
+//            $mylocation_lng = $request->mylocation_lng;
+
+            $listRoom = $this->getListRoom($person_live, $price_low, $price_high);
+            $valresult_havecar = $this->havecar($listRoom, $search_lat_away, $search_lng_away);
+
+            $result = $valresult_havecar;
+
+        }
+
+        if ($result != null){
+            return view('smartsearch', compact('result', 'zone_bts', 'lifestyle_location', 'price_low', 'price_high', 'person_live', 'area_zone', 'optioncar'));
+        }else{
+            return redirect('/')->with(['data' => $notfound]);
+        }
+//        dd($result);
 
     }
 
@@ -158,19 +168,47 @@ class SearchController extends Controller
     }
 
 
-    function getListRoom()
+    function getListRoom($personlive, $price_lower, $price_higher)
     {
 
         $room = DB::table('room')
-            ->select('*', 'bts_station.lat AS btsstation_lat', 'bts_station.lng AS btsstation_lng')
+            ->select('*', 'room.id AS roomid', 'bts_station.lat AS btsstation_lat', 'bts_station.lng AS btsstation_lng')
             ->join('bts_station', 'bts_station.id', '=', 'room.btsstation_id')
-            ->join('imageRoom', 'imageRoom.roomid', '=', 'room.id')
-            ->join('zone', 'zone.id', '=', 'room.zone_id')
+            ->where('room.personLive', '=', '' . $personlive)
+            ->whereBetween('room.price', [$price_lower, $price_higher])
             ->get();
 
 //        dd($room);
+//        return $room;
 
-        return $room;
+
+        $arrimgroom = [];
+        foreach ($room as $aRoom_l) {
+//            $imgroom = $this->imageRoomloop($aRoom_l->id);
+//            echo $aRoom_l->roomid;
+            $imgroom = $this->imageRoomloop($aRoom_l->roomid);
+
+            array_push($arrimgroom, $imgroom);
+        }
+
+//        dd($arrimgroom);
+
+        $itemArr = [];
+        foreach ($arrimgroom as $index => $subItem) {
+            array_push($itemArr, $subItem->pathimg);
+        }
+
+
+        $RoomFullsetattr = $room->map(function ($item, $key) use ($itemArr) {
+
+//            foreach ($arrimgroom as $subItem) {
+            $item->imgRoomF = $itemArr[$key];
+//            }
+            return $item;
+        });
+
+        return $RoomFullsetattr;
+
     }
 
     function calRouteAndTime($place_lat_away, $place_lng_away, $room_lat, $room_lng)
@@ -187,6 +225,7 @@ class SearchController extends Controller
         ]);
         $data = json_decode($res->getBody()->getContents(), true);
         $summaryloop = $data["response"]["route"];
+
         foreach ($summaryloop as $item) {
 
             $s_sumarry = $item['summary']['distance'];
@@ -195,4 +234,77 @@ class SearchController extends Controller
         $objCalrouteandTime = [$s_sumarry, $baseTime];
         return $objCalrouteandTime;
     }
+
+    function getBtsstationlist()
+    {
+        $bts_lists = DB::table('bts_station')->get();
+
+        return $bts_lists;
+
+    }
+
+
+    function zoneBts()
+    {
+        $bts_lists = DB::table('zone')->get();
+        return $bts_lists;
+
+    }
+
+    function havecar($listroom, $place_lifestyle_lat, $place_lifestyle_lng)
+    {
+        $calRoute = [];
+        foreach ($listroom as $room) {
+            $place_lat_away = $room->lat;
+            $place_lng_away = $room->lng;
+            array_push($calRoute, $this->calRouteAndTime($place_lat_away, $place_lng_away, $place_lifestyle_lat, $place_lifestyle_lng));
+        }
+
+        $result = $listroom->map(function ($item, $key) use ($calRoute) {
+            $item->time = $calRoute[$key][0];
+            $item->distance = $calRoute[$key][1];
+
+            return $item;
+        });
+
+
+        return $result;
+
+
+    }
+
+
+    function nothavecar($listroom, $bts_station_lat, $bts_station_lng)
+    {
+
+        $calRoute = [];
+
+        foreach ($listroom as $room) {
+            $place_lat_away = $room->lat;
+            $place_lng_away = $room->lng;
+            array_push($calRoute, $this->calRouteAndTime($place_lat_away, $place_lng_away, $bts_station_lat, $bts_station_lng));
+        }
+
+        $result = $listroom->map(function ($item, $key) use ($calRoute) {
+            $item->time = $calRoute[$key][0];
+            $item->distance = $calRoute[$key][1];
+
+            return $item;
+        });
+
+
+        return $result;
+    }
+
+    function imageRoomloop($roomid)
+    {
+        $imgroom = DB::table('imageRoom')
+            ->where('imageRoom.roomid', '=', $roomid)
+            ->groupBy('roomid')
+            ->first();
+//            dd($imgroom);
+        return $imgroom;
+    }
+
+
 }

@@ -128,31 +128,20 @@ function optionCar() {
 }
 
 
-// add new Room
-//
-//
-// $(function () {
-//     $('#save_value').click(function () {
-//         var val = [];
-//         $(':checkbox:checked').each(function (i) {
-//             val[i] = $(this).val();
-//         });
-//     });
-// });
-
-
-function getNamelocationnear() {
-
-
-}
 
 function smartSearch() {
-    var chs_car = $('#chose_optioncar').val();
+    var chs_car = $('#optioncar').val();
 
+    if (chs_car == "nothavecar") {
 
-    alert(chs_car)
+        $('#radio_car0').addClass('facilities_active');
+    } else {
+        $('#radio_car1').addClass('facilities_active');
 
+    }
 }
+
+
 
 
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Adroom;
 use App\Imageroom;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class ManagerprofileController extends Controller
@@ -19,13 +20,34 @@ class ManagerprofileController extends Controller
         //
 
         $myrooms = DB::table('room')
-           ->join('imageRoom','roomid','=','room.id')
-//            ->join('user', 'user.remember_token', '=', 'room.user_token') //แก้ tokent
-            ->join('zone', 'zone.id', '=', 'room.zone_id')
+            ->select('*', 'room.id AS roomid')
+            ->join('bts_station', 'bts_station.id', '=', 'room.btsstation_id')
+            ->where('room.user_id', Auth::user()->id)
             ->get();
 
-//        dd($myroom);
-        return view('managerroom',compact('myrooms'));
+        $arr = [];
+        foreach ($myrooms as $detailroom) {
+            $listimg = $this->roomiMg($detailroom->roomid);
+            array_push($arr, $listimg);
+        }
+
+        $itemArr = [];
+        foreach ($arr as $index => $subItem) {
+             array_push($itemArr,$subItem->pathimg);
+        }
+
+        $arrom = $myrooms->map(function ($item, $key) use ($itemArr) {
+
+                $item->pathimg = $itemArr[$key];
+
+            return $item;
+        });
+
+
+        $myrooms = $arrom;
+
+//        dd($arrom);
+        return view('managerroom', compact('myrooms'));
     }
 
     /**
@@ -92,5 +114,16 @@ class ManagerprofileController extends Controller
     public function destroy(Imageroom $profile)
     {
         //
+    }
+
+    function roomiMg($idroom)
+    {
+        $listimg = DB::table('imageRoom')
+            ->where('roomid', '=', $idroom)
+            ->groupBy('roomid')
+            ->first();
+
+        return $listimg;
+
     }
 }
