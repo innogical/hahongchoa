@@ -24,7 +24,7 @@ Route::resource('/register', 'RegisterController');
 Route::resource('/loginend', 'LoginController');
 Route::resource('/managerroom', 'ManagerprofileController');
 Route::resource('/adroom','AdroomdController');
-Route::resource('/ห้องเช่าติดรถไฟฟ้า','SearchController');
+Route::resource('/roomnearskytrian','SearchController');
 
 
 Route::get('/home', 'HomeController@index')->name('home');

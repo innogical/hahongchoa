@@ -5,16 +5,7 @@
             <div class="col align-content-center" style="height: 80px;">
                 <form action="/ห้องเช่าติดรถไฟฟ้า" method="post">
                     @csrf
-                    {{--<div class="row justify-content-center">--}}
-                        {{--<div class=" col-1">--}}
-                            {{--<p class="color-dark-blue-fond mt-3">คำค้นหา</p>--}}
-                        {{--</div>--}}
-                        {{--<input type="text" name="lifestyleplace" class="border-0 col-6 shadow mt-2"--}}
-                               {{--placeholder="สถานที่ทำงาน / มหาวิทยาลัย" value="{{$lifestyle_location}}"--}}
-                               {{--style="height: 40px">--}}
-                    {{--</div>--}}
-
-                    <div class="row mt-1 justify-content-center">
+                    <div class="row mt-1">
                         <div class="card-body col-2 ">
                             <div class="row border mt-2">
                                 <div class="col-auto  mt-2">
@@ -35,7 +26,7 @@
                             </div>
                         </div>
 
-                        <div class="card-body col-2 ">
+                        <div class="card-body col-1 ">
                             <div class="row border mt-2">
 
                                 {{--<input type="text" value="{{$person_live}}" class="col-4 border-0" name="people_life"--}}
@@ -66,39 +57,53 @@
                                 </select>
                             </div>
                         </div>
-
-
-                        <div class="card-body col-1 pl-0 pr-0 ml-0 mr-0">
-                            <input type="text" value="{{$optioncar}}" hidden id="optioncar">
-                            <div class="row  mt-2">
-                                <div class="">
-                                    <label class="btn border" id="radio_car0">
-                                        <img src="{{asset('/icon/nocar.svg' )}}" alt="nocar">
-                                        <input type="radio" value="nothavecar"
-                                               name="optioncar" class="invisible" onclick="optionCar()">
-                                    </label>
-
-                                </div>
-                                <div class="ml-2">
-                                    <label class="btn border" id="radio_car1">
-                                        <img src="{{asset('/icon/havecar.svg' )}}" alt="havecar">
-                                        <input type="radio" value="havecar"
-                                               name="optioncar" class="invisible" onclick="optionCar()">
-                                    </label>
-                                </div>
-                            </div>
+                        <div class="form-group">
+                            <select class="form-control" id="sel1" name="sortprice">
+                                <option value="low"> ราคาถูก ถึง แพง</option>
+                                <option value="high">ราคาแพง ถึง ถูก</option>
+                            </select>
                         </div>
-                        <div class=" col-1 mt-4 ">
-                            <button type="submit" class="btn color-higiht-orange-btn" style="height: 40px">
-                                <img src="{{asset('/icon/search.svg')}}" style="width: 30px; height: auto;" alt="">
-                                ค้นหาห้องว่างใกล้คุณ
-                            </button>
+
+                        <div class="form-group">
+                            <select class="form-control" id="sel1" name="sortdistance">
+                                <option value="near">ใกล้ถึงไกล</option>
+                                <option value="far">ไกลถึงใกล้</option>
+                            </select>
                         </div>
                     </div>
 
-                </form>
 
+                    <div class="card-body col-1 pl-0 pr-0 ml-0 mr-0">
+                        <input type="text" value="{{$optioncar}}" hidden id="optioncar">
+                        <div class="row  mt-2">
+                            <div class="">
+                                <label class="btn border" id="radio_car0">
+                                    <img src="{{asset('/icon/nocar.svg' )}}" alt="nocar">
+                                    <input type="radio" value="nothavecar"
+                                           name="optioncar" class="invisible" onclick="optionCar()">
+                                </label>
+
+                            </div>
+                            <div class="ml-2">
+                                <label class="btn border" id="radio_car1">
+                                    <img src="{{asset('/icon/havecar.svg' )}}" alt="havecar">
+                                    <input type="radio" value="havecar"
+                                           name="optioncar" class="invisible" onclick="optionCar()">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" col-1 mt-4 ">
+                        <button type="submit" class="btn color-higiht-orange-btn" style="height: 40px">
+                            <img src="{{asset('/icon/search.svg')}}" style="width: 30px; height: auto;" alt="">
+                            ค้นหาห้องว่างใกล้คุณ
+                        </button>
+                    </div>
             </div>
+
+            </form>
+
+        </div>
         </div>
 
     </nav>
@@ -106,9 +111,18 @@
     @include('component.card-list-smartsearch')
     <div class="container">
         <div class="col">
-            <div class="text-left mt-2">
-                <h4 class="color-dark-blue-fond">ผลการค้นหา</h4>
+            <div class="row">
+
+                <div class=" mt-2">
+                    <h4 class="color-dark-blue-fond">ผลการค้นหา</h4>
+                </div>
+                {{--<div class=" mt-2">--}}
+                {{--@include('component.optionsearch')--}}
+                {{--@yield('optionbarsearch')--}}
+                {{--</div>--}}
             </div>
+
+
             <div class="row">
                 @yield('cardzone')
             </div>
@@ -121,8 +135,6 @@
 
     <script>
         $(document).ready(function () {
-            // executes when HTML-Document is loaded and DOM is ready
-            // alert("document is ready");
             smartSearch()
         });
     </script>

@@ -38,7 +38,7 @@
 
 
             @if(session()->get('data'))
-{{session()->get('data')}}
+                {{session()->get('data')}}
                 <div class="modal fade" id="myModal">
                     <div class="modal-dialog modal-sm">
                         <div class="modal-content">

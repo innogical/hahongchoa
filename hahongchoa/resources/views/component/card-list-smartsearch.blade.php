@@ -10,7 +10,6 @@
 
                         <img src="{{asset('/images_rooms/'.$room->imgRoomF)}}" alt="{{$room->imgRoomF}}" width="100%"
                              height="164px">
-                        {{--<img src="{{asset('/images/')}}" alt="{{$room->imgRoomF}}">--}}
 
                     </div>
 

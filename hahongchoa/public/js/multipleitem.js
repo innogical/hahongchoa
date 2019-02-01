@@ -142,6 +142,13 @@ function smartSearch() {
 }
 
 
+function optionprice(){
+    var option = $('#sel1').val();
+    window.location= "http://127.0.0.1:8000/roomnearskytrian/"+option;
+
+    // alert(option)
+}
+
 
 
 
