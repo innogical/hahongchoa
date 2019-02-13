@@ -20,11 +20,15 @@ Route::get('/', 'RoomController@listroom');
 
 
 Route::resource('/room', 'RoomController');
+
+Route::get('/room/query/{txtquery}', 'RoomController@querySeach');
+
 Route::resource('/register', 'RegisterController');
 Route::resource('/loginend', 'LoginController');
 Route::resource('/managerroom', 'ManagerprofileController');
 Route::resource('/adroom','AdroomdController');
 Route::resource('/roomnearskytrian','SearchController');
+
 
 
 Route::get('/home', 'HomeController@index')->name('home');

@@ -12,16 +12,13 @@
 
     <!-- Scripts -->
     <script src="{{asset('js/jquery-slim.min.js') }}"></script>
+    <script src="{{asset('js/jquery.min.js') }}"></script>
     <script src="{{asset('js/bootstrap.min.js') }}" defer></script>
     <script src="{{asset('js/popper.min.js') }} " defer></script>
     <script src="{{asset('js/multipleitem.js') }} " defer></script>
     <script src="{{asset('js/dropzone.js') }} "></script>
-    <script src="{{asset('js/Slideimg.js') }} "></script>
 
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-    <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-    <script type="text/javascript" src="slick/slick.min.js"></script>
 
 
 @stack('scripts')

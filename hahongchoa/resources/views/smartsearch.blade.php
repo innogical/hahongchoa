@@ -6,9 +6,9 @@
                 <form action="/ห้องเช่าติดรถไฟฟ้า" method="post">
                     @csrf
                     <div class="row mt-1">
-                        <div class="card-body col-2 ">
-                            <div class="row border mt-2">
-                                <div class="col-auto  mt-2">
+                        <div class="card-body col-2 p-0">
+                            <div class="row border m-2">
+                                <div class="col-auto">
                                     ราคาเริ่มต้น
                                 </div>
                                 <input type="text" value="{{$price_low}}" class="col-4 border-0" name="price_low"
@@ -16,9 +16,9 @@
                             </div>
                         </div>
 
-                        <div class="card-body col-2 ">
-                            <div class="row border mt-2">
-                                <div class="col-auto  mt-2">
+                        <div class="card-body col-2 p-0">
+                            <div class="row border m-2">
+                                <div class="col-auto  ">
                                     ถึง
                                 </div>
                                 <input type="text" value="{{$price_high}}" class="col-6 border-0" name="price_high"
@@ -26,29 +26,26 @@
                             </div>
                         </div>
 
-                        <div class="card-body col-1 ">
-                            <div class="row border mt-2">
+                        <div class="card-body col-1 p-0">
 
-                                {{--<input type="text" value="{{$person_live}}" class="col-4 border-0" name="people_life"--}}
-                                {{--style="height: 40px">--}}
-
-                                <select id="inputState" class="form-control col" name="person_live">
+                            <div class="row border m-2">
+                                <select id="inputState" class="form-control" name="person_live">
                                     <option value="{{$person_live}}" selected>{{$person_live}}</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
+                                    <option value="1">1คน</option>
+                                    <option value="2">2คน</option>
+                                    <option value="3">3คน</option>
+                                    <option value="4">4คน</option>
+                                    <option value="5">5คน</option>
                                 </select>
-                                <div class="col-auto  mt-2">
-                                    คน
-                                </div>
+                                {{--<div class="mt-2">--}}
+                                    {{--คน--}}
+                                {{--</div>--}}
                             </div>
                         </div>
 
 
-                        <div class="card-body col-2">
-                            <div class=" border mt-2">
+                        <div class="card-body col-2 p-0">
+                            <div class=" border m-2 ">
                                 <select id="inputState" class="form-control col" name="area_zone">
                                     {{--<option value="{{$area_zone}}" selected>{{$area_zone}}</option>--}}
                                     @foreach($zone_bts as $a_zone)
@@ -58,14 +55,14 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <select class="form-control" id="sel1" name="sortprice">
+                            <select class="form-control" name="sortprice">
                                 <option value="low"> ราคาถูก ถึง แพง</option>
                                 <option value="high">ราคาแพง ถึง ถูก</option>
                             </select>
                         </div>
 
                         <div class="form-group">
-                            <select class="form-control" id="sel1" name="sortdistance">
+                            <select class="form-control" name="sortdistance">
                                 <option value="near">ใกล้ถึงไกล</option>
                                 <option value="far">ไกลถึงใกล้</option>
                             </select>
@@ -73,7 +70,7 @@
                     </div>
 
 
-                    <div class="card-body col-1 pl-0 pr-0 ml-0 mr-0">
+                    <div class="card-body col-1 p-0 ml-0 mr-0">
                         <input type="text" value="{{$optioncar}}" hidden id="optioncar">
                         <div class="row  mt-2">
                             <div class="">
@@ -93,7 +90,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class=" col-1 mt-4 ">
+                    <div class="col-1">
                         <button type="submit" class="btn color-higiht-orange-btn" style="height: 40px">
                             <img src="{{asset('/icon/search.svg')}}" style="width: 30px; height: auto;" alt="">
                             ค้นหาห้องว่างใกล้คุณ

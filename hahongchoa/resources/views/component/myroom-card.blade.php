@@ -28,14 +28,14 @@
                         </div>
                     </div>
 
-                    <div class="box-twin-data row mt-1">
-                        <div class="img-fluid col-1 p-0 mr-1">
-                            <img src="{{asset('/icon/hilight.svg')}}" alt="" width="30px" height="30px">
-                        </div>
-                        <div class="text-justify col color-dark-orange-fond">
-                            {{$myroom->hilight}}
-                        </div>
-                    </div>
+                    {{--<div class="box-twin-data row mt-1">--}}
+                        {{--<div class="img-fluid col-1 p-0 mr-1">--}}
+                            {{--<img src="{{asset('/icon/hilight.svg')}}" alt="" width="30px" height="30px">--}}
+                        {{--</div>--}}
+                        {{--<div class="text-justify col color-dark-orange-fond">--}}
+                            {{--{{$myroom->hilight}}--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
 
                     <div class="box-twin-data row mt-1">
                         <div class="img-fluid col-1 p-0 mr-1">

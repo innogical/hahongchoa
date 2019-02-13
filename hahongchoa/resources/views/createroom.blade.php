@@ -31,14 +31,19 @@
                 <div class="col-6 mt-2">
                     <select id="inputState" class="form-control" name="lifestyle">
                         <option value="1" selected>Lifestyle</option>
-                    @foreach($lifestyle as $index=> $lifestyle_name)
+                        @foreach($lifestyle as $index=> $lifestyle_name)
                             <option value="{{$index+1}}">{{$lifestyle_name}}</option>
                         @endforeach
                     </select>
                 </div>
 
                 <div class="col-6 mt-2">
-                    <input type="text" class="form-control" placeholder="จุดเด่น" name="hilight">
+                    <p></p>
+
+                    <p><span id="totaltext">0</span>/80 ตัวอักษร</p>
+                    <input type="text" class="form-control" placeholder="จุดเด่น กรุณาย่อเนื้อหาจุดเด่นของคุณภายใน 80 ตัวอักษร" name="hilight"
+                           id="hilight"
+                           onkeyup="counttext()" maxlength="80">
                 </div>
                 <div class="form-group col-6 mt-2">
                     <select id="inputState" class="form-control" name="promise">
@@ -57,11 +62,11 @@
 
                 {{--<div class="col-6 mt-2">--}}
 
-                    {{--<select id="inputState" class="form-control" name="bts">--}}
-                        {{--@foreach($bts as $index=> $list_brs)--}}
-                            {{--<option value="{{$index+1}}">{{$list_brs}}</option>--}}
-                        {{--@endforeach--}}
-                    {{--</select>--}}
+                {{--<select id="inputState" class="form-control" name="bts">--}}
+                {{--@foreach($bts as $index=> $list_brs)--}}
+                {{--<option value="{{$index+1}}">{{$list_brs}}</option>--}}
+                {{--@endforeach--}}
+                {{--</select>--}}
                 {{--</div>--}}
 
             </div>

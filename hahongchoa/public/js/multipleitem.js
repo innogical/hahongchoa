@@ -128,7 +128,6 @@ function optionCar() {
 }
 
 
-
 function smartSearch() {
     var chs_car = $('#optioncar').val();
 
@@ -142,13 +141,51 @@ function smartSearch() {
 }
 
 
-function optionprice(){
+function optionprice() {
     var option = $('#sel1').val();
-    window.location= "http://127.0.0.1:8000/roomnearskytrian/"+option;
+    window.location = "http://127.0.0.1:8000/roomnearskytrian/" + option;
 
     // alert(option)
 }
 
+function counttext() {
+    var text = $('#hilight').val();
+    $('#totaltext').html(text.length)
+}
 
+
+function querylocation() {
+    var txtQuery = $('#lifestyleplace').val();
+    var render = "";
+    $.ajaxSetup({
+        header: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'GET',
+        url: 'http://127.0.0.1:8000/room/query/' + txtQuery,
+        success: function (res) {
+            $.each(res, function (position) {
+                console.log(res[position].namelocation);
+                render += "<p id=\"result_search\" onclick=\"clickSelectLocation(this)\">" + res[position].namelocation + "</p>\n"
+            });
+
+            $('#result-search').show();
+            $('#result-search').html(render);
+        },
+        error: function (err) {
+            console.log("err" + err);
+        }
+
+    })
+
+}
+
+function clickSelectLocation(obj) {
+
+    $('#lifestyleplace').val(obj.innerText);
+    $('#result-search').hide();
+}
 
 

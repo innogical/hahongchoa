@@ -100,10 +100,9 @@ class RoomController extends Controller
             ->get();
 
 
-
         $zone = $this->Zonebts_near();
 
-        return view('welcome', compact('listrooms','zone'));
+        return view('welcome', compact('listrooms', 'zone'));
     }
 
     function Zonebts_near()
@@ -112,6 +111,17 @@ class RoomController extends Controller
         $bts_lists = DB::table('bts_station')->get();
         return $bts_lists;
 
+    }
+
+    public function querySeach($txtquery)
+    {
+        $search = DB::table('searchlocation')
+            ->where('namelocation', 'like', '%' . $txtquery . '%')
+            ->get();
+
+//        return $search;
+//        return json_decode($search,true);
+        return response()->json($search);
     }
 
 
