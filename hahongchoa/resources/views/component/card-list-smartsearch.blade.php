@@ -2,15 +2,13 @@
     @if(count($result)>0)
         {{--{{count($result)}}--}}
         @foreach($result as $room)
-            <div class="col-3 card  mt-2 border-0" style="height:auto;">
+            <div class="col-md-4 col-4 card  mt-2 border-0" style="height:auto;">
                 <div class="">
                     <div class="card-img bg-dark" style="height:164px; width: 100%">
-                        <img class="setad position-absolute" src="{{asset('/icon/comp_ad.png')}}" alt="Ad">
-                        <button type="submit" class=" btn btn_green btn-compare position-absolute">เปรียบเทียบ</button>
-
+                        {{--<img class="setad position-absolute" src="{{asset('/icon/comp_ad.png')}}" alt="Ad">--}}
+                        {{--<button type="submit" class=" btn btn_green btn-compare position-absolute">เปรียบเทียบ</button>--}}
                         <img src="{{asset('/images_rooms/'.$room->imgRoomF)}}" alt="{{$room->imgRoomF}}" width="100%"
                              height="164px">
-
                     </div>
 
                 </div>
@@ -20,16 +18,21 @@
                         <div class="row">
                             <p class="color-green col p-0 m-0 color-dark-blue-fond">{{$room->name}}</p>
                         </div>
-                        <div class="box-twin-data row mt-2">
+                        <div class="row">
+                            <p style="font-size: 12px; " class="text-dark">{{$room->address}}</p>
+                        </div>
+                        <div class="box-twin-data row">
                             <div class="img-fluid col-1 p-0 mr-1">
                                 <img src="{{asset('/icon/pin.svg')}}" alt="" width="30px" height="30px">
                             </div>
                             <div class="text-justify col color-dark-blue-fond">
-                                สถานีรถไฟฟ้า{{$room->name_station}}
+                                <p>
+                                    สถานีรถไฟฟ้า{{$room->name_station}}
+                                </p>
                             </div>
                         </div>
 
-                        <div class="box-twin-data row mt-1">
+                        <div class="box-twin-data row ">
                             <div class="img-fluid col-1 p-0 mr-1">
                                 <img src="{{asset('/icon/hilight.svg')}}" alt="" width="30px" height="30px">
                             </div>
@@ -38,36 +41,35 @@
                             </div>
                         </div>
 
-                        <div class="box-twin-data row mt-1">
+                        <div class="box-twin-data row ">
                             <div class="img-fluid col-1 p-0 mr-1">
                                 <img src="{{asset('/icon/person.svg')}}" alt="" width="30px" height="30px">
                             </div>
-                            <div class="text-justify col color-dark-blue-fond">{{$room->personLive}} คน</div>
+                            <div class="text-justify col color-dark-blue-fond">{{$room->personLive}}</div>
                         </div>
-
-                        <div class="box-twin-data row mt-1">
+                        <div class="box-twin-data row">
                             <div class="img-fluid col-1 p-0 mr-1">
-                                <img src="{{asset('/icon/baht.svg')}}" alt="" width="30px" height="30px">
+                                <img src="{{asset('/icon/distance.svg')}}" alt="" width="30px" height="30px">
                             </div>
-                            <div class="text-justify col color-dark-blue-fond">{{$room->price}} บาท/เดือน</div>
-                        </div>
-                        <div class="box-twin-data row mt-1">
-                            @if($optioncar =="havecar")
-                                <div class="img-fluid col-1 p-0 mr-1">
-                                    <img src="{{asset('/icon/distance.svg')}}" alt="" width="30px" height="30px">
-                                </div>
-                            @else
-                                <div class="img-fluid col-1 p-0 mr-1">
-                                    <img src="{{asset('/icon/skytrian.svg')}}" alt="" width="30px" height="30px">
-                                </div>
-                            @endif
                             <div class="text-justify col color-dark-blue-fond">{{number_format($room->distance,1,'.','')}}
                                 กิโลเมตร
                             </div>
                         </div>
+
+                        <div class=" row ">
+                            {{--<div class="img-fluid col-1 p-0 mr-1">--}}
+                            {{--<img src="{{asset('/icon/baht.svg')}}" alt="" width="30px" height="30px">--}}
+                            {{--</div>--}}
+                            <div class="col-12">
+                                <div class="text-right color-dark-blue-fond"
+                                     style="font-size: 18px">{{$room->price}}.-
+                                </div>
+
+                            </div>
+                        </div>
+
                         <div class="row">
-                            <button type="submit" class="col btn btn-light-blue mt-2 color-dark-orange-fond">
-                                ติดต่อเจ้าของ
+                            <button type="submit" class="col btn  mt-2 btn_green text-white">ติดต่อเจ้าของ
                             </button>
                         </div>
                     </div>

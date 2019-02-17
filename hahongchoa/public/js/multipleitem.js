@@ -15,9 +15,11 @@ function getCurrentlocation() {
         $("#inputLat").val(position.coords.latitude);
         $("#inputLng").val(position.coords.longitude);
 
-
         $("#mylocation_lat").val(position.coords.latitude);
         $("#mylocation_lng").val(position.coords.longitude);
+
+        $("#mylat").val(position.coords.latitude);
+        $("#mylng").val(position.coords.longitude);
 
 
         initMap(position)
@@ -157,35 +159,237 @@ function counttext() {
 function querylocation() {
     var txtQuery = $('#lifestyleplace').val();
     var render = "";
-    $.ajaxSetup({
-        header: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-    $.ajax({
-        type: 'GET',
-        url: 'http://127.0.0.1:8000/room/query/' + txtQuery,
-        success: function (res) {
-            $.each(res, function (position) {
-                console.log(res[position].namelocation);
-                render += "<p id=\"result_search\" onclick=\"clickSelectLocation(this)\">" + res[position].namelocation + "</p>\n"
-            });
 
-            $('#result-search').show();
-            $('#result-search').html(render);
-        },
-        error: function (err) {
-            console.log("err" + err);
-        }
+    if (txtQuery != null || txtQuery != "") {
 
-    })
+        $.ajaxSetup({
+            header: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            type: 'GET',
+            url: 'http://127.0.0.1:8000/room/query/' + txtQuery,
+            success: function (res) {
+                if (res.length != 0) {
+                    $.each(res, function (index, item) {
+                        console.log(res[index].namelocation);
+                        console.log(res);
+                        render += "<p id=\"result_search\" class=\'hover_item_search\'  onclick=\"clickSelectLocation(this)\">" + res[index].namelocation + "</p>\n"
+                    });
 
+                    $('#result-search').show();
+                    $('#result-search').addClass('bg-search-box');
+                    // $('#result-search').addClass('bg_corner');
+                    $('#result-search').html(render);
+                } else {
+                    render = "";
+                    console.log("null");
+                    $('#result-search').hide();
+                }
+
+            },
+            error: function (err) {
+                console.log("err" + err[0]);
+            }
+
+        })
+
+    } else {
+        render = "";
+        $('#result-search').hide();
+
+    }
 }
 
 function clickSelectLocation(obj) {
-
     $('#lifestyleplace').val(obj.innerText);
     $('#result-search').hide();
 }
 
+function clickeoptionSearch(numpage) {
+
+    $('#search-tab-nearlocation').click(function () {
+
+
+        if ($('#search-tab-nearlocation').hasClass('active_tab_search')) {
+            $('#search-tab-nearlocation').removeClass('bg-active_tab_search');
+
+
+        } else {
+
+            $('#search-tab-nearlocation').addClass('bg-active_tab_search');
+            $('#search-tab-near_station').removeClass('bg-active_tab_search');
+        }
+    });
+
+
+    $('#search-tab-near_station').click(function () {
+        $('#search-tab-near_station').addClass('bg-active_tab_search');
+        $('#search-tab-nearlocation').removeClass('bg-active_tab_search');
+
+    });
+
+    // console.log(numpage);
+    var render = ""
+    document.getElementById('myTabContent').innerHTML = ""
+
+    switch (numpage) {
+        case 1:
+            // var a = "@include 'form-search_room' ";
+            render = "    <div class=\"tab-pane fade show active\" id=\"home\" role=\"tabpanel\" aria-labelledby=\"home-tab\">\n" +
+                "        <div class=\"col-12\">\n" +
+                "            <div class=\"row mt-2\">\n" +
+                "                <div class=\"col-12\">\n" +
+                "                    <input type=\"text\" class=\"bg_corner border\" style=\"width:100%\"\n" +
+                "                           placeholder=\"สถานที่ทำงาน / มหาวิทยาลัย\"\n" +
+                "                           name=\"lifestyleplace\" id=\"lifestyleplace\" onkeyup=\"querylocation()\">\n" +
+                "                </div>\n" +
+                "            </div>\n" +
+                "\n" +
+                "            <div class=\"row mt-2\">\n" +
+                "                <div class=\"col-12\" id=\"background_search\">\n" +
+                "                    <div class=\"result-searc \" id=\"result-search\"></div>\n" +
+                "                </div>\n" +
+                "            </div>\n" +
+                "            <div class=\"row mt-2\">\n" +
+                "                <div class=\"col-6\">\n" +
+                "                    <input type=\"text\" class=\"bg_corner border\" style=\"width:100%\"\n" +
+                "                           placeholder=\"ราคาถูกสุด\"\n" +
+                "                           name=\"price_low\">\n" +
+                "                </div>\n" +
+                "                <div class=\"col-6\">\n" +
+                "                    <input type=\"text\" class=\"bg_corner border\" style=\"width:100%\"\n" +
+                "                           placeholder=\"ราคาแพงสุด\"\n" +
+                "                           name=\"price_high\">\n" +
+                "\n" +
+                "                    <input type=\"text\" name=\"stat_search_option[0]\" hidden value=\"search_nearLocation\">\n" +
+                "                </div>\n" +
+                "            </div>\n" +
+                "\n" +
+                "\n" +
+                "            <div class=\"row mt-2\">\n" +
+                "                <div class=\"col-md-6 col-6\">\n" +
+                "                    <select class=\"bg_corner border\" name=\"person_live\" style=\"width: 100%;\">\n" +
+                "                        <option selected>ผู้อยู่อาศัย</option>\n" +
+                "                        <option value=\"1\">1</option>\n" +
+                "                        <option value=\"2\">2</option>\n" +
+                "                        <option value=\"3\">3</option>\n" +
+                "                        <option value=\"4\">4</option>\n" +
+                "                        <option value=\"5\">5</option>\n" +
+                "                    </select>\n" +
+                "                </div>\n" +
+                "                <div class=\"row col-md-6\">\n" +
+                "                    <div class=\"col-md-3 col-3\">\n" +
+                "                        <label class=\" btn border\" id=\"radio_car0\">\n" +
+                "                           <img src=\"http://" + window.location.host + "/icon/nocar.svg \" alt=\"\">\n" +
+                "                            <input type=\"radio\" value=\"nothavecar\"\n" +
+                "                                   name=\"optioncar\" class=\"invisible\" onclick=\"optionCar()\">\n" +
+                "                        </label>\n" +
+                "                    </div>\n" +
+                "                    <div class=\"col-md-3 col-3\">\n" +
+                "                        <label class=\"btn border\" id=\"radio_car1\">\n" +
+                "                          <img src=\"http://" + window.location.host + "/icon/havecar.svg \" alt=\"\">\n" +
+                "                            <input type=\"radio\" value=\"havecar\"\n" +
+                "                                   name=\"optioncar\" class=\"invisible\" onclick=\"optionCar()\">\n" +
+                "                        </label>\n" +
+                "                    </div>\n" +
+                "                    <div class=\"col form-group\">\n" +
+                "                        <button type=\"submit\"\n" +
+                "                                class=\"font-weight-normal text-white btn btn-default btn_green\"\n" +
+                "                                style=\"width: 100%\">ค้นหา\n" +
+                "                        </button>\n" +
+                "                    </div>\n" +
+                "                </div>\n" +
+                "            </div>\n" +
+                "\n" +
+                "        </div>\n" +
+                "\n" +
+                "    </div>\n"
+
+            document.getElementById('myTabContent').innerHTML = render
+            // document.getElementById('myTabContent').innerHTML = a;
+            break;
+        case 2:
+
+            // var x = "@include 'form-search' ";
+            // document.getElementById('myTabContent').innerHTML = x;
+
+            render = "<div class=\"tab-pane fade show active\" id=\"home\" role=\"tabpanel\" aria-labelledby=\"home-tab\">\n" +
+                "        <div class=\"col-12\">\n" +
+                "\n" +
+                "            <div class=\"row mt-2\">\n" +
+                "                <div class=\"col-12\" id=\"background_search\">\n" +
+                "                    <div class=\"result-searc \" id=\"result-search\"></div>\n" +
+                "                </div>\n" +
+                "            </div>\n" +
+                "            <div class=\"row mt-2\">\n" +
+                "                <div class=\"col-6\">\n" +
+                "                    <input type=\"text\" class=\"bg_corner border\" style=\"width:100%\"\n" +
+                "                           placeholder=\"ราคาถูกสุด\"\n" +
+                "                           name=\"price_low\">\n" +
+                "                </div>\n" +
+                "                <div class=\"col-6\">\n" +
+                "                    <input type=\"text\" class=\"bg_corner border\" style=\"width:100%\"\n" +
+                "                           placeholder=\"ราคาแพงสุด\"\n" +
+                "                           name=\"price_high\">\n" +
+                "\n" +
+                "                    <input type=\"text\" name=\"stat_search_option\" hidden value=\"search_nearLocation\">\n" +
+                "                </div>\n" +
+                "            </div>\n" +
+                "\n" +
+                "\n" +
+                "            <div class=\"row mt-2\">\n" +
+                "                <div class=\"col-md-6 col-6\">\n" +
+                "                    <select class=\"bg_corner border\" name=\"person_live\" style=\"width: 100%;\">\n" +
+                "                        <option selected>ผู้อยู่อาศัย</option>\n" +
+                "                        <option value=\"1\">1</option>\n" +
+                "                        <option value=\"2\">2</option>\n" +
+                "                        <option value=\"3\">3</option>\n" +
+                "                        <option value=\"4\">4</option>\n" +
+                "                        <option value=\"5\">5</option>\n" +
+                "                    </select>\n" +
+                "                </div>\n" +
+                "                <div class=\"row col-md-6\">\n" +
+                "                    <div class=\"col-md-3 col-3\">\n" +
+                "                        <label class=\" btn border\" id=\"radio_car0\">\n" +
+                "                            <img src=\"http://" + window.location.host + "/icon/nocar.svg \" alt=\"\">\n" +
+                "                            <input type=\"radio\" value=\"nothavecar\"\n" +
+                "                                   name=\"optioncar\" class=\"invisible\" onclick=\"optionCar()\">\n" +
+                "                        </label>\n" +
+                "                    </div>\n" +
+                "                    <div class=\"col-md-3 col-3\">\n" +
+                "                        <label class=\"btn border\" id=\"radio_car1\">\n" +
+                "                            <img src=\"http://" + window.location.host + "/icon/havecar.svg\" alt=\"\">\n" +
+                "                            <input type=\"radio\" value=\"havecar\"\n" +
+                "                                   name=\"optioncar\" class=\"invisible\" onclick=\"optionCar()\">\n" +
+                "                        </label>\n" +
+                "                    </div>\n" +
+                "                    <div class=\"col form-group\">\n" +
+                "                        <button type=\"submit\"\n" +
+                "                                class=\"font-weight-normal text-white btn btn-default btn_green\"\n" +
+                "                                style=\"width: 100%\">ค้นหา\n" +
+                "                        </button>\n" +
+                "                    </div>\n" +
+                "                </div>\n" +
+                "            </div>\n" +
+                "\n" +
+                "        </div>\n" +
+                "\n" +
+                "    </div>";
+
+            document.getElementById('myTabContent').innerHTML = render
+
+
+            break;
+        default:
+
+    }
+    return numpage;
+}
+
+function includeAsJsString($template) {
+    $string = view($template);
+    return str_replace("\n", '\n', str_replace('"', '\"', addcslashes(str_replace("\r", '', (string), $string), "\0..\37'\\")));
+}
 

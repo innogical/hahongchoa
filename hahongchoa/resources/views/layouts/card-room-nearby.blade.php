@@ -1,5 +1,5 @@
-@section('room')
-    @foreach($newRoom as $room)
+@section('nearroom')
+    @foreach($mapdataNearby as $room)
 
         <div class="col-md-4 col-12 card  mt-2 border-0" style="height:auto;">
             <div class="">

@@ -99,9 +99,10 @@ a:hover {
     background: #F44D31;
     color: #f7f7f7;
 }
+
 /*.btn_green{*/
-    /*background: #F44D31;*/
-    /*color: #f7f7f7;*/
+/*background: #F44D31;*/
+/*color: #f7f7f7;*/
 /*}*/
 
 .bg_img_login {
@@ -195,11 +196,43 @@ a .hover_item_room:hover {
     opacity: 0.85
 }
 
-.bg_slide_background {
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#2484c6+66,ffffff+100 */
-    background: #2484c6; /* Old browsers */
-    background: -moz-linear-gradient(top, #2484c6 66%, #ffffff 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(top, #2484c6 66%, #ffffff 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to bottom, #2484c6 66%, #ffffff 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#2484c6', endColorstr='#ffffff', GradientType=0); /* IE6-9 */
+/*.bg_slide_background {*/
+/*!* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#2484c6+66,ffffff+100 *!*/
+/*background: #2484c6; !* Old browsers *!*/
+/*background: -moz-linear-gradient(top, #2484c6 66%, #ffffff 100%); !* FF3.6-15 *!*/
+/*background: -webkit-linear-gradient(top, #2484c6 66%, #ffffff 100%); !* Chrome10-25,Safari5.1-6 *!*/
+/*background: linear-gradient(to bottom, #2484c6 66%, #ffffff 100%); !* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ *!*/
+/*filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#2484c6', endColorstr='#ffffff', GradientType=0); !* IE6-9 *!*/
+/*}*/
+
+.bg_corner {
+    border-radius: 10px;
+    height: 40px;
+
+}
+
+.bg-search-box {
+    padding: 8px;
+    background-color: white;
+    position: absolute;
+    z-index: 1;
+    width: 80%;
+    left: 20px;
+    border-radius: 10px;
+    border-style: solid;
+    border-width: 0.5px;
+    border-color: #0c5460;
+}
+
+.bg-search-box :hover {
+    cursor: pointer;
+}
+
+.bg-search-box .hover_item_search :hover {
+    background-color: #ccc
+}
+
+.bg-active_tab_search {
+    background-color: #F44D31 !important;
+    color: whitesmoke !important;
 }

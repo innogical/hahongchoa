@@ -1,25 +1,25 @@
-<div class="col bg_slide_background" style="height: 415px">
+{{--<div class="col bg_slide_background" style="height: 415px">--}}
 
-    <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img class="d-block w-100 h-100" src="{{asset('/bts_screen/bts_screen_1.png')}}" alt="First slide">
-            </div>
-            <div class="carousel-item">
-                <img class="d-block w-100 h-100" src="{{asset('/bts_screen/bts_screen_2.png')}}" alt="Second slide">
-            </div>
-            <div class="carousel-item">
-                <img class="d-block w-100 h-100" src="{{asset('/bts_screen/bts_screen_3.png')}}" alt="Third slide">
-            </div>
-            <div class="carousel-item">
-                <img class="d-block w-100 h-100" src="{{asset('/bts_screen/bts_screen_4.png')}}" alt="Third slide">
-            </div>
-            <div class="carousel-item">
-                <img class="d-block w-100 h-100" src="{{asset('/bts_screen/bts_screen_5.png')}}" alt="Third slide">
-            </div>
-        </div>
-    </div>
-</div>
+    {{--<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">--}}
+        {{--<div class="carousel-inner">--}}
+            {{--<div class="carousel-item active">--}}
+                {{--<img class="d-block w-100 h-100" src="{{asset('/bts_screen/bts_screen_1.png')}}" alt="First slide">--}}
+            {{--</div>--}}
+            {{--<div class="carousel-item">--}}
+                {{--<img class="d-block w-100 h-100" src="{{asset('/bts_screen/bts_screen_2.png')}}" alt="Second slide">--}}
+            {{--</div>--}}
+            {{--<div class="carousel-item">--}}
+                {{--<img class="d-block w-100 h-100" src="{{asset('/bts_screen/bts_screen_3.png')}}" alt="Third slide">--}}
+            {{--</div>--}}
+            {{--<div class="carousel-item">--}}
+                {{--<img class="d-block w-100 h-100" src="{{asset('/bts_screen/bts_screen_4.png')}}" alt="Third slide">--}}
+            {{--</div>--}}
+            {{--<div class="carousel-item">--}}
+                {{--<img class="d-block w-100 h-100" src="{{asset('/bts_screen/bts_screen_5.png')}}" alt="Third slide">--}}
+            {{--</div>--}}
+        {{--</div>--}}
+    {{--</div>--}}
+{{--</div>--}}
 
 
     {{--search--}}
