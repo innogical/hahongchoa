@@ -12,24 +12,25 @@
 
             {{--@yield('orderfilter')--}}
             @include('layouts.card-list-room')
-            <div class="col p-0 ">
+            <div class="col-md-12 col-12 p-0 ">
 
-                <div class="text-center mt-2">
+                <div class="text-center mt-4">
                     <h4 class="color-dark-blue-fond">ห้องเช่าแนะนำ</h4>
                 </div>
                 <div class="row m-0">
                     @yield('room')
                 </div>
 
-                <div class="text-left mt-2">
+                <div class="text-center mt-4">
                     <h4 class="color-dark-blue-fond">ห้องใหม่น่าสนใจ</h4>
                 </div>
                 <div class="row m-0">
                     {{--todo:: รอแก้ sql--}}
                     @yield('room')
                 </div>
+
                 @if(count($mapdataNearby)!= 0 || $mapdataNearby != null)
-                    <div class="text-left mt-2">
+                    <div class="text-center mt-4">
                         <h4 class="color-dark-blue-fond">ห้องเช่าใกล้ฉัน</h4>
                     </div>
                     <div class="row m-0">

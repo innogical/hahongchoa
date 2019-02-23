@@ -52,53 +52,16 @@ class SearchController extends Controller
         $area_zone = $request->area_zone;
         $lifestyle_location = $request->lifestyleplace;
         $optioncar = $request->optioncar;
+
+
         $stat_search_option = $request->stat_search_option;
-
-//my latlng
-
-
-        $mylocation_lat = $request->mylocation_lat;
-        $mylocation_lng = $request->mylocation_lng;
 
 
         $notfound = "notfound";
         $zone_bts = [];
 
-//        return $person_live[0];
-
-
-        // location form search
-//
-//        if ($lifestyle_location != null) {
-//
-//            $search = DB::table('searchlocation')
-//                ->where('namelocation', 'like', '%' . $lifestyle_location . '%')
-//                ->first();
-//
-//
-//            if ($search != null) {
-//
-//                $search_lat_away = $search->lat;
-//                $search_lng_away = $search->lng;
-//
-//
-//                //ยังขาดตรงนี้
-//
-//
-//            } else {
-//                return redirect('/')->with(['data' => $notfound]);
-//            }
-//
-//
-//        } else {
-
-//        for ($i = 0; $i<3 ; $i++){
-//            return $stat_search_option[$i];
-//        }
-//        return $stat_search_option;
         if ($stat_search_option == "search_nearLocation") {
 
-            echo  "oksl";
 
             if ($lifestyle_location != null) {
 
@@ -106,240 +69,90 @@ class SearchController extends Controller
                     ->where('namelocation', 'like', '%' . $lifestyle_location . '%')
                     ->first();
 
-                return $search;
+                if ($search != null) {
+//
+                    $search_lat_away = $search->lat;
+                    $search_lng_away = $search->lng;
 
-//            }
 
+//                    $zone_bts = $this->getBtsstationlist();
+
+
+                    if ($optioncar == "nothavecar") {
+
+
+                        $listRoom = $this->getListRoom($person_live, $price_low, $price_high);
+
+                        $val_roomFormlistroom = $this->nothavecar($listRoom, $search_lat_away, $search_lng_away);
+                        $result = $val_roomFormlistroom->sortBy('price');
+
+                    } else {
 //
-//
-//
-//                if ($search != null) {
-//
-//                    $search_lat_away = $search->lat;
-//                    $search_lng_away = $search->lng;
-//
-//
-////                    $zone_bts = $this->getBtsstationlist();
-//
-//
-//                    if ($optioncar == "nothavecar") {
-//
-//
-//                        $listRoom = $this->getListRoom($person_live, $price_low, $price_high);
-//
-//                        $val_roomFormlistroom = $this->nothavecar($listRoom, $search_lat_away, $search_lng_away);
-//                        $result = $val_roomFormlistroom->sortBy('price');
-//
-//
-////                        return $val_roomFormlistroom;
-//
-//
-//                    } else {
-//
-//                        $listRoom = $this->getListRoom($person_live, $price_low, $price_high);
-//                        $pot_station_bts = $this->getBtsstationlist();
-//                        foreach ($pot_station_bts as $bts) {
-//                            $place_lat_away = $bts->lat;
-//                            $place_lng_away = $bts->lng;
-//                        }
-//
-//                        $valresult_havecar = $this->havecar($listRoom, $place_lat_away, $place_lng_away);
-//                        $result = $valresult_havecar->sortBy('price');
-//
-//                    }
-//
-//
-//                } else {
-//                    return redirect('/')->with(['data' => $notfound]);
-//                }
-//
-//
-//
-//
+                        $listRoom = $this->getListRoom($person_live, $price_low, $price_high);
+                        $pot_station_bts = $this->getBtsstationlist();
+                        foreach ($pot_station_bts as $bts) {
+                            $place_lat_away = $bts->lat;
+                            $place_lng_away = $bts->lng;
+                        }
+
+                        $valresult_havecar = $this->havecar($listRoom, $place_lat_away, $place_lng_away);
+                        $result = $valresult_havecar->sortBy('price');
+
+                    }
+
+                    if ($result != null || $result != []) {
+                        return view('smartsearch', compact('result', 'zone_bts', 'lifestyle_location', 'price_low', 'price_high', 'person_live', 'area_zone', 'optioncar'));
+
+                    } else {
+                        return redirect('/')->with(['data' => $notfound]);
+                    }
+
+                }
+
             }
-//
+
         } else {
 
-            echo "sdadqewqe";
-//            return $lifestyle_location;
-
             //search section find room near bts only !!!
-//
-//            $zone_bts = $this->getBtsstationlist();
-//
-//            if ($optioncar == "nothavecar") {
-//
-//                $listRoom = $this->getListRoom($person_live, $price_low, $price_high);
-//                $pot_station_bts = $this->getBtsstationlist();
-//                foreach ($pot_station_bts as $bts) {
-//                    $place_lat_away = $bts->lat;
-//                    $place_lng_away = $bts->lng;
-//                }
-//
-//                $val_roomFormlistroom = $this->nothavecar($listRoom, $place_lat_away, $place_lng_away);
-//                $result = $val_roomFormlistroom->sortBy('price');
-//
-//            } else {
-//
-//                $listRoom = $this->getListRoom($person_live, $price_low, $price_high);
-//                $pot_station_bts = $this->getBtsstationlist();
-//                foreach ($pot_station_bts as $bts) {
-//                    $place_lat_away = $bts->lat;
-//                    $place_lng_away = $bts->lng;
-//                }
-//
-//                $valresult_havecar = $this->havecar($listRoom, $place_lat_away, $place_lng_away);
-//                $result = $valresult_havecar;
-//            }
+//            return ["person"=>$person_live,"pricelow"=>$price_low,"pricehigh"=>$price_high,"btsstation"=>$area_zone];
+            $zone_bts = $this->getBtsstationlist();
+            if ($optioncar == "nothavecar") {
+
+                $listRoom = $this->getListRoom($person_live, $price_low, $price_high);
+                $pot_station_bts = $this->getBtsstationlist();
+                foreach ($pot_station_bts as $bts) {
+                    $place_lat_away = $bts->lat;
+                    $place_lng_away = $bts->lng;
+                }
+
+                $val_roomFormlistroom = $this->nothavecar($listRoom, $place_lat_away, $place_lng_away);
+                $result = $val_roomFormlistroom->sortBy('price');
+
+            } else {
+
+                $listRoom = $this->getListRoom($person_live, $price_low, $price_high);
+                $pot_station_bts = $this->getBtsstationlist();
+                foreach ($pot_station_bts as $bts) {
+                    $place_lat_away = $bts->lat;
+                    $place_lng_away = $bts->lng;
+                }
+
+                $valresult_havecar = $this->havecar($listRoom, $place_lat_away, $place_lng_away);
+
+                $result = $valresult_havecar->sortBy('price');
+
+
+            }
+
+            if ($result != null || $result != []) {
+                return view('smartsearch', compact('result', 'zone_bts', 'lifestyle_location', 'price_low', 'price_high', 'person_live', 'area_zone', 'optioncar'));
+
+            } else {
+                return redirect('/')->with(['data' => $notfound]);
+            }
 
         }
-//        }
-
 //
-//        $search = DB::table('searchlocation')
-//            ->where('namelocation', 'like', '%' . $lifestyle_location . '%')
-//            ->first();
-//
-//
-//        if ($search != null) {
-//
-//            $search_lat_away = $search->lat;
-//            $search_lng_away = $search->lng;
-//        } else {
-//            return redirect('/')->with(['data' => $notfound]);
-//        }
-
-//        if ($sortprice == "low" && $sortdistance == "near") {
-//
-//
-//        } else if ($sortprice == "low" && $sortdistance == "far") {
-//
-//
-//
-//        } else if ($sortprice == "high" && $sortdistance == "near") {
-//
-//
-//
-//        } else if ($sortprice == "high" && $sortdistance == "far") {
-//
-//
-//
-//        }
-
-//
-//
-//
-//        if ($optioncar == "nothavecar") {
-////ไม่มีรถ/////////////
-//            if ($sortprice == "low" && $sortdistance == "near") {
-//
-////                $listRoom = $this->getListRoom($person_live, $price_low, $price_high, $sortprice);
-////
-////                $pot_station_bts = $this->getBtsstationlist();
-////
-////                foreach ($pot_station_bts as $bts) {
-////                    $place_lat_away = $bts->lat;
-////                    $place_lng_away = $bts->lng;
-////                }
-////
-////                $val_roomFormlistroom = $this->nothavecar($listRoom, $place_lat_away, $place_lng_away);
-////                $sort = $val_roomFormlistroom->sortBy('distance')->sortBy('price');
-////
-//////                return $sort;
-////                $result = $sort->values()->all();
-//
-//            } else if ($sortprice == "low" && $sortdistance == "far") {
-//
-//
-//                $listRoom = $this->getListRoom($person_live, $price_low, $price_high, $sortprice);
-//
-//                $pot_station_bts = $this->getBtsstationlist();
-//
-//                foreach ($pot_station_bts as $bts) {
-//                    $place_lat_away = $bts->lat;
-//                    $place_lng_away = $bts->lng;
-//                }
-//
-//                $val_roomFormlistroom = $this->nothavecar($listRoom, $place_lat_away, $place_lng_away);
-//                $sort = $val_roomFormlistroom->sortByDesc('distance')->sortBy('price');
-//
-////                return $sort;
-//                $result = $sort->values()->all();
-//
-//
-//            } else if ($sortprice == "high" && $sortdistance == "near") {
-//
-//
-//                $listRoom = $this->getListRoom($person_live, $price_low, $price_high, $sortprice);
-//                $pot_station_bts = $this->getBtsstationlist();
-//
-//                foreach ($pot_station_bts as $bts) {
-//                    $place_lat_away = $bts->lat;
-//                    $place_lng_away = $bts->lng;
-//                }
-//
-//                $val_roomFormlistroom = $this->nothavecar($listRoom, $place_lat_away, $place_lng_away);
-//                $sort = $val_roomFormlistroom->sortBy('distance')->sortByDesc('price');
-//
-////                return $sort;
-//                $result = $sort->values()->all();
-//
-//
-//            } else if ($sortprice == "high" && $sortdistance == "far") {
-//
-//
-//                $listRoom = $this->getListRoom($person_live, $price_low, $price_high, $sortprice);
-//                $pot_station_bts = $this->getBtsstationlist();
-//
-//                foreach ($pot_station_bts as $bts) {
-//                    $place_lat_away = $bts->lat;
-//                    $place_lng_away = $bts->lng;
-//                }
-//
-//                $val_roomFormlistroom = $this->nothavecar($listRoom, $place_lat_away, $place_lng_away);
-//                $sort = $val_roomFormlistroom->sortByDesc('distance')->sortByDesc('price');
-//
-////                return $sort;
-//                $result = $sort->values()->all();
-//
-//
-//            }
-//
-//
-////            $listRoom = $this->getListRoom($person_live, $price_low, $price_high,);
-////            dd($listRoom);
-//
-//
-////            $pot_station_bts = $this->getBtsstationlist();
-////
-////            foreach ($pot_station_bts as $bts) {
-////                $place_lat_away = $bts->lat;
-////                $place_lng_away = $bts->lng;
-////            }
-////
-////            $val_roomFormlistroom = $this->nothavecar($listRoom, $place_lat_away, $place_lng_away);
-////            $result = $val_roomFormlistroom;
-//        } else {
-//            //มีรถ
-////            $mylocation_lat = $request->mylocation_lat;
-////            $mylocation_lng = $request->mylocation_lng;
-//
-//            $listRoom = $this->getListRoom($person_live, $price_low, $price_high);
-//            $valresult_havecar = $this->havecar($listRoom, $search_lat_away, $search_lng_away);
-//
-//            $result = $valresult_havecar;
-//
-//        }
-
-//return $result;
-
-//        if ($result != null || $result != []) {
-//            return view('smartsearch', compact('result', 'zone_bts', 'lifestyle_location', 'price_low', 'price_high', 'person_live', 'area_zone', 'optioncar'));
-//
-//        } else {
-//            return redirect('/')->with(['data' => $notfound]);
-//        }
-
     }
 
     /**
@@ -348,16 +161,8 @@ class SearchController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public
-    function show($id)
+    public function show($id)
     {
-//        //
-//        if ($id == "lowtohigh"){
-//
-//        }else {
-//
-//
-//        }
 
     }
 
@@ -401,15 +206,6 @@ class SearchController extends Controller
 
     function getListRoom($personlive, $price_lower, $price_higher)
     {
-//        $chs_rangeprice = "";
-//        if ($rangePrice == "low") {
-//            $chs_rangeprice = "asc";
-//
-//        } else if ($rangePrice == "high") {
-//            $chs_rangeprice = "desc";
-//
-//        }
-
 
         $room = DB::table('room')
             ->select('*', 'room.id AS roomid', 'bts_station.lat AS btsstation_lat', 'bts_station.lng AS btsstation_lng')
@@ -547,5 +343,68 @@ class SearchController extends Controller
         return $imgroom;
     }
 
+
+    public function sorTval(Request $request)
+    {
+        $dataSearch = json_decode($request->dataAll);
+        $sortDistance = $request->sortDistnce;
+        $sortPrice = $request->sortPrice;
+
+        $price_low = $request->price_low;
+        $price_high = $request->price_high;
+        $person_live = $request->person_live;
+        $area_zone = $request->area_zone;
+        $lifestyle_location = $request->lifestyle_location;
+        $optioncar = $request->optioncar;
+////
+//        $price_low = "";
+//        $price_high = "";
+//        $person_live = "";
+//        $area_zone =" ";
+//        $lifestyle_location ="";
+//        $optioncar ="";
+
+        $zone_bts = [];
+
+
+//        return $dataSearch;
+
+        $collectio_data = collect($dataSearch);
+
+
+//        dd($collectio_data);
+
+        if ($sortPrice == "priceLow" && $sortDistance == "distaceAsc") {
+            $newsortdata = $collectio_data->sortBy('price')->sortBy('distance');
+        } else if ($sortPrice == "priceLow" && $sortDistance == "distaceDesc") {
+            $newsortdata = $collectio_data->sortBy('price')->sortByDesc('distance');
+        } else if ($sortPrice == "priceHigh" && $sortDistance == "distaceAsc") {
+            $newsortdata = $collectio_data->sortByDesc('price')->sortBy('distance');
+        } else if ($sortPrice == "priceHigh" && $sortDistance == "distaceDesc") {
+            $newsortdata = $collectio_data->sortByDesc('price')->sortByDesc('distance');
+        }
+
+        //todo:: มันเรียงจริงหรือไม่
+
+
+//        $result = $newsortdata;
+//        $result = $newsortdata->values()->all();
+
+//        return $newsortdata;
+//        return [
+//            "data" => $result,
+//            "zonebtn" => $zone_bts,
+//            "lifestyle" => $lifestyle_location,
+//            "priceLow " => $price_low,
+//            "pricehigiht" => $price_high,
+//            "person_live" => $person_live,
+//            "areazzone" => $area_zone,
+//            "optioncar" => $optioncar,
+//        ];
+//        return view('component.card-list-smartsearch',compact('result'));
+        return view('smartsearch', compact('result', 'zone_bts', 'lifestyle_location', 'price_low', 'price_high', 'person_live', 'area_zone', 'optioncar'));
+
+
+    }
 
 }

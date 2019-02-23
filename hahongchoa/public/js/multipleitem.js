@@ -102,11 +102,6 @@ function selectbtnCheckbox() {
 //bug ครั้งแรก
     console.log(arrsss);
 
-
-    // console.log(result)
-    // console.log("result:" + facilities)
-
-
     $('#facility').val(arrsss);
 
 }
@@ -231,8 +226,8 @@ function clickeoptionSearch(numpage) {
     });
 
     // console.log(numpage);
-    var render = ""
-    document.getElementById('myTabContent').innerHTML = ""
+    var render = "";
+    document.getElementById('myTabContent').innerHTML = "";
 
     switch (numpage) {
         case 1:
@@ -246,77 +241,6 @@ function clickeoptionSearch(numpage) {
                 "                           name=\"lifestyleplace\" id=\"lifestyleplace\" onkeyup=\"querylocation()\">\n" +
                 "                </div>\n" +
                 "            </div>\n" +
-                "\n" +
-                "            <div class=\"row mt-2\">\n" +
-                "                <div class=\"col-12\" id=\"background_search\">\n" +
-                "                    <div class=\"result-searc \" id=\"result-search\"></div>\n" +
-                "                </div>\n" +
-                "            </div>\n" +
-                "            <div class=\"row mt-2\">\n" +
-                "                <div class=\"col-6\">\n" +
-                "                    <input type=\"text\" class=\"bg_corner border\" style=\"width:100%\"\n" +
-                "                           placeholder=\"ราคาถูกสุด\"\n" +
-                "                           name=\"price_low\">\n" +
-                "                </div>\n" +
-                "                <div class=\"col-6\">\n" +
-                "                    <input type=\"text\" class=\"bg_corner border\" style=\"width:100%\"\n" +
-                "                           placeholder=\"ราคาแพงสุด\"\n" +
-                "                           name=\"price_high\">\n" +
-                "\n" +
-                "                    <input type=\"text\" name=\"stat_search_option[0]\" hidden value=\"search_nearLocation\">\n" +
-                "                </div>\n" +
-                "            </div>\n" +
-                "\n" +
-                "\n" +
-                "            <div class=\"row mt-2\">\n" +
-                "                <div class=\"col-md-6 col-6\">\n" +
-                "                    <select class=\"bg_corner border\" name=\"person_live\" style=\"width: 100%;\">\n" +
-                "                        <option selected>ผู้อยู่อาศัย</option>\n" +
-                "                        <option value=\"1\">1</option>\n" +
-                "                        <option value=\"2\">2</option>\n" +
-                "                        <option value=\"3\">3</option>\n" +
-                "                        <option value=\"4\">4</option>\n" +
-                "                        <option value=\"5\">5</option>\n" +
-                "                    </select>\n" +
-                "                </div>\n" +
-                "                <div class=\"row col-md-6\">\n" +
-                "                    <div class=\"col-md-3 col-3\">\n" +
-                "                        <label class=\" btn border\" id=\"radio_car0\">\n" +
-                "                           <img src=\"http://" + window.location.host + "/icon/nocar.svg \" alt=\"\">\n" +
-                "                            <input type=\"radio\" value=\"nothavecar\"\n" +
-                "                                   name=\"optioncar\" class=\"invisible\" onclick=\"optionCar()\">\n" +
-                "                        </label>\n" +
-                "                    </div>\n" +
-                "                    <div class=\"col-md-3 col-3\">\n" +
-                "                        <label class=\"btn border\" id=\"radio_car1\">\n" +
-                "                          <img src=\"http://" + window.location.host + "/icon/havecar.svg \" alt=\"\">\n" +
-                "                            <input type=\"radio\" value=\"havecar\"\n" +
-                "                                   name=\"optioncar\" class=\"invisible\" onclick=\"optionCar()\">\n" +
-                "                        </label>\n" +
-                "                    </div>\n" +
-                "                    <div class=\"col form-group\">\n" +
-                "                        <button type=\"submit\"\n" +
-                "                                class=\"font-weight-normal text-white btn btn-default btn_green\"\n" +
-                "                                style=\"width: 100%\">ค้นหา\n" +
-                "                        </button>\n" +
-                "                    </div>\n" +
-                "                </div>\n" +
-                "            </div>\n" +
-                "\n" +
-                "        </div>\n" +
-                "\n" +
-                "    </div>\n"
-
-            document.getElementById('myTabContent').innerHTML = render
-            // document.getElementById('myTabContent').innerHTML = a;
-            break;
-        case 2:
-
-            // var x = "@include 'form-search' ";
-            // document.getElementById('myTabContent').innerHTML = x;
-
-            render = "<div class=\"tab-pane fade show active\" id=\"home\" role=\"tabpanel\" aria-labelledby=\"home-tab\">\n" +
-                "        <div class=\"col-12\">\n" +
                 "\n" +
                 "            <div class=\"row mt-2\">\n" +
                 "                <div class=\"col-12\" id=\"background_search\">\n" +
@@ -350,17 +274,19 @@ function clickeoptionSearch(numpage) {
                 "                        <option value=\"5\">5</option>\n" +
                 "                    </select>\n" +
                 "                </div>\n" +
+
+
                 "                <div class=\"row col-md-6\">\n" +
                 "                    <div class=\"col-md-3 col-3\">\n" +
                 "                        <label class=\" btn border\" id=\"radio_car0\">\n" +
-                "                            <img src=\"http://" + window.location.host + "/icon/nocar.svg \" alt=\"\">\n" +
+                "                           <img src=\"http://" + window.location.host + "/icon/nocar.svg \" alt=\"\">\n" +
                 "                            <input type=\"radio\" value=\"nothavecar\"\n" +
                 "                                   name=\"optioncar\" class=\"invisible\" onclick=\"optionCar()\">\n" +
                 "                        </label>\n" +
                 "                    </div>\n" +
                 "                    <div class=\"col-md-3 col-3\">\n" +
                 "                        <label class=\"btn border\" id=\"radio_car1\">\n" +
-                "                            <img src=\"http://" + window.location.host + "/icon/havecar.svg\" alt=\"\">\n" +
+                "                          <img src=\"http://" + window.location.host + "/icon/havecar.svg \" alt=\"\">\n" +
                 "                            <input type=\"radio\" value=\"havecar\"\n" +
                 "                                   name=\"optioncar\" class=\"invisible\" onclick=\"optionCar()\">\n" +
                 "                        </label>\n" +
@@ -376,9 +302,115 @@ function clickeoptionSearch(numpage) {
                 "\n" +
                 "        </div>\n" +
                 "\n" +
+                "    </div>\n";
+
+            document.getElementById('myTabContent').innerHTML = render;
+            break;
+        case 2:
+            render = "<div class=\"tab-pane fade show active\" id=\"home\" role=\"tabpanel\" aria-labelledby=\"home-tab\">\n" +
+                "        <div class=\"col-12\">\n" +
+                "\n" +
+                "            <div class=\"row mt-2\">\n" +
+                "                <div class=\"col-12\" id=\"background_search\">\n" +
+                "                    <div class=\"result-searc \" id=\"result-search\"></div>\n" +
+                "                </div>\n" +
+                "            </div>\n" +
+                "            <div class=\"row mt-2\">\n" +
+                "                <div class=\"col-6\">\n" +
+                "                    <input type=\"text\" class=\"bg_corner border\" style=\"width:100%\"\n" +
+                "                           placeholder=\"ราคาถูกสุด\"\n" +
+                "                           name=\"price_low\">\n" +
+                "                </div>\n" +
+                "                <div class=\"col-6\">\n" +
+                "                    <input type=\"text\" class=\"bg_corner border\" style=\"width:100%\"\n" +
+                "                           placeholder=\"ราคาแพงสุด\"\n" +
+                "                           name=\"price_high\">\n" +
+                "\n" +
+                "                    <input type=\"text\" name=\"stat_search_option\" hidden value=\"search_nearBts\">\n" +
+                "                </div>\n" +
+                "            </div>\n" +
+                "\n" +
+                "\n" +
+                "            <div class=\"row mt-2\">\n" +
+                "                <div class=\"col-md-6 col-6\">\n" +
+                "                    <select class=\"bg_corner border\" name=\"person_live\" style=\"width: 100%;\">\n" +
+                "                        <option selected>จำนวนผู้อยู่อาศัย</option>\n" +
+                "                        <option value=\"1\">1</option>\n" +
+                "                        <option value=\"2\">2</option>\n" +
+                "                        <option value=\"3\">3</option>\n" +
+                "                        <option value=\"4\">4</option>\n" +
+                "                        <option value=\"5\">5</option>\n" +
+                "                    </select>\n" +
+                "                </div>\n" +
+                "                <div class=\"col-md-6 col-6\">\n" +
+                "                    <select class=\"bg_corner border\" name=\"area_zone\" style=\"width: 100%;\">\n" +
+                "                        <option selected>ใกล้สถานีรถไฟฟ้า</option>\n" +
+                "                        <option value=\"1\">หมอชิต</option>\n" +
+                "                        <option value=\"2\">สะพานควาย</option>\n" +
+                "                        <option value=\"3\">อารีย์</option>\n" +
+                "                        <option value=\"4\">สนามเป้า</option>\n" +
+                "                        <option value=\"5\">อนุสาวรีย์ชัยสมรภูมิ</option>\n" +
+                "                        <option value=\"6\">พญาไท</option>\n" +
+                "                        <option value=\"7\">ราชเทวี</option>\n" +
+                "                        <option value=\"8\">สยาม</option>\n" +
+                "                        <option value=\"9\">ชิดลม</option>\n" +
+                "                        <option value=\"10\">เพลินจิต</option>\n" +
+                "                        <option value=\"11\">นานา</option>\n" +
+                "                        <option value=\"12\">อโศก</option>\n" +
+                "                        <option value=\"13\">พร้อมพงษ์</option>\n" +
+                "                        <option value=\"14\">ทองหล่อ</option>\n" +
+                "                        <option value=\"15\">เอกมัย</option>\n" +
+                "                        <option value=\16\">พระโขนง</option>\n" +
+                "                        <option value=\"17\">อ่อนนุช</option>\n" +
+                "                        <option value=\"18\">บางจาก</option>\n" +
+                "                        <option value=\"19\">ปุณณวิถี</option>\n" +
+                "                        <option value=\"20\">อุดมสุข</option>\n" +
+                "                        <option value=\"21\">บางนา</option>\n" +
+                "                        <option value=\"22\">แบริ่ง</option>\n" +
+                "                        <option value=\"23\">สนามกีฬา</option>\n" +
+                "                        <option value=\"24\">ราชดำริ</option>\n" +
+                "                        <option value=\"25\">ศาลาแดง</option>\n" +
+                "                        <option value=\"26\">ช่องนนทรี</option>\n" +
+                "                        <option value=\"27\">สุรศักดิ์</option>\n" +
+                "                        <option value=\"28\">สะพานตากสิน</option>\n" +
+                "                        <option value=\"29\">กรุงธนบุรี</option>\n" +
+                "                        <option value=\"30\">วงเวียนใหญ่</option>\n" +
+                "                        <option value=\"31\">โพธิ์นิมิตร</option>\n" +
+                "                        <option value=\"32\">ตลาดพลู</option>\n" +
+                "                        <option value=\"33\">วุฒากาศ</option>\n" +
+                "                        <option value=\34\">บางหว้า</option>\n" +
+                "                        <option value=\"35\">สำโรง</option>\n" +
+                "                    </select>\n" +
+                "                </div>\n" +
+                "            </div>\n" +
+                "                <div class=\"row mt-2\">\n" +
+                "                    <div class=\"col-md-2 col-2\">\n" +
+                "                        <label class=\" btn border\" id=\"radio_car0\">\n" +
+                "                            <img src=\"http://" + window.location.host + "/icon/nocar.svg \" alt=\"\">\n" +
+                "                            <input type=\"radio\" value=\"nothavecar\"\n" +
+                "                                   name=\"optioncar\" class=\"invisible\" onclick=\"optionCar()\">\n" +
+                "                        </label>\n" +
+                "                    </div>\n" +
+                "                    <div class=\"col-md-2 col-2\">\n" +
+                "                        <label class=\"btn border\" id=\"radio_car1\">\n" +
+                "                            <img src=\"http://" + window.location.host + "/icon/havecar.svg\" alt=\"\">\n" +
+                "                            <input type=\"radio\" value=\"havecar\"\n" +
+                "                                   name=\"optioncar\" class=\"invisible\" onclick=\"optionCar()\">\n" +
+                "                        </label>\n" +
+                "                    </div>\n" +
+                "                    <div class=\"col-md-8 form-group\">\n" +
+                "                        <button type=\"submit\"\n" +
+                "                                class=\"font-weight-normal text-white btn btn-default btn_green\"\n" +
+                "                                style=\"width: 100%\">ค้นหา\n" +
+                "                        </button>\n" +
+                "                    </div>\n" +
+                "                </div>\n" +
+                "\n" +
+                "        </div>\n" +
+                "\n" +
                 "    </div>";
 
-            document.getElementById('myTabContent').innerHTML = render
+            document.getElementById('myTabContent').innerHTML = render;
 
 
             break;
@@ -388,8 +420,8 @@ function clickeoptionSearch(numpage) {
     return numpage;
 }
 
-function includeAsJsString($template) {
-    $string = view($template);
-    return str_replace("\n", '\n', str_replace('"', '\"', addcslashes(str_replace("\r", '', (string), $string), "\0..\37'\\")));
-}
 
+function herfLocationTocontact(url) {
+    window.location = url
+
+}

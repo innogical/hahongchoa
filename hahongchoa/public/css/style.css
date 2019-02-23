@@ -135,16 +135,20 @@ a:hover {
 /*color*/
 
 .setad {
-    width: 70px;
+    width: 40px;
     height: auto;
-    float: right;
-    position: relative;
-    top: -16px;
-    right: 0px;
+    border-radius: 0 0 0 8px;
+    right: 14px;
+    background-color: #f7f7f7;
+    padding: 2px;
+
 }
 
-a .hover_item_room:hover {
+.hover_item_room:hover {
     text-decoration: none;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transition: width 2s;
+    transition-timing-function: ease-in-out;
 }
 
 /*addNewroom*/
@@ -235,4 +239,36 @@ a .hover_item_room:hover {
 .bg-active_tab_search {
     background-color: #F44D31 !important;
     color: whitesmoke !important;
+}
+
+.bg_popver_filter {
+    z-index: 1;
+    position: absolute;
+    background-color: whitesmoke;
+    height: auto;
+
+}
+
+.hover_compare_room:hover {
+    cursor: pointer;
+}
+/*//3 จุด*/
+.threedotother_text{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow:ellipsis;
+}
+
+.shadow_box{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.bg_facility{
+    width: 100%;
+    padding: 12px;
+    height: auto;
+    background-color: #f7f7f7;
+}
+.img_facility{
+ padding: 2px;
+    border-radius: 100%;
 }

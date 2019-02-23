@@ -24,7 +24,7 @@
 @stack('scripts')
 
 <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Mitr" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Mitr:300,400,500" rel="stylesheet">
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 

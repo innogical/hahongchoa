@@ -18,7 +18,8 @@ Route::get('/', 'RoomController@listroom');
 
 Route::resource('/room', 'RoomController');
 Route::get('/room/query/{txtquery}', 'RoomController@querySeach');
-//Route::get('/{lat,lng}', 'RoomController@nearRoom');
+Route::post('/roomnearskytrian/sortresult','SearchController@sorTval');
+Route::get('/roomnearskytrian/compare/{idroom1}/{idroom2}','RoomController@compareRoom');
 
 Route::resource('/register', 'RegisterController');
 Route::resource('/loginend', 'LoginController');

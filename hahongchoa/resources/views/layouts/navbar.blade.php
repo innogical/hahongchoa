@@ -1,7 +1,7 @@
 @section('nav')
 
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-light shadow p-1" style="padding: 0;height: 70px">
+        <nav class="navbar navbar-expand-md navbar-light bg-light shadow_box p-1" style="padding: 0;height: 70px">
             <div class="container" style="padding: 0">
                 <a class="navbar-brand" href="{{ url('/') }}">
 
@@ -25,14 +25,15 @@
                                 <div class=" col-2">
                                     <p class="color-dark-blue-fond mt-3 text-center">คำค้นหา</p>
                                 </div>
-                                    <input type="text" name="lifestyleplace" class="col-8 border-0 shadow mt-2"
-                                           placeholder="สถานที่ทำงาน / มหาวิทยาลัย" value="{{$lifestyle_location}}"
-                                           style="padding: 10px">
+                                <input type="text" name="lifestyleplace" class="col-8 border-0 shadow mt-2"
+                                       placeholder="สถานที่ทำงาน / มหาวิทยาลัย" value="{{$lifestyle_location}}"
+                                       style="padding: 10px">
                                 {{--{{$lifestyle_location}}--}}
                             </div>
                         </div>
 
                 @endif
+
                 {{--</ul>--}}
                 <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -40,6 +41,8 @@
                         {{--href="{{url('/')}}">หน้าแรก</a></li>--}}
                         {{--<li><a class="  {{ Request:: is('http://127.0.0.1:8000/zone') ? 'color-light-orenge ' : 'nav-link' }} "--}}
                         {{--href="{{ url('/zone') }}">พื้นที่</a></li>--}}
+
+                        <div class="btn btn-orange-light" id="btn_compare">เปรียบเทียบห้อง</div>
 
                         @if(\Illuminate\Support\Facades\Auth::User())
 
@@ -58,8 +61,8 @@
                             {{--<li><a class="nav-link" href="{{url('/login')}}">เข้าสู่ระบบ</a></li>--}}
                             <li><a class="nav-link border color-border-orange" href="{{url('/login')}}">ลงประกาศห้อง</a>
                             </li>
-
                         @endif
+
 
                     </ul>
                 </div>

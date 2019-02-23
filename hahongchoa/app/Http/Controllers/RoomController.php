@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Adroom;
+use App\Imageroom;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use GuzzleHttp\Client;
@@ -17,7 +18,6 @@ class RoomController extends Controller
 
     public function index()
     {
-
 //        return view('welcome');
     }
 
@@ -50,10 +50,75 @@ class RoomController extends Controller
      */
     public function show($id)
     {
+
+
         //
 //dd($id);
 //        return $id;
-        return view('detailroom', compact('id'));
+        $room = DB::table('room')
+            ->select('*', 'bts_station.lat AS bts_lat', 'bts_station.lng AS bts_lng', 'room.lat AS room_lat', 'room.lng AS room_lng')
+            ->join('bts_station', 'bts_station.id', '=', 'room.btsstation_id')
+            ->join('lease', 'lease.id', '=', 'room.lease_id')
+            ->join('user', 'user.id', '=', 'room.user_id')
+            ->join('imageRoom', 'imageRoom.roomid', '=', 'room.id')
+            ->groupBy('imageRoom.img_id')
+            ->where('room.id', '=', $id)->get();
+
+
+        $idRoom = $room->first(); //new unwrap collection
+
+        $img_air = Imageroom::where('roomid', '=', $idRoom->id)->get();
+        $room_facility = DB::table('room_facility')->where('room_facility.room_id', '=', $idRoom->id)
+            ->get();
+
+        $arr_roomid = [];
+        $arr_cal = [];
+
+
+        foreach ($room_facility as $Aroom) {
+            array_push($arr_roomid, $Aroom->facility_id);
+        }
+
+
+        $distance_form_roomTobts = $this->calRouteAndTime($idRoom->room_lat, $idRoom->room_lng, $idRoom->bts_lat, $idRoom->bts_lng);
+
+//        array_push($arr_cal, $distance_form_roomTobts[0], $distance_form_roomTobts[1]);
+
+//        return $arr_cal;
+        foreach ($room_facility as $Aroom) {
+            array_push($arr_roomid, $Aroom->facility_id);
+        }
+
+        $Facilityofroom = DB::table('facility')->whereIn('facility.id', $arr_roomid)->get();
+//        return $Facilityofroom;
+
+
+        $mapRoom_detail_facility = $Facilityofroom->map(function ($item, $key) use ($arr_roomid) {
+            $item->pathImagr_facility = $arr_roomid[$key];
+            return $item;
+        });
+
+        $mapdata_room = $room->map(function ($item, $key) use ($distance_form_roomTobts) {
+            $item->time = $distance_form_roomTobts[0];
+            $item->distance = $distance_form_roomTobts[1];
+            return $item;
+        });
+
+
+        $TotelRoom = $mapdata_room->first();
+//        return($distance_form_roomTobts);
+
+//        return $mapRoom_detail_facility;
+
+
+//        ->join('facility','facility.id','=',$room_facility)
+
+//        return $room;
+//        return $room_facility;
+//        dd($room);
+
+
+        return view('detailroom', compact('TotelRoom', 'img_air', 'mapRoom_detail_facility'));
     }
 
     /**
@@ -120,10 +185,10 @@ class RoomController extends Controller
 //        }
 
 
-        $zone = $this->Zonebts_near();
+        $listbts = $this->Zonebts_near();
 
 
-        return view('welcome', compact('newRoom', 'mapdataNearby', 'reccomdRoom', 'zone'));
+        return view('welcome', compact('newRoom', 'mapdataNearby', 'reccomdRoom', 'listbts'));
     }
 
     function Zonebts_near()
@@ -155,6 +220,7 @@ class RoomController extends Controller
                 'app_code' => 'Yon71VCM7Qbc9ELCymSPTw'
             ]
         ]);
+
         $data = json_decode($res->getBody()->getContents(), true);
         $summaryloop = $data["response"]["route"];
 
@@ -164,7 +230,11 @@ class RoomController extends Controller
             $baseTime = $item['summary']['baseTime'] / 60;
         }
         $objCalrouteandTime = [$s_sumarry, $baseTime];
+
+
         return $objCalrouteandTime;
+
+
     }
 
     public function nearRoom($lat, $lng)
@@ -237,9 +307,23 @@ class RoomController extends Controller
         foreach ($summaryloop as $item) {
 
             $s_sumarry = $item['summary']['distance'];
-            $baseTime = $item['summary']['baseTime'] / 60;
+            $baseTime = $item['summary']['baseTime'];
         }
         $objCalrouteandTime = [$s_sumarry, $baseTime];
         return $objCalrouteandTime;
     }
+
+
+    public function compareRoom($idroom1, $idroom2)
+    {
+        $room1 = Adroom::where('id', '=', $idroom1)->first();
+        $room2 = Adroom::where('id', '=', $idroom2)->first();
+
+//        return ["room1"=>$room1->first(),"room2"=>$room2->first()];
+        return view('compareroom', compact('room1', 'room2'));
+
+
+    }
+
+
 }

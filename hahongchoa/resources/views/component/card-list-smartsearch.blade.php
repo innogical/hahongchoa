@@ -23,7 +23,7 @@
                         </div>
                         <div class="box-twin-data row">
                             <div class="img-fluid col-1 p-0 mr-1">
-                                <img src="{{asset('/icon/pin.svg')}}" alt="" width="30px" height="30px">
+                                <img src="{{asset('/icon/trian.svg')}}" alt="" width="30px" height="30px">
                             </div>
                             <div class="text-justify col color-dark-blue-fond">
                                 <p>
@@ -49,7 +49,7 @@
                         </div>
                         <div class="box-twin-data row">
                             <div class="img-fluid col-1 p-0 mr-1">
-                                <img src="{{asset('/icon/distance.svg')}}" alt="" width="30px" height="30px">
+                                <img src="{{asset('/icon/pin.svg')}}" alt="" width="30px" height="30px">
                             </div>
                             <div class="text-justify col color-dark-blue-fond">{{number_format($room->distance,1,'.','')}}
                                 กิโลเมตร
@@ -81,7 +81,11 @@
 
         <script>
             $(document).ready(function () {
-                $("#myModal").modal()
+                $("#myModal").modal();
+
+
+
+
             })
         </script>
 
