@@ -106,17 +106,6 @@ class RoomController extends Controller
 
 
         $TotelRoom = $mapdata_room->first();
-//        return($distance_form_roomTobts);
-
-//        return $mapRoom_detail_facility;
-
-
-//        ->join('facility','facility.id','=',$room_facility)
-
-//        return $room;
-//        return $room_facility;
-//        dd($room);
-
 
         return view('detailroom', compact('TotelRoom', 'img_air', 'mapRoom_detail_facility'));
     }
@@ -178,12 +167,6 @@ class RoomController extends Controller
 
 
         $mapdataNearby = [];
-//        if ($request->mylat != null && $request->mylng != null) {
-//
-//            echo $request->mylat;
-////            return ["lat" =>$request->mylat,"lng"=>$request->mylng];
-//        }
-
 
         $listbts = $this->Zonebts_near();
 
@@ -316,11 +299,87 @@ class RoomController extends Controller
 
     public function compareRoom($idroom1, $idroom2)
     {
-        $room1 = Adroom::where('id', '=', $idroom1)->first();
-        $room2 = Adroom::where('id', '=', $idroom2)->first();
+        $room1 = Adroom::where('id', '=', $idroom1)->get();
+        $room2 = Adroom::where('id', '=', $idroom2)->get();
 
-//        return ["room1"=>$room1->first(),"room2"=>$room2->first()];
-        return view('compareroom', compact('room1', 'room2'));
+        $idroom1 = $room1[0]->id;
+        $idroom2 = $room2[0]->id;
+
+//        return $room1;
+
+        $findimg_room1 = DB::table('imageRoom')
+            ->where('imageRoom.roomid', '=', $idroom1)
+            ->get();
+
+
+        $findimg_room2 = DB::table('imageRoom')
+            ->where('imageRoom.roomid', '=', $idroom2)
+            ->get();
+
+        $leas_room1 = DB::table('lease')->where('lease.id', '=', $room1[0]->lease_id)
+            ->first();
+
+
+        $leas_room2 = DB::table('lease')->where('lease.id', '=', $room2[0]->lease_id)
+            ->first();
+
+
+//        return [$leas_room1, $leas_room2];
+
+        $room1_facility = DB::table('room_facility')
+            ->select('facility_id')
+            ->where('room_facility.room_id', '=', $idroom1)
+            ->get();
+        $room2_facility = DB::table('room_facility')
+            ->select('facility_id')
+            ->where('room_facility.room_id', '=', $idroom2)
+            ->get();
+
+//        return [$room1_facility, $room2_facility];
+
+        $arr_keepidRoom1 = [];
+        $arr_keepidRoom2 = [];
+
+        foreach ($room1_facility as $Facility_1) {
+            array_push($arr_keepidRoom1, $Facility_1->facility_id);
+        }
+        foreach ($room2_facility as $Facility_2) {
+            array_push($arr_keepidRoom2, $Facility_2->facility_id);
+        }
+//
+////        return ["id-facility" => $arr_keepidRoom1, "id-facility-2" => $arr_keepidRoom2];
+
+        $facilityOfroom_1 = DB::table('facility')->whereIn('facility.id', $arr_keepidRoom1)
+            ->get();
+        $facilityOfroom_2 = DB::table('facility')->whereIn('facility.id', $arr_keepidRoom2)
+            ->get();
+
+
+//        return $facilityOfroom_2;
+
+        $mapdata_room1 = $room1->map(function ($item, $key) use ($findimg_room1,$leas_room1){
+
+        $item->imageRoom = $findimg_room1[0];
+        $item->lease = $leas_room1->laase_duration;
+        return $item;
+    });
+
+
+        $mapdata_room2 = $room1->map(function ($item, $key) use ($findimg_room2, $leas_room2) {
+            $item->imageRoom = $findimg_room2[0];
+            $item->lease = $leas_room2->laase_duration;
+            return $item;
+        });
+
+
+        $aroom_1 = $room1->first();
+        $aroom_2 = $room2->first();
+        $img_room1 = $mapdata_room1->first();
+        $img_room2 = $mapdata_room2->first();
+
+//        return [$img_room1,$img_room2];
+
+        return view('compareroom', compact('aroom_1', 'aroom_2', 'img_room1', 'img_room2', 'facilityOfroom_1', 'facilityOfroom_2'));
 
 
     }

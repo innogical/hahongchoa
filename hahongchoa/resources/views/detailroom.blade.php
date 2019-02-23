@@ -196,8 +196,8 @@
 
             </div>
 
-            <input type="text" value="13.8192362" id="room_lat" hidden>
-            <input type="text" value="100.0573583" id="room_lng" hidden>
+            <input type="text" value="{{$TotelRoom->lat}}" id="room_lat" hidden>
+            <input type="text" value="{{$TotelRoom->lng}}" id="room_lng" hidden>
 
             {{--<hr class="col-12 ml-2">--}}
             <div class="col-md-12">
@@ -205,16 +205,8 @@
                 <div class="row">
                     <div class="col-md-6 col-12 mt-4">
                         <h4>ตำแหน่งที่พัก</h4>
-                        <script>
-                            var lat;
-                            var lng;
-
-                            lat = {!! $TotelRoom->lat !!};
-                            lng = {!! $TotelRoom->lng !!};
-                            console.log("sadqwe" + lng)
-                        </script>
                         <div id="roommap" style="height: 384px"
-                             onload="loadDetailMap(lat,lng)">
+                             onload="loadDetailMap()">
                         </div>
                     </div>
 
@@ -266,7 +258,12 @@
     <script async defer
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC9CSkZmCPxPPyZahRKqk0yfSfav1rZHxg&callback=loadDetailMap"
     ></script>
+    {{--<script>--}}
+        {{--var lat = {!! $TotelRoom->lat !!}--}}
+        {{--var lng = {!! $TotelRoom->lng !!}--}}
 
+        {{--console.log("sadqwe" + lng + lat)--}}
+    {{--</script>--}}
 
     <footer>
         @include('layouts.footer')

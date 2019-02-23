@@ -32,18 +32,15 @@
                             </div>
                         </div>
 
-                @endif
-
-                {{--</ul>--}}
-                <!-- Right Side Of Navbar -->
+                    @endif
                     <ul class="navbar-nav ml-auto">
-                        {{--<li><a class="  {{ Request::is('/') ? 'color-light-orenge' : 'nav-link' }} "--}}
-                        {{--href="{{url('/')}}">หน้าแรก</a></li>--}}
-                        {{--<li><a class="  {{ Request:: is('http://127.0.0.1:8000/zone') ? 'color-light-orenge ' : 'nav-link' }} "--}}
-                        {{--href="{{ url('/zone') }}">พื้นที่</a></li>--}}
+                        @if(Request::url() == "http://127.0.0.1:8000/room/*")
 
-                        <div class="btn btn-orange-light" id="btn_compare">เปรียบเทียบห้อง</div>
 
+                        @else
+                            <div class="btn btn-orange-light" id="btn_compare">เปรียบเทียบห้อง</div>
+
+                        @endif
                         @if(\Illuminate\Support\Facades\Auth::User())
 
                             <div class="dropdown">
@@ -53,13 +50,15 @@
                                     <span class="caret"></span></button>
                                 <ul class="dropdown-menu">
                                     <li><a href="{{'/adroom'}}" class="color-dark-blue-fond">ลงประกาศห้อง</a></li>
-                                    <li><a href="{{'/managerroom'}}" class="color-dark-blue-fond">จัดการห้อง</a></li>
+                                    <li><a href="{{'/managerroom'}}" class="color-dark-blue-fond">จัดการห้อง</a>
+                                    </li>
                                     <li><a href="{{'/logout'}}" class="color-dark-blue-fond">ออกจากระบบ</a></li>
                                 </ul>
                             </div>
                         @else
                             {{--<li><a class="nav-link" href="{{url('/login')}}">เข้าสู่ระบบ</a></li>--}}
-                            <li><a class="nav-link border color-border-orange" href="{{url('/login')}}">ลงประกาศห้อง</a>
+                            <li><a class="nav-link border color-border-orange"
+                                   href="{{url('/login')}}">ลงประกาศห้อง</a>
                             </li>
                         @endif
 

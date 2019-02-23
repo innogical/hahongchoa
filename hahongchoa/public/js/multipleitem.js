@@ -61,7 +61,7 @@ function getCurrentlocation() {
 }
 
 
-function loadDetailMap() {
+function loadDetailMap(lat,lng) {
     var lat = parseFloat($('#room_lat').val());
     var lng = parseFloat($('#room_lng').val());
     console.log("lat" + lat);
