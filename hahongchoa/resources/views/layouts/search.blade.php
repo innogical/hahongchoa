@@ -1,8 +1,13 @@
 @section('search')
+    <div class="embed-responsive embed-responsive-16by9 position-relative">
+        <video width="100%" height="100%" loop autoplay>
+            <source src="vdo/screen_motion_converttoAE_3.mp4" type="video/mp4">
+        </video>
+    </iframe>
+    </div>
+    <div class="col-12 col-md-6 position-absolute" style="margin-top: 130px;">
 
-    <div class="col-12 col-md-6">
-
-        <form action="/roomnearskytrian" method="post" class=" bg-white body_box-search ">
+        <form action="/roomnearskytrian" method="post" class=" bg-white body_box-search">
             @csrf
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item">
@@ -22,6 +27,9 @@
             </div>
         </form>
     </div>
+
+
+
 
     <script>
         $(document).ready(function () {

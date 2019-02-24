@@ -34,17 +34,18 @@
 
                     @endif
                     <ul class="navbar-nav ml-auto">
-                        @if(Request::url() == "http://127.0.0.1:8000/room/*")
+                        {{--{{Request::url()}}--}}
+                        {{--@if(Request::url() != "http://127.0.0.1:8000/room/*")--}}
 
-
-                        @else
+                        {{--@elseif (Request::url() != "http://127.0.0.1:8000/")--}}
                             <div class="btn btn-orange-light" id="btn_compare">เปรียบเทียบห้อง</div>
 
-                        @endif
+                        {{--@endif--}}
                         @if(\Illuminate\Support\Facades\Auth::User())
 
                             <div class="dropdown">
-                                <button class="btn color-higiht-orange-btn dropdown-toggle" type="button"
+                                <button class="btn btn_green bg_corner text-white font-weight-light dropdown-toggle"
+                                        type="button"
                                         data-toggle="dropdown">
                                     {{Auth::User()->username}}
                                     <span class="caret"></span></button>
@@ -57,9 +58,14 @@
                             </div>
                         @else
                             {{--<li><a class="nav-link" href="{{url('/login')}}">เข้าสู่ระบบ</a></li>--}}
-                            <li><a class="nav-link border color-border-orange"
-                                   href="{{url('/login')}}">ลงประกาศห้อง</a>
-                            </li>
+
+                            @if(Request::url() == "http://127.0.0.1:8000/adroom/")
+
+                            @else
+                                <li><a class="nav-link border color-border-orange"
+                                       href="{{url('/login')}}">ลงประกาศห้อง</a>
+                                </li>
+                            @endif
                         @endif
 
 

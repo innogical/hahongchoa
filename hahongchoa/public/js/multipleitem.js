@@ -29,9 +29,10 @@ function getCurrentlocation() {
     var marker;
 
     function initMap(position) {
+
         var uluru = {lat: position.coords.latitude, lng: position.coords.longitude};
         map = new google.maps.Map(
-            document.getElementById('map'), {zoom: 14, center: uluru});
+            document.getElementById('map'), {zoom: 10, center: uluru});
 
 
         marker = new google.maps.Marker({position: uluru, map: map});
@@ -129,7 +130,6 @@ function smartSearch() {
     var chs_car = $('#optioncar').val();
 
     if (chs_car == "nothavecar") {
-
         $('#radio_car0').addClass('facilities_active');
     } else {
         $('#radio_car1').addClass('facilities_active');
@@ -231,14 +231,13 @@ function clickeoptionSearch(numpage) {
 
     switch (numpage) {
         case 1:
-            // var a = "@include 'form-search_room' ";
             render = "    <div class=\"tab-pane fade show active\" id=\"home\" role=\"tabpanel\" aria-labelledby=\"home-tab\">\n" +
                 "        <div class=\"col-12\">\n" +
                 "            <div class=\"row mt-2\">\n" +
                 "                <div class=\"col-12\">\n" +
                 "                    <input type=\"text\" class=\"bg_corner border\" style=\"width:100%\"\n" +
                 "                           placeholder=\"สถานที่ทำงาน / มหาวิทยาลัย\"\n" +
-                "                           name=\"lifestyleplace\" id=\"lifestyleplace\" onkeyup=\"querylocation()\">\n" +
+                "                           name=\"lifestyleplace\" id=\"lifestyleplace\" required onkeyup=\"querylocation()\">\n" +
                 "                </div>\n" +
                 "            </div>\n" +
                 "\n" +
@@ -251,12 +250,12 @@ function clickeoptionSearch(numpage) {
                 "                <div class=\"col-6\">\n" +
                 "                    <input type=\"text\" class=\"bg_corner border\" style=\"width:100%\"\n" +
                 "                           placeholder=\"ราคาถูกสุด\"\n" +
-                "                           name=\"price_low\">\n" +
+                "                           name=\"price_low\" required>\n" +
                 "                </div>\n" +
                 "                <div class=\"col-6\">\n" +
                 "                    <input type=\"text\" class=\"bg_corner border\" style=\"width:100%\"\n" +
                 "                           placeholder=\"ราคาแพงสุด\"\n" +
-                "                           name=\"price_high\">\n" +
+                "                           name=\"price_high\" required>\n" +
                 "\n" +
                 "                    <input type=\"text\" name=\"stat_search_option\" hidden value=\"search_nearLocation\">\n" +
                 "                </div>\n" +
@@ -265,7 +264,7 @@ function clickeoptionSearch(numpage) {
                 "\n" +
                 "            <div class=\"row mt-2\">\n" +
                 "                <div class=\"col-md-6 col-6\">\n" +
-                "                    <select class=\"bg_corner border\" name=\"person_live\" style=\"width: 100%;\">\n" +
+                "                    <select class=\"bg_corner border\" name=\"person_live\" style=\"width: 100%;\" required>\n" +
                 "                        <option selected>ผู้อยู่อาศัย</option>\n" +
                 "                        <option value=\"1\">1</option>\n" +
                 "                        <option value=\"2\">2</option>\n" +
@@ -279,16 +278,16 @@ function clickeoptionSearch(numpage) {
                 "                <div class=\"row col-md-6\">\n" +
                 "                    <div class=\"col-md-3 col-3\">\n" +
                 "                        <label class=\" btn border\" id=\"radio_car0\">\n" +
-                "                           <img src=\"http://" + window.location.host + "/icon/nocar.svg \" alt=\"\">\n" +
+                "                           <img src=\"http://" + window.location.host + "/icon/nohavecar.svg \"   alt=\"\">\n" +
                 "                            <input type=\"radio\" value=\"nothavecar\"\n" +
-                "                                   name=\"optioncar\" class=\"invisible\" onclick=\"optionCar()\">\n" +
+                "                                   name=\"optioncar\" class=\"invisible\" onclick=\"optionCar()\" required>\n" +
                 "                        </label>\n" +
                 "                    </div>\n" +
                 "                    <div class=\"col-md-3 col-3\">\n" +
                 "                        <label class=\"btn border\" id=\"radio_car1\">\n" +
                 "                          <img src=\"http://" + window.location.host + "/icon/havecar.svg \" alt=\"\">\n" +
                 "                            <input type=\"radio\" value=\"havecar\"\n" +
-                "                                   name=\"optioncar\" class=\"invisible\" onclick=\"optionCar()\">\n" +
+                "                                   name=\"optioncar\" class=\"invisible\" onclick=\"optionCar()\" required>\n" +
                 "                        </label>\n" +
                 "                    </div>\n" +
                 "                    <div class=\"col form-group\">\n" +

@@ -64,7 +64,7 @@
                             {{--<img src="{{asset('/icon/baht.svg')}}" alt="" width="30px" height="30px">--}}
                             {{--</div>--}}
                             <div class="col-12">
-                                <div class="text-right color-dark-blue-fond" style="font-size: 18px">{{$room->price}}
+                                <div class="text-right color-dark-blue-fond" style="font-size: 18px">{{number_format($room->price)}}
                                     ฿.-/เดือน
                                 </div>
 

@@ -17,12 +17,12 @@ class ManagerprofileController extends Controller
      */
     public function index()
     {
-        //
 
         $myrooms = DB::table('room')
             ->select('*', 'room.id AS roomid')
             ->join('bts_station', 'bts_station.id', '=', 'room.btsstation_id')
             ->where('room.user_id', Auth::user()->id)
+            ->orderBy('created_at','desc')
             ->get();
 
         $arr = [];

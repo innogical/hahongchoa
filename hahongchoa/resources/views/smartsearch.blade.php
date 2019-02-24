@@ -11,6 +11,7 @@
                             <input type="text" class="bg_corner border form-control"
                                    value="{{$price_low}}">
                         </div>
+                        <input type="text" name="stat_search_option" hidden value="search_nearLocation">
                         <lable class="mt-2">ถึง</lable>
                         <div class="col-md-2 col-2">
                             <input type="text" class=" bg_corner border form-control"
@@ -59,7 +60,7 @@
                                        name="optioncar" class="invisible" onclick="optionCar()">
                             </label>
 
-                            <label class="btn border" id="radio_car0">
+                            <label class="btn border" id="radio_car1">
                                 <img src="{{asset('/icon/havecar.svg' )}}" alt="havecar">
                                 <input type="radio" value="havecar"
                                        name="optioncar" class="invisible" onclick="optionCar()">
@@ -87,9 +88,10 @@
         <div class="col-md-12 col-12">
             <div class="d-flex justify-content-md-between mt-2">
                 <div class="row">
-                    <h4 class="color-dark-blue-fond">ผลการค้นหา</h4>
-                    <h5 class="p-1 ml-3">{{count($result)}} ห้อง</h5>
+                    <h4 class="color-dark-blue-fond font-weight-light">ผลการค้นหา</h4>
+                    <h5 class="p-1 ml-3 font-weight-light">{{count($result)}} ห้อง</h5>
                 </div>
+
                 @include('component.optionsearch')
                 @yield('optionbarsearch')
             </div>
@@ -99,7 +101,7 @@
         <div class="offset-md-8 offset-8 col-md-4  col-4">
             <form action="/roomnearskytrian/sortresult" method="post" class="form-group m-0">
                 @csrf
-                <div class="bg_corner bg_popver_filter col-md-12 col-12 p-2" id="show_option_filter">
+                <div class="bg_corner bg_popver_filter col-md-10 col-10 p-2" id="show_option_filter">
 
                     <div class="" hidden>
                         <input type="text" value="{{$price_low}}" name="price_low">
@@ -111,8 +113,7 @@
 
                     </div>
 
-
-                    <h5>ระยะทาง</h5>
+                    <h6>เรียงลำดับระยะทาง</h6>
                     <div class="row">
                         <input type="text" value="{{$result}}" hidden name="dataAll">
                         <div class="form-check radio">
@@ -125,9 +126,8 @@
                         </div>
                     </div>
 
-                    <h5>ราคา</h5>
+                    <h5>เรียงลำดับราคา</h5>
                     <div class="row">
-
                         <div class="form-check radio">
                             <input type="radio" name="sortPrice" value="priceLow">
                             <label class="form-check-label" for="exampleCheck1">ราคาถูกถึงแพง</label>
@@ -137,7 +137,9 @@
                             <label class="form-check-label" for="exampleCheck1">ราคาแพงถึงถูก</label>
                         </div>
                     </div>
-                    <button type="submit" class=" btn btn-primary col-md-6 d-block ">ยืนยัน</button>
+                    <div class="row d-flex justify-content-center m-2">
+                        <button type="submit" class=" btn bg_corner btn_green col-md-6 d-block text-white ">ยืนยัน</button>
+                    </div>
 
                 </div>
             </form>

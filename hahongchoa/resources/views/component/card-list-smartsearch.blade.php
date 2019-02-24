@@ -1,14 +1,11 @@
 @section('cardzone')
     @if(count($result)>0)
-        {{--{{count($result)}}--}}
         @foreach($result as $room)
             <div class="col-md-4 col-4 card  mt-2 border-0" style="height:auto;">
                 <div class="">
-                    <div class="card-img bg-dark" style="height:164px; width: 100%">
-                        {{--<img class="setad position-absolute" src="{{asset('/icon/comp_ad.png')}}" alt="Ad">--}}
-                        {{--<button type="submit" class=" btn btn_green btn-compare position-absolute">เปรียบเทียบ</button>--}}
+                    <div class="card-img bg-dark" style="height:auto; width: 100%">
                         <img src="{{asset('/images_rooms/'.$room->imgRoomF)}}" alt="{{$room->imgRoomF}}" width="100%"
-                             height="164px">
+                             height="auto">
                     </div>
 
                 </div>
@@ -16,7 +13,7 @@
 
                     <div class="card-body border pb-1 hover_item_room">
                         <div class="row">
-                            <p class="color-green col p-0 m-0 color-dark-blue-fond">{{$room->name}}</p>
+                            <p class="color-dark-blue-fond col p-0 m-0" style="font-size: 20px">{{$room->name}}</p>
                         </div>
                         <div class="row">
                             <p style="font-size: 12px; " class="text-dark">{{$room->address}}</p>
@@ -26,32 +23,32 @@
                                 <img src="{{asset('/icon/trian.svg')}}" alt="" width="30px" height="30px">
                             </div>
                             <div class="text-justify col color-dark-blue-fond">
-                                <p>
+                                <p class="font-weight-light">
                                     สถานีรถไฟฟ้า{{$room->name_station}}
                                 </p>
                             </div>
                         </div>
 
-                        <div class="box-twin-data row ">
-                            <div class="img-fluid col-1 p-0 mr-1">
-                                <img src="{{asset('/icon/hilight.svg')}}" alt="" width="30px" height="30px">
-                            </div>
-                            <div class="text-justify col color-dark-orange-fond">
-                                {{$room->hilight}}
-                            </div>
-                        </div>
+                        {{--<div class="box-twin-data row ">--}}
+                        {{--<div class="img-fluid col-1 p-0 mr-1">--}}
+                        {{--<img src="{{asset('/icon/hilight.svg')}}" alt="" width="30px" height="30px">--}}
+                        {{--</div>--}}
+                        {{--<div class="text-justify col color-dark-orange-fond">--}}
+                        {{--{{$room->hilight}}--}}
+                        {{--</div>--}}
+                        {{--</div>--}}
 
                         <div class="box-twin-data row ">
                             <div class="img-fluid col-1 p-0 mr-1">
                                 <img src="{{asset('/icon/person.svg')}}" alt="" width="30px" height="30px">
                             </div>
-                            <div class="text-justify col color-dark-blue-fond">{{$room->personLive}}</div>
+                            <div class="text-justify col color-dark-blue-fond font-weight-light">1-{{$room->personLive}} คน</div>
                         </div>
                         <div class="box-twin-data row">
                             <div class="img-fluid col-1 p-0 mr-1">
                                 <img src="{{asset('/icon/pin.svg')}}" alt="" width="30px" height="30px">
                             </div>
-                            <div class="text-justify col color-dark-blue-fond">{{number_format($room->distance,1,'.','')}}
+                            <div class="text-justify col color-dark-blue-fond font-weight-light">{{number_format($room->distance,1,'.','')}}
                                 กิโลเมตร
                             </div>
                         </div>
@@ -62,7 +59,7 @@
                             {{--</div>--}}
                             <div class="col-12">
                                 <div class="text-right color-dark-blue-fond"
-                                     style="font-size: 18px">{{$room->price}}.-
+                                     style="font-size: 18px">{{number_format($room->price)}}฿.- /เดือน
                                 </div>
 
                             </div>
@@ -82,8 +79,6 @@
         <script>
             $(document).ready(function () {
                 $("#myModal").modal();
-
-
 
 
             })

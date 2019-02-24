@@ -37,13 +37,7 @@
 <body>
 @include('layouts.navbar')
 
-{{--{{Request::route()->getName()}}--}}
-{{--@if(Request::route()->getName() == "search.index")--}}
-
-    {{--@yield('searchnav')--}}
-{{--@else--}}
     @yield('nav')
-{{--@endif--}}
 
 @yield('content')
 </body>

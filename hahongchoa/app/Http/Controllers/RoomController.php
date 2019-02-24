@@ -305,8 +305,6 @@ class RoomController extends Controller
         $idroom1 = $room1[0]->id;
         $idroom2 = $room2[0]->id;
 
-//        return $room1;
-
         $findimg_room1 = DB::table('imageRoom')
             ->where('imageRoom.roomid', '=', $idroom1)
             ->get();
@@ -322,7 +320,7 @@ class RoomController extends Controller
 
         $leas_room2 = DB::table('lease')->where('lease.id', '=', $room2[0]->lease_id)
             ->first();
-
+//dd($room1[0]->lease_id);
 
 //        return [$leas_room1, $leas_room2];
 
@@ -346,16 +344,13 @@ class RoomController extends Controller
         foreach ($room2_facility as $Facility_2) {
             array_push($arr_keepidRoom2, $Facility_2->facility_id);
         }
-//
-////        return ["id-facility" => $arr_keepidRoom1, "id-facility-2" => $arr_keepidRoom2];
-
         $facilityOfroom_1 = DB::table('facility')->whereIn('facility.id', $arr_keepidRoom1)
             ->get();
         $facilityOfroom_2 = DB::table('facility')->whereIn('facility.id', $arr_keepidRoom2)
             ->get();
 
 
-//        return $facilityOfroom_2;
+//        return $leas_room1;
 
         $mapdata_room1 = $room1->map(function ($item, $key) use ($findimg_room1,$leas_room1){
 

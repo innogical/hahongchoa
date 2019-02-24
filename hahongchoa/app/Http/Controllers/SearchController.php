@@ -62,7 +62,6 @@ class SearchController extends Controller
 
         if ($stat_search_option == "search_nearLocation") {
 
-
             if ($lifestyle_location != null) {
 
                 $search = DB::table('searchlocation')
@@ -74,9 +73,7 @@ class SearchController extends Controller
                     $search_lat_away = $search->lat;
                     $search_lng_away = $search->lng;
 
-
 //                    $zone_bts = $this->getBtsstationlist();
-
 
                     if ($optioncar == "nothavecar") {
 
@@ -98,14 +95,20 @@ class SearchController extends Controller
                         $valresult_havecar = $this->havecar($listRoom, $place_lat_away, $place_lng_away);
                         $result = $valresult_havecar->sortBy('price');
 
+
                     }
 
                     if ($result != null || $result != []) {
+//                        dd($result);
+
                         return view('smartsearch', compact('result', 'zone_bts', 'lifestyle_location', 'price_low', 'price_high', 'person_live', 'area_zone', 'optioncar'));
 
                     } else {
                         return redirect('/')->with(['data' => $notfound]);
                     }
+
+                } else {
+                    return redirect('/')->with(['data' => $notfound]);
 
                 }
 
@@ -346,7 +349,11 @@ class SearchController extends Controller
 
     public function sorTval(Request $request)
     {
-        $dataSearch = json_decode($request->dataAll);
+        $dataSearch = json_decode($request->dataAll, true);
+
+//         dd($dataSearch);
+
+
         $sortDistance = $request->sortDistnce;
         $sortPrice = $request->sortPrice;
 
@@ -356,39 +363,44 @@ class SearchController extends Controller
         $area_zone = $request->area_zone;
         $lifestyle_location = $request->lifestyle_location;
         $optioncar = $request->optioncar;
-////
-//        $price_low = "";
-//        $price_high = "";
-//        $person_live = "";
-//        $area_zone =" ";
-//        $lifestyle_location ="";
-//        $optioncar ="";
 
         $zone_bts = [];
 
 
-//        return $dataSearch;
-
+//dd($dataSearch);
         $collectio_data = collect($dataSearch);
-
-
 //        dd($collectio_data);
+//        $collectio_data = $dataSearch;
+
 
         if ($sortPrice == "priceLow" && $sortDistance == "distaceAsc") {
             $newsortdata = $collectio_data->sortBy('price')->sortBy('distance');
+//            return ["case1" => json_decode(json_encode($newsortdata->reverse()->toArray()))];
+
         } else if ($sortPrice == "priceLow" && $sortDistance == "distaceDesc") {
             $newsortdata = $collectio_data->sortBy('price')->sortByDesc('distance');
+//            return ["case2" => json_decode(json_encode($newsortdata->reverse()->toArray()))];
+
         } else if ($sortPrice == "priceHigh" && $sortDistance == "distaceAsc") {
             $newsortdata = $collectio_data->sortByDesc('price')->sortBy('distance');
+//            return ["case3" => json_decode(json_encode($newsortdata->reverse()->toArray()))];
+
         } else if ($sortPrice == "priceHigh" && $sortDistance == "distaceDesc") {
+            $newsortdata = $collectio_data->sortByDesc('price');
+
             $newsortdata = $collectio_data->sortByDesc('price')->sortByDesc('distance');
+//            return ["case4" => json_decode(json_encode($newsortdata->reverse()->toArray()))];
+
         }
 
-        //todo:: มันเรียงจริงหรือไม่
+        $arr_data_ = json_decode(json_encode($newsortdata->reverse()->toArray()));
+//        $arr_data_sort = $newsortdata->values()->all();
 
+//        return [$arr_data_sort,collect($arr_data_)];
+//        dd($newsortdata);
 
-//        $result = $newsortdata;
-//        $result = $newsortdata->values()->all();
+        $result =collect($arr_data_);
+
 
 //        return $newsortdata;
 //        return [
@@ -402,7 +414,13 @@ class SearchController extends Controller
 //            "optioncar" => $optioncar,
 //        ];
 //        return view('component.card-list-smartsearch',compact('result'));
-        return view('smartsearch', compact('result', 'zone_bts', 'lifestyle_location', 'price_low', 'price_high', 'person_live', 'area_zone', 'optioncar'));
+//        return $result[1];
+
+        if ($result) {
+            return view('smartsearch', compact('result', 'zone_bts', 'lifestyle_location', 'price_low', 'price_high', 'person_live', 'area_zone', 'optioncar'));
+        } else {
+            return redirect('/')->with(['data' => "ไม่พบข้อมูล"]);
+        }
 
 
     }

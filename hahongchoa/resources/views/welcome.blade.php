@@ -55,7 +55,7 @@
 
                                 <!-- Modal body -->
                                 <div class="modal-body">
-                                    <p>กรุณาค้นหาใหม่อีกครั้ง</p>
+                                    <p class="text-center">กรุณาค้นหาใหม่อีกครั้ง</p>
                                 </div>
 
                                 <!-- Modal footer -->
