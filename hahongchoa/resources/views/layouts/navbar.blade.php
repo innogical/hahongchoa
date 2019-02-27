@@ -35,12 +35,11 @@
                     @endif
                     <ul class="navbar-nav ml-auto">
                         {{--{{Request::url()}}--}}
-                        {{--@if(Request::url() != "http://127.0.0.1:8000/room/*")--}}
+                        @if(Request::url() != "http://127.0.0.1:8000/room/*")
 
-                        {{--@elseif (Request::url() != "http://127.0.0.1:8000/")--}}
-                            <div class="btn btn-orange-light" id="btn_compare">เปรียบเทียบห้อง</div>
-
-                        {{--@endif--}}
+                        @elseif (Request::url() != "http://127.0.0.1:8000/")
+                            <div class="btn btn-orange-light mx-2" id="btn_compare">เปรียบเทียบห้อง</div>
+                        @endif
                         @if(\Illuminate\Support\Facades\Auth::User())
 
                             <div class="dropdown">
