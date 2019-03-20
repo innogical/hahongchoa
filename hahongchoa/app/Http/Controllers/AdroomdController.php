@@ -30,11 +30,15 @@ class AdroomdController extends Controller
             'เพลินจิต', 'นานา', 'อโศก', 'พร้อมพงษ์', ' ทองหล่อ', 'เอกมัย', 'พระโขนง', ' อ่อนนุช', 'บางจาก', ' ปุณณวิถี', ' อุดมสุข', 'บางนา', 'แบริ่ง', 'สนามกีฬา', 'ราชดำริ', ' ศาลาแดง', 'ช่องนนทรี', 'สุรศักดิ์', 'สะพานตากสิน', 'กรุงธนบุรี', 'วงเวียนใหญ่', 'โพธิ์นิมิตร', 'ตลาดพลู', 'วุฒากาศ', 'บางหว้า', 'สำโรง'
         ];
 
-        $icon = ['cctv.svg', 'elavator.svg', 'fitness.svg', 'food.svg', 'furniture.svg', 'park.svg', 'pet.svg', 'skytrian.svg', 'swim.svg', 'washing.svg', 'wifi.svg'];
+//        $icon = ['cctv.svg', 'elavator.svg', 'fitness.svg', 'food.svg', 'furniture.svg', 'park.svg', 'pet.svg', 'skytrian.svg', 'swim.svg', 'washing.svg', 'wifi.svg'];
+        $icon = ['cctv.svg', 'elavator.svg', 'fitness.svg', 'food.svg', 'furniture.svg', 'park.svg', 'pet.svg', 'swim.svg', 'washing.svg', 'wifi.svg'];
 //        $listzone = $this->Zonebts_near();
 //        dd($listzone);
 
-        return view('createroom', compact( 'promise', 'bts', 'lifestyle', 'icon','zone'));
+        $namefacility = ['CCTV', 'ลิฟต์', 'ฟิตเนส', 'ร้านอาหาร', 'เฟอร์นิเจอร์', 'จอดรถ', 'เลี้ยงสัตว์', 'สระว่ายนํ้า', 'ซักผ้า', 'Internet'];
+
+
+        return view('createroom', compact('promise', 'bts', 'lifestyle', 'icon','namefacility', 'zone'));
 
     }
 
@@ -142,6 +146,8 @@ class AdroomdController extends Controller
     function show(Adroom $adroom)
     {
         //
+
+
     }
 
     /**
@@ -151,9 +157,11 @@ class AdroomdController extends Controller
      * @return \Illuminate\Http\Response
      */
     public
-    function edit(Adroom $adroom)
+    function edit($id)
     {
         //
+
+        return $id;
     }
 
     /**
@@ -187,6 +195,8 @@ class AdroomdController extends Controller
         $bts_lists = DB::table('zone')->get();
         return $bts_lists;
 
+
     }
+
 
 }

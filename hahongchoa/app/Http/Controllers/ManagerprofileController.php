@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Adroom;
+use App\Facilitys;
 use App\Imageroom;
+use Carbon\Carbon;
+use Faker\Provider\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -22,7 +25,7 @@ class ManagerprofileController extends Controller
             ->select('*', 'room.id AS roomid')
             ->join('bts_station', 'bts_station.id', '=', 'room.btsstation_id')
             ->where('room.user_id', Auth::user()->id)
-            ->orderBy('created_at','desc')
+            ->orderBy('created_at', 'desc')
             ->get();
 
         $arr = [];
@@ -33,12 +36,12 @@ class ManagerprofileController extends Controller
 
         $itemArr = [];
         foreach ($arr as $index => $subItem) {
-             array_push($itemArr,$subItem->pathimg);
+            array_push($itemArr, $subItem->pathimg);
         }
 
-        $arrom = $myrooms->map(function ($item, $key) use ($itemArr) {
+        $arrom = $myrooms->transform(function ($item, $key) use ($itemArr) {
 
-                $item->pathimg = $itemArr[$key];
+            $item->pathimg = $itemArr[$key];
 
             return $item;
         });
@@ -46,7 +49,7 @@ class ManagerprofileController extends Controller
 
         $myrooms = $arrom;
 
-//        dd($arrom);
+//        dd($myrooms);
         return view('managerroom', compact('myrooms'));
     }
 
@@ -88,8 +91,38 @@ class ManagerprofileController extends Controller
      * @param  \App\Imageroom $profile
      * @return \Illuminate\Http\Response
      */
-    public function edit(Imageroom $profile)
+    public function edit($id)
+
     {
+        $icon = ['cctv.svg', 'elavator.svg', 'fitness.svg', 'food.svg', 'furniture.svg', 'park.svg', 'pet.svg', 'swim.svg', 'washing.svg', 'wifi.svg'];
+//        $listzone = $this->Zonebts_near();
+//        dd($listzone);
+        $lifestyle = ['นักศึกษา', 'บุคคลทั่วไป'];
+
+        $promise = ['3เดือน', '6เดือน', '1ปี'];
+        $namefacility = ['CCTV', 'ลิฟต์', 'ฟิตเนส', 'ร้านอาหาร', 'เฟอร์นิเจอร์', 'จอดรถ', 'เลี้ยงสัตว์', 'สระว่ายนํ้า', 'ซักผ้า', 'Internet'];
+        $myRoom = Adroom::find($id);
+        $image_ofroom = Imageroom::where('roomid', '=', $myRoom->id)->get();
+        $facility_ofRoom = DB::table('room_facility')
+            ->where('room_id', '=', $myRoom->id)->get();
+
+//        dd($facility_ofRoom);
+
+
+        foreach ($image_ofroom as $key => $iamge) {
+
+            $filename = $iamge->pathimg;
+            $obj['name'] = $filename; //get the filename in array
+            $obj['size'] = filesize("images_rooms/" . $filename); //get the flesize in array
+            $obj['dataURI'] = 'data:image/jpg;base64,' . base64_encode(file_get_contents("images_rooms/" . $filename));//get the flesize in array
+            $image_ofroom_toResult[] = $obj; // copy it to another array
+        }
+
+
+//        return $myRoom;
+
+
+        return view('edit_room', compact('icon', 'namefacility', 'myRoom', 'lifestyle', 'promise', 'image_ofroom_toResult', 'facility_ofRoom'));
         //
     }
 
@@ -100,9 +133,64 @@ class ManagerprofileController extends Controller
      * @param  \App\Imageroom $profile
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Imageroom $profile)
+    public function update(Request $request)
     {
         //
+        $idroom = $request->idroom;
+        $namecondo = $request->namecondo;
+        $address = $request->address;
+        $zonearea = $request->zonearea;
+        $lifestyle = $request->lifestyle;
+        $promise = $request->promise;
+        $hilight = $request->hilight;
+        $detail = $request->detail;
+        $sizeroom = $request->sizeroom;
+        $price = $request->price;
+        $amoutLife = $request->amoutLife;
+        $options_facility_edit = $request->options_facility_edit;
+        $lat = $request->lat;
+        $lng = $request->lng;
+        $facility = json_decode($request->facility);
+        $file = $request->file;
+
+//
+//        $Editroom = Adroom::find($idroom);
+//        $Editroom->stylelife_id = $lifestyle;
+//        $Editroom->name = $namecondo;
+//        $Editroom->address = $address;
+//        $Editroom->lease_id = $promise;
+//        $Editroom->btsstation_id = $zonearea;
+//        $Editroom->zone_id = $zonearea;
+//        $Editroom->size = $sizeroom;
+//        $Editroom->personLive =
+//        $Editroom->lat = $lat
+//        $Editroom->lng = $lng;
+//        $Editroom->detail = $detail
+//        $Editroom->hilight = $hilight;
+//        $Editroom->price = $price;
+
+
+        Imageroom::where('roomid', '=', $idroom)->delete();
+
+//       $listimgs->destroy();
+//
+//        foreach ($imageRoom as $img){
+//            $img->delete();
+//        }
+
+        foreach ($file as $a_file) {
+            $addnewImage = new Imageroom();
+            $addnewImage->roomid = $idroom;
+            $name_image = Carbon::now()->min() . $a_file->getClientOriginalName();
+            $addnewImage->pathimg = $name_image;
+            $a_file->move(public_path() . '/images_rooms/', $name_image);
+            $addnewImage->save();
+
+        }
+
+        return redirect('/manager');
+
+
     }
 
     /**
@@ -111,9 +199,11 @@ class ManagerprofileController extends Controller
      * @param  \App\Imageroom $profile
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Imageroom $profile)
+    public function destroy($id)
     {
         //
+
+        return $id;
     }
 
     function roomiMg($idroom)
@@ -126,4 +216,6 @@ class ManagerprofileController extends Controller
         return $listimg;
 
     }
+
+
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Adroom;
 use App\Imageroom;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use GuzzleHttp\Client;
@@ -93,12 +94,12 @@ class RoomController extends Controller
 //        return $Facilityofroom;
 
 
-        $mapRoom_detail_facility = $Facilityofroom->map(function ($item, $key) use ($arr_roomid) {
+        $mapRoom_detail_facility = $Facilityofroom->transform(function ($item, $key) use ($arr_roomid) {
             $item->pathImagr_facility = $arr_roomid[$key];
             return $item;
         });
 
-        $mapdata_room = $room->map(function ($item, $key) use ($distance_form_roomTobts) {
+        $mapdata_room = $room->transform(function ($item, $key) use ($distance_form_roomTobts) {
             $item->time = $distance_form_roomTobts[0];
             $item->distance = $distance_form_roomTobts[1];
             return $item;
@@ -148,10 +149,11 @@ class RoomController extends Controller
     {
 
         $newRoom = DB::table('room')
-            ->select('*', 'bts_station.lat AS btsstation_lat', 'bts_station.lng AS btsstation_lng')
+            ->select('*', 'bts_station.lat AS btsstation_lat', 'bts_station.lng AS btsstation_lng','room.id AS roomid')
             ->join('bts_station', 'bts_station.id', '=', 'room.btsstation_id')
             ->join('imageRoom', 'imageRoom.roomid', '=', 'room.id')
             ->join('zone', 'zone.id', '=', 'room.zone_id')
+            ->join('user', 'user.id', '=', 'room.user_id')
             ->orderBy('room.created_at')
             ->groupBy('imageRoom.roomid')
             ->get();
@@ -171,6 +173,7 @@ class RoomController extends Controller
         $listbts = $this->Zonebts_near();
 
 
+//        return $newRoom;
         return view('welcome', compact('newRoom', 'mapdataNearby', 'reccomdRoom', 'listbts'));
     }
 
@@ -258,7 +261,7 @@ class RoomController extends Controller
 
         }
         $zone = $this->Zonebts_near();
-        $mapdataNearby = $newRoom->map(function ($item, $key) use ($arr_listnearRoom) {
+        $mapdataNearby = $newRoom->transform(function ($item, $key) use ($arr_listnearRoom) {
 
             $item->time = $arr_listnearRoom[$key][0];
             $item->distance = $arr_listnearRoom[$key][1];
@@ -352,15 +355,15 @@ class RoomController extends Controller
 
 //        return $leas_room1;
 
-        $mapdata_room1 = $room1->map(function ($item, $key) use ($findimg_room1,$leas_room1){
+        $mapdata_room1 = $room1->transform(function ($item, $key) use ($findimg_room1, $leas_room1) {
 
-        $item->imageRoom = $findimg_room1[0];
-        $item->lease = $leas_room1->laase_duration;
-        return $item;
-    });
+            $item->imageRoom = $findimg_room1[0];
+            $item->lease = $leas_room1->laase_duration;
+            return $item;
+        });
 
 
-        $mapdata_room2 = $room1->map(function ($item, $key) use ($findimg_room2, $leas_room2) {
+        $mapdata_room2 = $room1->transform(function ($item, $key) use ($findimg_room2, $leas_room2) {
             $item->imageRoom = $findimg_room2[0];
             $item->lease = $leas_room2->laase_duration;
             return $item;
@@ -376,6 +379,16 @@ class RoomController extends Controller
 
         return view('compareroom', compact('aroom_1', 'aroom_2', 'img_room1', 'img_room2', 'facilityOfroom_1', 'facilityOfroom_2'));
 
+
+    }
+
+
+    public function loadcontacRoom($idroom)
+    {
+
+        $owner = Adroom::find($idroom);
+        $userofRoom = User::find($owner->user_id);
+        return $userofRoom;
 
     }
 

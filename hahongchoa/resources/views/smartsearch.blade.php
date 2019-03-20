@@ -1,9 +1,9 @@
 @extends('layouts.app')
 @section('content')
     <nav class="navbar navbar-expand-md navbar-light p-1 bg-light shadow" style="padding: 0;height: auto">
-        <div class="container">
-            <div class="col-md-12 col-12">
-                <form action="/roomnearskytrian" method="post" class="form-group">
+        <div class="container screen_desktop">
+            <div class="col-md-12 col-12 screen_desktop">
+                <form action="/roomnearskytrian" method="post" class="form-group ">
                     @csrf
                     <div class="row mt-2">
                         <lable class="mt-2">ราคา</lable>
@@ -31,7 +31,7 @@
                             </select>
                         </div>
 
-                        @if($zone_bts == [] || $zone_bts == null || $zone_bts == "" || $area_zone == null || $area_zone == "")
+                        @if($zone_bts == [] || $zone_bts == null || $zone_bts == "")
 
 
                         @else
@@ -40,7 +40,7 @@
 
                                 <select id="inputState" class="form-control bg_corner border col-md-12 col-12"
                                         name="area_zone">
-                                    <option value="{{$area_zone}}" selected>{{$area_zone}}</option>
+                                    {{--<option value="{{$area_zone}}" selected>{{$area_zone}}</option>--}}
                                     @foreach($zone_bts as $a_zone)
                                         <option value="{{$a_zone->id}}">{{$a_zone-> name_station }}</option>
                                     @endforeach
@@ -55,7 +55,7 @@
                             <input type="text" value="{{$optioncar}}" hidden id="optioncar">
 
                             <label class="btn border" id="radio_car0">
-                                <img src="{{asset('/icon/nocar.svg' )}}" alt="nocar">
+                                <img src="{{asset('/icon/nohavecar.svg' )}}" alt="nocar">
                                 <input type="radio" value="nothavecar"
                                        name="optioncar" class="invisible" onclick="optionCar()">
                             </label>
@@ -90,10 +90,10 @@
                 <div class="row">
                     <h4 class="color-dark-blue-fond font-weight-light">ผลการค้นหา</h4>
                     <h5 class="p-1 ml-3 font-weight-light">{{count($result)}} ห้อง</h5>
+                    @include('component.optionsearch')
+                    @yield('optionbarsearch')
                 </div>
 
-                @include('component.optionsearch')
-                @yield('optionbarsearch')
             </div>
         </div>
 
@@ -107,7 +107,7 @@
                         <input type="text" value="{{$price_low}}" name="price_low">
                         <input type="text" value="{{$price_high}}" name="price_high">
                         <input type="text" value="{{$person_live}}" name="person_live">
-                        <input type="text" value="{{$area_zone}}" name="area_zone">
+                        {{--<input type="text" value="{{$area_zone}}" name="area_zone">--}}
                         <input type="text" value="{{$optioncar}}" name="optioncar">
                         <input type="text" value="{{$lifestyle_location}}" name="lifestyleplace">
 
@@ -138,23 +138,14 @@
                         </div>
                     </div>
                     <div class="row d-flex justify-content-center m-2">
-                        <button type="submit" class=" btn bg_corner btn_green col-md-6 d-block text-white ">ยืนยัน</button>
+                        <button type="submit" class=" btn bg_corner btn_green col-md-6 d-block text-white ">ยืนยัน
+                        </button>
                     </div>
 
                 </div>
             </form>
 
         </div>
-
-
-        {{--<div class="row">--}}
-
-        {{--</div>--}}
-
-        {{--</div>--}}
-        {{--</div>--}}
-
-
         <div class="col-md-12 col-12">
 
             <div class="row">

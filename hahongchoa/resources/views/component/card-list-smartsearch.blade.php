@@ -1,13 +1,12 @@
 @section('cardzone')
     @if(count($result)>0)
         @foreach($result as $room)
-            <div class="col-md-4 col-4 card  mt-2 border-0" style="height:auto;">
+            <div class="col-md-4 col-12 card  mt-2 border-0" style="height:auto;">
                 <div class="">
                     <div class="card-img bg-dark" style="height:auto; width: 100%">
                         <img src="{{asset('/images_rooms/'.$room->imgRoomF)}}" alt="{{$room->imgRoomF}}" width="100%"
                              height="auto">
                     </div>
-
                 </div>
                 <a href="/room/{{$room->id}}">
 
@@ -79,9 +78,7 @@
         <script>
             $(document).ready(function () {
                 $("#myModal").modal();
-
-
-            })
+            });
         </script>
 
     @endif

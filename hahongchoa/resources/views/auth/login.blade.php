@@ -1,52 +1,66 @@
 @extends('layouts.app')
 @section('content')
 
-    <div class="container-fluid bg_img_login p-0">
-        <div class="row justify-content-center">
-            <div class="col-md-6 .offset-md-3 box-background-manager-login">
-                <h5 class="color-dark-blue-fond">เข้าสู่ระบบ</h5>
 
-                <form action="/loginend" method="post">
-                    @csrf
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Email address</label>
-                        <input type="email" class="form-control" name="mail" aria-describedby="emailHelp"
-                               placeholder="Email" required>
-                        <small id="emailHelp" class="form-text text-muted">กรุณากรอก Email
-                        </small>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Password</label>
-                        <input type="password" class="form-control" placeholder="Password" name="pass" required>
-                        <small id="emailHelp" class="form-text text-muted">กรุณากรอก Password
-
-                    </div>
-
-                    <button type="submit" class="btn btn-light-blue justify-content-center float-right mb-2">
-                        เข้าสู่ระบบ
-                    </button>
-                </form>
-                <a href="{{url('/register')}}">
-                    <button type=" submit" class="btn color-higiht-orange-btn text-left mb-2">
-                        สมัครสมาชิก
-                    </button>
-                </a>
-
-
-            </div>
+    <div class="container-fluid p-0 position-absolute">
+        <div class="embed-responsive embed-responsive-16by9">
+            <video width="100%" height="100%" loop autoplay>
+                <source src="vdo/screen_login.mp4" type="video/mp4">
+            </video>
         </div>
-
-
     </div>
 
 
-    <script>
-    // swal("hi");
-    </script>
+    <div class="container ">
+        <div class="row justify-content-center mt-3">
+            <div class="col-md-6 col-12  box-background-manager-login bg_corner h-auto">
+                <div class="row">
+                    <div class="col p-2">
+                        <h5 class="text-white text-center">เข้าสู่ระบบ</h5>
+                    </div>
+                </div>
+                <form action="/loginend" method="post" class="">
+                    @csrf
+                    <div class="row ">
+                        <div class="form-group col-md-8 offset-md-2">
+                            <input type="email" class="form-control bg_corner w-100" name="mail"
+                                   aria-describedby="emailHelp"
+                                   placeholder="Email" required>
+                        </div>
+                    </div>
 
+                    <div class="row">
+                        <div class="form-group col-md-8 offset-md-2">
+                            <input type="password" class="form-control bg_corner" placeholder="Password" name="pass"
+                                   required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8 offset-md-2">
+                            <button type="submit" class="btn btn_green bg_corner w-100 text-white">
+                                เข้าสู่ระบบ
+                            </button>
+                        </div>
+                    </div>
+
+                </form>
+
+                <div class="row">
+
+                    <div class="col">
+                        <div class=" d-flex justify-content-center m-2">
+                            <p class="font-italic text-white">ยังไม่สมัครสมาชิก? </p>
+                            <a href="{{'/register'}}" class="font-weight-light color-green ml-1">สมัครสมาชิกที่นี่</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
     <footer>
-        @include('layouts.footer')
-        @yield('footer')
+        {{--@include('layouts.footer')--}}
+        {{--@yield('footer')--}}
     </footer>
 
 @endsection

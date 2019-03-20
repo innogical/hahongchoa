@@ -17,6 +17,7 @@
     <script src="{{asset('js/popper.min.js') }} " defer></script>
     <script src="{{asset('js/multipleitem.js') }} " defer></script>
     <script src="{{asset('js/dropzone.js') }} "></script>
+    <script src="{{asset('js/config_dropzone.js') }} "></script>
 
 
 
@@ -30,7 +31,19 @@
 
     <link rel="stylesheet" type="text/css" href="slick/slick.css"/>
     <link rel="stylesheet" type="text/css" href="slick/slick-theme.css"/>
+    <link href="{{asset('/css/dropzone.css')}}" rel="stylesheet" type="text/css">
 
+    {{-------------------------------------------------------------------------- favicon--------------------------------------------------------------------}}
+
+    {{--<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">--}}
+    {{--<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">--}}
+    {{--<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">--}}
+    {{--<link rel="manifest" href="/site.webmanifest">--}}
+    {{--<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#f44d31">--}}
+    {{--<meta name="msapplication-TileColor" content="#ffffff">--}}
+    {{--<meta name="theme-color" content="#ffffff">--}}
+
+    {{-------------------------------------------------------------------------- favicon--------------------------------------------------------------------}}
 
 </head>
 

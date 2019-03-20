@@ -15,17 +15,22 @@ Auth::routes();
 
 Route::get('/logout','LoginController@logout');
 Route::get('/', 'RoomController@listroom');
-
 Route::resource('/room', 'RoomController');
-Route::get('/room/query/{txtquery}', 'RoomController@querySeach');
-Route::post('/roomnearskytrian/sortresult','SearchController@sorTval');
-Route::get('/roomnearskytrian/compare/{idroom1}/{idroom2}','RoomController@compareRoom');
-
 Route::resource('/register', 'RegisterController');
 Route::resource('/loginend', 'LoginController');
-Route::resource('/managerroom', 'ManagerprofileController');
-Route::resource('/adroom','AdroomdController');
 Route::resource('/roomnearskytrian','SearchController');
 
 
-Route::get('/home', 'HomeController@index')->name('home');
+//----------------API---------------
+
+Route::get('/room/query/{txtquery}', 'RoomController@querySeach');
+Route::get('/room/loadcontacRoom/{idroom}', 'RoomController@loadcontacRoom');
+
+Route::post('/roomnearskytrian/sortresult','SearchController@sorTval');
+Route::get('/roomnearskytrian/compare/{idroom1}/{idroom2}','RoomController@compareRoom');
+
+//----------------API---------------
+
+//Route::get('/home', 'HomeController@index')->name('home');
+Route::resource('/managerroom', 'ManagerprofileController')->middleware('auth');
+Route::resource('/adroom','AdroomdController')->middleware('auth');

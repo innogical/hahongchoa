@@ -61,8 +61,48 @@ function getCurrentlocation() {
 
 }
 
+function editMap() {
 
-function loadDetailMap(lat,lng) {
+    var lat = $("#inputLat").val();
+    var lng = $("#inputLng").val();
+
+    console.log("editmap" + lat);
+    console.log("editmap" + lng);
+
+
+    var uluru = {
+        lat: parseFloat(lat),
+        lng: parseFloat(lng)
+    };
+    map = new google.maps.Map(
+        document.getElementById('map'), {zoom: 10, center: uluru});
+
+
+    marker = new google.maps.Marker({position: uluru, map: map});
+
+    map.addListener('click', function (e) {
+        if (marker) {
+            marker.setMap(null);
+
+        }
+
+        var Position_clike = {
+            lat: e.latLng.lat(),
+            lng: e.latLng.lng()
+        };
+
+        $("#inputLat").val(e.latLng.lat());
+        $("#inputLng").val(e.latLng.lng());
+
+        marker = new google.maps.Marker({position: Position_clike, map: map})
+
+        // Pinmaker(Position_clike)
+    });
+
+}
+
+
+function loadDetailMap(lat, lng) {
     var lat = parseFloat($('#room_lat').val());
     var lng = parseFloat($('#room_lng').val());
     console.log("lat" + lat);
@@ -100,8 +140,9 @@ function selectbtnCheckbox() {
 
         }
     });
+
 //bug ครั้งแรก
-    console.log(arrsss);
+    console.log("kepe", arrsss);
 
     $('#facility').val(arrsss);
 
@@ -385,7 +426,7 @@ function clickeoptionSearch(numpage) {
                 "                <div class=\"row mt-2\">\n" +
                 "                    <div class=\"col-md-2 col-2\">\n" +
                 "                        <label class=\" btn border\" id=\"radio_car0\">\n" +
-                "                            <img src=\"http://" + window.location.host + "/icon/nocar.svg \" alt=\"\">\n" +
+                "                            <img src=\"http://" + window.location.host + "/icon/nohavecar.svg \" alt=\"\">\n" +
                 "                            <input type=\"radio\" value=\"nothavecar\"\n" +
                 "                                   name=\"optioncar\" class=\"invisible\" onclick=\"optionCar()\">\n" +
                 "                        </label>\n" +
@@ -424,3 +465,52 @@ function herfLocationTocontact(url) {
     window.location = url
 
 }
+
+
+function contact_room(idroom) {
+    console.log(idroom);
+    console.log(window.location.host + "room/loadcontacRoom/" + idroom);
+
+
+    $.ajaxSetup({
+        header: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'GET',
+        url: window.location.host / +"room/loadcontacRoom/" + idroom,
+        success: function (res) {
+
+            console.log(res);
+            $.each(res, function (index, item) {
+                // console.log(res[index].namelocation);
+                // console.log(res);
+                // render += "<p id=\"result_search\" class=\'hover_item_search\'  onclick=\"clickSelectLocation(this)\">" + res[index].namelocation + "</p>\n"
+            });
+
+            // $('#result-search').show();
+            // $('#result-search').addClass('bg-search-box');
+            // // $('#result-search').addClass('bg_corner');
+            // $('#result-search').html(render);
+
+
+        },
+        error: function (err) {
+            console.log("err" + err[0]);
+        }
+
+    });
+
+
+
+}
+
+function clcikeskit(id) {
+    $('#btn_dele'+id).click()
+}
+
+
+
+
+

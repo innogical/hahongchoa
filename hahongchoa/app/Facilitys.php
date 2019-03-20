@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Model;
 class Facilitys extends Model
 {
     public $table = "room_facility";
-//    public $primaryKey = "id";
+    public $primaryKey = "id";
 
 
     /**
