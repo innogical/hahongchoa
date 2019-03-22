@@ -6,7 +6,7 @@
         <div class="col-md-12 col-12">
 
             <div class="row">
-                <div class="col-md-6 col-12 img-fluid border mt-2" style="height: auto">
+                <div class="col-md-6 col-12 img-fluid border mt-2 p-0" style="height: auto">
                     <img class="d-block w-100"
                          src="{{asset('images_rooms/'. $TotelRoom->pathimg)}}"/>
 
@@ -132,7 +132,7 @@
                         <div class="carousel-item active">
                             <div class="row">
                                 @foreach($img_air as $a_img_air)
-                                    <img class="d-block w-100 col-3"
+                                    <img class="d-block w-100 col-md-3 col-6"
                                          src="{{asset('/images_rooms/'.$a_img_air->pathimg)}}">
                                 @endforeach
                             </div>
@@ -174,73 +174,85 @@
                     </a>
                 </div>
             </div>
+            {{--<div class="col-md-12 col-12">--}}
+            {{--<hr class="col-12 m-2">--}}
+
+            {{--</div>--}}
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-md-12 col-12">
+                <h4 class="text-center">สิ่งอำนวยความสะดวก</h4>
+
+                <div class="col-auto bg_facility">
+                    <div class="row d-flex justify-content-between">
+                        @foreach($mapRoom_detail_facility as $a_facility)
+
+                            <div class="col-md-auto col-3">
+
+                                <div class=" border img_facility">
+                                    <img src="{{asset('/icon/'.$a_facility->pathImage.".svg")}}" alt=""
+                                         style="width: 60px; height: auto; padding: 8px">
+
+                                </div>
+
+                                <p class="text-center mt-1">{{$a_facility->name}}</p>
+                            </div>
+
+
+                        @endforeach
+                    </div>
+
+                </div>
+            </div>
+
 
         </div>
-        <hr class="col-12 ml-2">
-        <div class="col-12">
+
+        <input type="text" value="{{$TotelRoom->lat}}" id="room_lat" hidden>
+        <input type="text" value="{{$TotelRoom->lng}}" id="room_lng" hidden>
+
+        {{--<hr class="col-12 ml-2">--}}
+        <div class="col-md-12">
+
             <div class="row">
-                <div class="col-md-12 col-12">
-                    <h4 class="text-center">สิ่งอำนวยความสะดวก</h4>
-
-                    <div class="row bg_facility col d-flex justify-content-between">
-                        @foreach($mapRoom_detail_facility as $a_facility)
-                            <div class=" border img_facility">
-                                <img src="{{asset('/icon/'.$a_facility->pathImage.".svg")}}" alt=""
-                                     style="width: 60px; height: auto; padding: 8px">
-                            </div>
-                        @endforeach
-
+                <div class="col-md-6 col-12 mt-4">
+                    <h4>ตำแหน่งที่พัก</h4>
+                    <div id="roommap" style="height: 384px"
+                         onload="loadDetailMap()">
                     </div>
                 </div>
 
-
-            </div>
-
-            <input type="text" value="{{$TotelRoom->lat}}" id="room_lat" hidden>
-            <input type="text" value="{{$TotelRoom->lng}}" id="room_lng" hidden>
-
-            {{--<hr class="col-12 ml-2">--}}
-            <div class="col-md-12">
-
-                <div class="row">
-                    <div class="col-md-6 col-12 mt-4">
-                        <h4>ตำแหน่งที่พัก</h4>
-                        <div id="roommap" style="height: 384px"
-                             onload="loadDetailMap()">
-                        </div>
+                <div class="col-md-6 col-12 mt-4">
+                    <h4>การเดินทาง</h4>
+                    <div class="col">
+                        <h5 class="color-dark-blue-fond">ที่อยู่:</h5>
+                        <p class="text-body font-weight-light">
+                            {{$TotelRoom->address}}
+                        </p>
                     </div>
 
-                    <div class="col-md-6 col-12 mt-4">
-                        <h4>การเดินทาง</h4>
-                        <div class="col">
-                            <h5 class="color-dark-blue-fond">ที่อยู่:</h5>
-                            <p class="text-body font-weight-light">
-                                {{$TotelRoom->address}}
-                            </p>
-                        </div>
-
-                        <div class="col">
-                            <div class="icon_symbol_tranfition">
-                                <div class="img-fluid">
-                                    <img src="{{asset('/icon/trian.svg')}}" class="h-auto" style="width: 60px" alt="">
-                                </div>
-                                <p>สถานี{{$TotelRoom->name_station}}<span></span>
-                                    ระยะทาง{{number_format($TotelRoom->distance,1,'.','')}}กิโลเมตร <span></span></p>
-                                <p class="color-green">ใช้เวลา {{ substr($TotelRoom->time,0,2)}}นาที</p>
+                    <div class="col">
+                        <div class="icon_symbol_tranfition">
+                            <div class="img-fluid">
+                                <img src="{{asset('/icon/trian.svg')}}" class="h-auto" style="width: 60px" alt="">
                             </div>
-                        </div>
-                        <div class="col">
-                            <div class="icon_symbol_tranfition">
-                                <div class="img-fluid">
-                                    <img src="{{asset('/icon/car_font_view.svg')}}" class="h-auto" style="width: 60px"
-                                         alt="">
-                                </div>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci amet aut cum
-                                    dolorum explicabo hic impedit laudantium maiores nam, nobis possimus quae quibusdam
-                                    quidem quos ratione recusandae rerum veniam voluptatum!</p>
-                            </div>
+                            <p class="m-0">สถานี{{$TotelRoom->name_station}}<span></span>
+                                ระยะทาง{{number_format($TotelRoom->distance,1,'.','')}}กิโลเมตร <span></span></p>
+                            <p class="color-green">ใช้เวลา {{ substr($TotelRoom->time,0,2)}}นาที</p>
                         </div>
                     </div>
+                    {{--<div class="col">--}}
+                        {{--<div class="icon_symbol_tranfition">--}}
+                            {{--<div class="img-fluid">--}}
+                                {{--<img src="{{asset('/icon/car_font_view.svg')}}" class="h-auto" style="width: 60px"--}}
+                                     {{--alt="">--}}
+                            {{--</div>--}}
+                            {{--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci amet aut cum--}}
+                                {{--dolorum explicabo hic impedit laudantium maiores nam, nobis possimus quae quibusdam--}}
+                                {{--quidem quos ratione recusandae rerum veniam voluptatum!</p>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
                 </div>
             </div>
 
@@ -258,12 +270,9 @@
     <script async defer
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC9CSkZmCPxPPyZahRKqk0yfSfav1rZHxg&callback=loadDetailMap"
     ></script>
-    {{--<script>--}}
-        {{--var lat = {!! $TotelRoom->lat !!}--}}
-        {{--var lng = {!! $TotelRoom->lng !!}--}}
 
-        {{--console.log("sadqwe" + lng + lat)--}}
-    {{--</script>--}}
+
+
 
     <footer>
         @include('layouts.footer')

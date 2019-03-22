@@ -47,6 +47,8 @@ class SearchController extends Controller
      */
     public function store(Request $request)
     {
+
+
         $price_low = $request->price_low;
         $price_high = $request->price_high;
         $person_live = $request->person_live;
@@ -102,7 +104,7 @@ class SearchController extends Controller
                         $valresult_havecar = $this->havecar($listRoom, $place_lat_away, $place_lng_away);
                         $result = $valresult_havecar->sortBy('price');
 
-
+dd($result);
                     }
 
                     if ($result != null || $result != []) {
@@ -154,7 +156,7 @@ class SearchController extends Controller
                 $valresult_havecar = $this->havecar($listRoom, $place_lat_away, $place_lng_away);
                 $result = $valresult_havecar->sortBy('price');
 
-
+//dd($result);
             }
 
 //            return $result;
@@ -225,6 +227,7 @@ class SearchController extends Controller
         $room = DB::table('room')
             ->select('*', 'room.id AS roomid', 'bts_station.lat AS btsstation_lat', 'bts_station.lng AS btsstation_lng')
             ->join('bts_station', 'bts_station.id', '=', 'room.btsstation_id')
+            ->join('user','user.id','=','room.user_id')
             ->where('room.personLive', '=', '' . $personlive)
             ->whereBetween('room.price', [$price_lower, $price_higher])
 //            ->orderBy('room.price', $chs_rangeprice)

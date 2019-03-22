@@ -8,23 +8,38 @@
 @section('content')
     <div class="container">
         <h4 class="color-dark-blue-fond mt-2 text-left">ประกาศห้องว่าง</h4>
-
-
         <form action="/adroom" method="post" enctype="multipart/form-data">
             @csrf
             <div class="row">
-                <div class="col-6 mt-2">
+                <div class="col-md-3 mt-2">
+                    <label>ประเภทห้องเช่า</label>
+                    <div class="row col-md-auto">
+                        <div>
+                            <label>
+                                <input type="radio" name="typebuild" value="1" class="custom-radio mx-2">
+                                Apartment
+                            </label>
+                            <label>
+                                <input type="radio" name="typebuild" value="2" class="custom-radio mx-2">Condo
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9 col-12 mt-2">
+                    <label>ชื่ออพาร์ตเมนต์/คอนโด</label>
                     <input type="text" class="form-control bg_corner" name="namecondo" required
-                           placeholder="ชื่ออพาร์ตเมนต์/คอนโด">
+                           placeholder="กรอกชื่ออพาร์ตเมนต์/คอนโด">
                 </div>
 
-                <div class="col-6 mt-2">
+                <div class="col-md-6 col-12 mt-2">
+                    <label>ที่อยู่อพาร์ตเมนต์/คอนโด</label>
                     <input type="text" class="form-control bg_corner" name="address" required placeholder="ที่อยู่">
                 </div>
 
 
-                <div class="col-6 mt-2">
-                    <select id="inputState" class="form-control bg_corner" name="zonearea">
+                <div class="col-md-6 col-6 mt-2">
+                    <label>ใกล้สถานีรถไฟฟ้า</label>
+                    <select id="inputState" class="form-control bg_corner custom-select" name="zonearea">
                         <option value="1" selected>ใกล้รถไฟฟ้า</option>
                         @foreach($bts as $index=>$namezone)
                             <option value="{{$index+1}}">{{$namezone}}</option>
@@ -34,9 +49,9 @@
                     {{--<input type="text" class="form-control" name="sizeroom" placeholder="ขนาดห้อง">--}}
                 </div>
 
-                <div class="col-6 mt-2">
-                    <select id="inputState" class="form-control bg_corner" name="lifestyle">
-                        <option value="1" selected>Lifestyle</option>
+                <div class="col-md-4 col-6 mt-2">
+                    <label>เหมาะสำหรับ</label>
+                    <select id="inputState" class="form-control bg_corner custom-select" name="lifestyle">
                         @foreach($lifestyle as $index=> $lifestyle_name)
                             <option value="{{$index+1}}">{{$lifestyle_name}}</option>
                         @endforeach
@@ -44,29 +59,26 @@
                 </div>
 
 
-                <div class="form-group col-6 mt-2">
-                    <select id="inputState" class="form-control bg_corner" name="promise">
+                <div class="form-group col-md-4 col-6 mt-2">
+                    <label>ระยะเวลาสัญญาเช่า</label>
+                    <select id="inputState" class="form-control bg_corner custom-select" name="promise">
                         <option value="1" selected>สัญญาเช่า</option>
                         @foreach($promise as $index=> $apromise)
                             <option value="{{$index+1}}">{{$apromise}}</option>
                         @endforeach
                     </select>
                 </div>
-                <div class="col-6 mt-2">
-                    <div class="row">
-                        <div class="col-md-8">
-
-                            <input type="text" class="form-control  bg_corner"
-                                   placeholder="จุดเด่น กรุณาย่อเนื้อหาจุดเด่นของคุณภายใน 80 ตัวอักษร" name="hilight"
-                                   id="hilight" required
-                                   onkeyup="counttext()" maxlength="80">
-                        </div>
-                        <div class="col-4 mb-2">
-
-                            <p></p>
-                            <p><span id="totaltext">0</span>/80 ตัวอักษร</p>
-                        </div>
-                    </div>
+                <div class="col-md-4 col-6 mt-2">
+                    <label>จุดเด่นของห้อง <span class="text-danger font-weight-light" style="font-size: 12px">กรุณาย่อข้อมูลไม่เกิน <span
+                                    id="totaltext"></span> /80 ตัวอักษร</span></label>
+                    <input type="text" class="form-control  bg_corner"
+                           placeholder="จุดเด่น " name="hilight"
+                           id="hilight" required
+                           onkeyup="counttext()" maxlength="80">
+                    {{--<div class="col-4 mb-2">--}}
+                    {{--<p></p>--}}
+                    {{--<p><span id="totaltext">0</span>/80 ตัวอักษร</p>--}}
+                    {{--</div>--}}
                 </div>
 
                 <div class="col-md-12 col-12 mt-2">
@@ -94,30 +106,23 @@
             </div>
 
 
-            <div class="col-12">
-
-                {{--<div class="fallback ">--}}
-                {{--<div class="dropzone bg_corner h-auto" id=""></div>--}}
-                {{--<input name="file[]" type="file" value="" multiple hidden/>--}}
-
-
-                <label for="">ภาพแบนเนอร์ บัตร</label>
+            <div class="col-md-12 col-12">
+                <label for="">ภาพรายละเอียดห้อง</label>
                 <div id="image-room" class="dropzone"
                      style="border: 2px solid #eaeaea; height: auto; border-radius: 20px;"></div>
                 <input type="file" id="list_room_Images" name="file[]" value="" multiple hidden/>
 
-
-                {{--</div>--}}
             </div>
             {{--<input type="file" name="filescan" class="col-12 border mt-2 " style="height: 40px;">--}}
-            <div class="text-left mt-2">
-                <h6 class="color-dark-blue-fond">สิ่งอำนวยความสะดวก</h6>
-            </div>
+                <div class=" mt-2">
+                    <h6 class="color-dark-blue-fond">สิ่งอำนวยความสะดวก</h6>
+                </div>
+
 
             <div class="row d-flex justify-content-between">
                 @foreach($icon as $index => $a_icon  )
 
-                    <div class="col-md-3 col-2 text-center" id="btn_facility">
+                    <div class="col-md-2 col-2 text-center" id="btn_facility">
                         <label class="btn border bg_corner "
                                style="border-radius: 100%; width: 46px;height: 46px; padding: 8px "
                                id="border_faci{{$index}}"
@@ -135,7 +140,7 @@
                            style="font-size: 12px">{{str_replace(".svg","",$namefacility[$index])}}</p>
                     </div>
                 @endforeach
-                <div class="offset-md-6 offset-4"></div>
+                <div class="offset-md-4 offset-4"></div>
 
             </div>
 
@@ -154,7 +159,7 @@
                     <div class="d-flex justify-content-center col-12">
 
                         <div class="col-md-4">
-                            <button type="reset" class="col btn text-black-50 ">ล้างค่า</button>
+                            <button type="reset" class="col btn text-black-50 bg_corner ">รีเซ็ต</button>
                         </div>
 
                         <div class="col-md-4">

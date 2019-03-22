@@ -52,16 +52,10 @@
                     <a href="/managerroom/{{$myroom->roomid}}/edit"
                        class="btn bg_corner col-md-5 col-5 m-1 btn_green text-white">แก้ไข</a>
 
-                    <a onclick="clcikeskit({{$myroom->roomid}})"
-                       class="btn bg_corner col-md-5  col-5 m-1 border-dark text-black-50">ลบ</a>
+                    <a class="btn bg_corner col-md-5  col-5 m-1 border-dark text-black-50" data-toggle="modal"
+                       data-target="#exampleModal{{$myroom->roomid}}">ลบ</a>
 
-                    <form action="/managerroom/{{$myroom->roomid}}" method="post" hidden>
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" id="btn_dele{{$myroom->roomid}}"
-                                class="btn bg_corner col-md-5  col-5 m-1 border-dark text-black-50">ลบ
-                        </button>
-                    </form>
+
                     {{--<button class="btn font-weight-light btn_green bg_corner col-md-5">แก้ไข</button>--}}
                     {{--<button class="btn text-black-50 font-weight-light border bg_corner col-md-5">ลบ</button>--}}
 
@@ -71,5 +65,46 @@
             {{--</a>--}}
 
         </div>
+
+        <div class=" modal fade" id="exampleModal{{$myroom->roomid}}" tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">ต้องการจะลบห้องนี้หรือไม่</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body text-center">
+
+
+                        <form action="/managerroom/{{$myroom->roomid}}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" id="btn_dele{{$myroom->roomid}}"
+                                    class="btn bg_corner border-danger col-md-5 col-6 m-1 text-danger"
+                                    data-toggle="modal"
+                                    data-target="#exampleModal{{$myroom->roomid}}"
+                                    style="background-color: transparent">
+                                ลบ
+                            </button>
+
+                            <button type="button" class="btn text-black-50 btn-secondary col-md-5 col-6 bg_corner border-dark"
+                                    style="background-color: transparent" data-dismiss="modal">ยกเลิก
+                            </button>
+
+
+                        </form>
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
     @endforeach
 @endsection

@@ -53,6 +53,7 @@ class RoomController extends Controller
     {
 
 
+
         //
 //dd($id);
 //        return $id;
@@ -91,7 +92,6 @@ class RoomController extends Controller
         }
 
         $Facilityofroom = DB::table('facility')->whereIn('facility.id', $arr_roomid)->get();
-//        return $Facilityofroom;
 
 
         $mapRoom_detail_facility = $Facilityofroom->transform(function ($item, $key) use ($arr_roomid) {
@@ -107,6 +107,7 @@ class RoomController extends Controller
 
 
         $TotelRoom = $mapdata_room->first();
+
 
         return view('detailroom', compact('TotelRoom', 'img_air', 'mapRoom_detail_facility'));
     }

@@ -63,6 +63,7 @@ class AdroomdController extends Controller
     {
         //
 
+        $typebuild =$request->typebuild;
         $namecondo = $request->namecondo;
         $amoutroom = $request->amoutroom;
         $address = $request->address;
@@ -98,6 +99,7 @@ class AdroomdController extends Controller
         $Addroom->detail = $detail;
         $Addroom->hilight = $hilight;
         $Addroom->amoutroom = $amoutroom;
+        $Addroom->type_builder = $typebuild;
         $Addroom->price = $price;
 //
         $Addroom->save();
@@ -129,8 +131,6 @@ class AdroomdController extends Controller
             $facility_model->facility_id = $a_facitltiy;
             $facility_model->save();
 
-
-//            echo $imageExtractFinal.'<br>';
         }
 
         return redirect('/managerroom')->with('success');

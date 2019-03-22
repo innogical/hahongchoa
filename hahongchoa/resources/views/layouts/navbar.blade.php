@@ -21,10 +21,11 @@
                     <div class="col-10 show_desktop">
 
                         <div class="row">
-                            <div class=" col-2">
+                            <div class="col-1 p-0">
                                 <p class="color-dark-blue-fond mt-3 text-center">คำค้นหา</p>
                             </div>
-                            <input type="text" name="lifestyleplace" class="col-8 border-0 shadow mt-2"
+                            <input type="text" name="lifestyleplace"
+                                   class="p-2 col-8 border-0 shadow_box  bg_corner mt-2"
                                    placeholder="สถานที่ทำงาน / มหาวิทยาลัย" value="{{$lifestyle_location}}"
                                    style="padding: 10px">
                             {{--{{$lifestyle_location}}--}}
@@ -32,6 +33,7 @@
                     </div>
 
                 @endif
+
                 <ul class="navbar-nav ml-auto">
                     {{--{{Request::url()}}--}}
                     @if(Request::url() == "http://127.0.0.1:8000")
@@ -46,7 +48,7 @@
                                     data-toggle="dropdown">
                                 {{Auth::User()->username}}
                                 <span class="caret"></span></button>
-                            <ul class="dropdown-menu p-1">
+                            <ul class="dropdown-menu p-1 position-absolute">
                                 <li><a href="{{'/adroom'}}" class="color-dark-blue-fond">ลงประกาศห้อง</a></li>
                                 <li><a href="{{'/managerroom'}}" class="color-dark-blue-fond">จัดการห้อง</a>
                                 </li>
@@ -59,7 +61,7 @@
                         @if(Request::url() == "http://127.0.0.1:8000/adroom/"  || Request::url() == "http://127.0.0.1:8000/register"  )
 
 
-                        @elseif( Request::url() == "http://127.0.0.1:8000/roomnearskytrian")
+                        @elseif( Request::url() == "http://127.0.0.1:8000/roomnearskytrian" )
                             {{--<li id="btn_op_form">--}}
                             {{--<a class="nav-link border bg_corner color-border-orange px-2 mr-2 text-black-50">ค้นหาห้องเช่า</a>--}}
                             {{--</li>--}}
@@ -80,7 +82,7 @@
                                                     ค้นหาห้องเช่าใกล้สถานที่</h5>
                                             @else
                                                 <h5 class="modal-title text-center" id="exampleModalLabel">
-                                                    ค้นหาห้องเช่าาใกล้สถานีรถไฟฟ้า่</h5>
+                                                    ค้นหาห้องเช่าาใกล้สถานีรถไฟฟ้า</h5>
                                             @endif
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
@@ -93,7 +95,7 @@
                                                     <div class="row">
                                                         <div class="col-12">
 
-                                                            <lable class="mt-2">คำค้นหา่</lable>
+                                                            <lable class="mt-2">คำค้นหา</lable>
                                                             <input type="text" class="bg_corner form-control"
                                                                    name="lifestyleplace" required
                                                                    value="{{$lifestyle_location}}">
@@ -154,23 +156,22 @@
 
                                                     @if($zone_bts == [] || $zone_bts == null || $zone_bts == "")
 
-
                                                     @else
-                                                        <div class="col">
-                                                            <div class="form-group">
-                                                                <label for="exampleFormControlSelect2">สถานีรถไฟฟ้า</label>
-                                                                <select id="inputState"
-                                                                        class="form-control bg_corner border col-md-12 col-12"
-                                                                        name="area_zone" required>
-                                                                    <option value="{{$name_bts_select->id}}"
-                                                                            selected>{{$name_bts_select->name_station}}</option>
-                                                                    @foreach($zone_bts as $a_zone)
-                                                                        <option value="{{$a_zone->id}}">{{$a_zone-> name_station }}</option>
-                                                                    @endforeach
-                                                                </select>
-                                                            </div>
+                                                        {{--<div class="col">--}}
+                                                        {{--<div class="form-group">--}}
+                                                        {{--<label for="exampleFormControlSelect2">สถานีรถไฟฟ้า</label>--}}
+                                                        {{--<select id="inputState"--}}
+                                                        {{--class="form-control bg_corner border col-md-12 col-12"--}}
+                                                        {{--name="area_zone" required>--}}
+                                                        {{--<option value="{{$name_bts_select->id}}"--}}
+                                                        {{--selected>{{$name_bts_select->name_station}}</option>--}}
+                                                        {{--@foreach($zone_bts as $a_zone)--}}
+                                                        {{--<option value="{{$a_zone->id}}">{{$a_zone-> name_station }}</option>--}}
+                                                        {{--@endforeach--}}
+                                                        {{--</select>--}}
+                                                        {{--</div>--}}
 
-                                                        </div>
+                                                        {{--</div>--}}
                                                     @endif
 
                                                     <div class="col">
@@ -179,7 +180,7 @@
                                                             <select id="inputState"
                                                                     class="form-control bg_corner border col-md-12 col-12"
                                                                     name="optioncar">
-                                                                <option value="{{$optioncar}}"
+                                                                <option
                                                                         selected>{{$optioncar}}</option>
                                                                 <option value="nothavecar">ไม่มีรถยนตร์</option>
                                                                 <option value="havecar">มีรถยนตร์</option>
@@ -214,11 +215,181 @@
                             {{--</div>--}}
                             {{--</div>--}}
 
+                        @elseif( Request::url()== "http://127.0.0.1:8000/roomnearskytrian/sortresult")
+
 
                         @else
-                            <li><a class="nav-link border bg_corner color-border-orange px-1 mr-2"
+                            <li>
+                                <a class="nav-link border screen_desktop bg_corner color-border-orang font-weight-light px-2 mr-2 color-dark-orange-fond"
                                    href="{{url('/login')}}">ลงประกาศห้อง</a>
                             </li>
+                            {{--version Moblie--}}
+                            <li>
+                                <a class="nav-link border  show_mobile bg_corner color-border-orang font-weight-light px-2 mr-2 color-dark-orange-fond"
+                                   href="{{url('/login')}}" id="regis_clicke" data-toggle="modal"
+                                   data-target="#exampleModal">ลงประกาศห้อง</a>
+                            </li>
+
+
+                            <!-- The Modal -->
+
+                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content box-background-manager-login" style="opacity: 10">
+                                        <div class="modal-header" style=" border-bottom: 1px solid #ccc;">
+                                            <h5 class="modal-title text-white-50" id="exampleModalLabel">
+                                                เข้าสู่ระบบ</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body text-center">
+                                            {{--<div class="row m-2">--}}
+                                            <div class="row">
+                                                <div class="col-md-12">
+
+                                                    <form action="/loginend" method="post" class="">
+                                                        @csrf
+                                                        <div class="row ">
+                                                            <div class="form-group col-md-8 offset-md-2">
+                                                                <input type="email" class="form-control bg_corner w-100"
+                                                                       name="mail"
+                                                                       aria-describedby="emailHelp"
+                                                                       placeholder="Email" required>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="form-group col-md-8 offset-md-2">
+                                                                <input type="password" class="form-control bg_corner"
+                                                                       placeholder="Password" name="pass"
+                                                                       required>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-8 offset-md-2">
+                                                                <button type="submit"
+                                                                        class="btn btn_green bg_corner w-100 text-white">
+                                                                    เข้าสู่ระบบ
+                                                                </button>
+                                                            </div>
+                                                        </div>
+
+                                                    </form>
+
+                                                </div>
+
+
+                                                {{--</div>--}}
+                                            </div>
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <div class="col d-flex justify-content-center">
+                                                <p class="font-italic text-white">ยังไม่สมัครสมาชิก? </p>
+
+                                                <a class="font-weight-light color-green ml-1"
+                                                   href="{{url('/login')}}" id="regis_clicke" data-toggle="modal"
+                                                   data-target="#exampleModal_regis">สมัครสมาชิกที่นี่</a>
+
+
+                                                {{--<a href="{{'/register'}}" class="font-weight-light color-green ml-1">สมัครสมาชิกที่นี่</a>--}}
+                                            </div>
+                                            {{--<button type="button" class="btn btn-secondary" data-dismiss="modal">Close--}}
+                                            {{--</button>--}}
+                                            {{--<button type="button" class="btn btn-primary">Save changes</button>--}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="modal fade" id="exampleModal_regis" tabindex="-1" role="dialog"
+                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content box-background-manager-login" style="opacity: 10">
+                                        <div class="modal-header" style=" border-bottom: 1px solid #ccc;">
+                                            <h5 class="modal-title text-white-50" id="exampleModalLabel">
+                                                สมัครสมาชิก</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body text-center">
+                                            {{--<div class="row m-2">--}}
+                                            <div class="row">
+                                                <div class="col-md-12">
+
+                                                    <form action="/register" method="post">
+                                                        @csrf
+                                                        <div class="row">
+                                                            <div class="form-group col-md-6">
+                                                                <input type="email" class="form-control bg_corner w-100" name="mail"
+                                                                       placeholder="Email" required>
+                                                            </div>
+                                                            <div class="form-group col-md-6 ">
+                                                                <input type="password" class="form-control bg_corner" placeholder="Password" name="password"
+                                                                       required>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row ">
+
+
+                                                            <div class="form-group  col-md-6">
+                                                                <input type="text" class="form-control bg_corner" name="usersurname" placeholder="ชื่อ-สกุล">
+                                                            </div>
+
+
+                                                            <div class="form-group col-md-6">
+                                                                <input type="tel" class="form-control bg_corner" name="telphone" placeholder="เบอร์โทรศัพท์"
+                                                                       maxlength="10">
+                                                            </div>
+
+
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="form-group col-md-6">
+                                                                <input type="url" class="form-control bg_corner" name="urlfacebook"
+                                                                       placeholder="https://www.facebook.com/hongchao"
+                                                                >
+                                                            </div>
+
+
+                                                            <div class="form-group col-md-6">
+                                                                <input type="url" class="form-control bg_corner" name="linelink"
+                                                                       placeholder="https://line.me/R/ti/p/hongchao"
+                                                                >
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row mb-3">
+                                                            <div class="col-md-8 offset-md-2">
+                                                                <button type="submit" class="btn btn_green bg_corner w-100 text-white">
+                                                                    เข้าสู่ระบบ
+                                                                </button>
+                                                            </div>
+                                                        </div>
+
+                                                    </form>
+
+
+                                                </div>
+
+
+                                                {{--</div>--}}
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
                         @endif
                     @endif
 
@@ -232,4 +403,13 @@
 
 
 
+    <script>
+        $('#regis_clicke').click(function () {
+            console.log("clicke btn");
+$('#exampleModal').hide();
+        });
+
+
+    </script>
 @endsection
+

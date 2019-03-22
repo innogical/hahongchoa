@@ -31,6 +31,7 @@ class Adroom extends Model
         'detail',
         'hilight',
         'amoutroom',
+        'type_builder',
         'price'
     ];
 

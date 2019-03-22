@@ -22,7 +22,9 @@ function getCurrentlocation() {
         $("#mylng").val(position.coords.longitude);
 
 
-        initMap(position)
+        initMap(position);
+
+        getMypostion(position)
     }
 
     var map;
@@ -274,9 +276,9 @@ function clickeoptionSearch(numpage) {
         case 1:
             render = "    <div class=\"tab-pane fade show active\" id=\"home\" role=\"tabpanel\" aria-labelledby=\"home-tab\">\n" +
                 "        <div class=\"col-12\">\n" +
-                "            <div class=\"row mt-2\">\n" +
+                "            <div class=\"row mt-3\">\n" +
                 "                <div class=\"col-12\">\n" +
-                "                    <input type=\"text\" class=\"bg_corner border\" style=\"width:100%\"\n" +
+                "                    <input type=\"text\" class=\"bg_corner border shadow_box p-2\" style=\"width:100%\"\n" +
                 "                           placeholder=\"สถานที่ทำงาน / มหาวิทยาลัย\"\n" +
                 "                           name=\"lifestyleplace\" id=\"lifestyleplace\" required onkeyup=\"querylocation()\">\n" +
                 "                </div>\n" +
@@ -289,23 +291,23 @@ function clickeoptionSearch(numpage) {
                 "            </div>\n" +
                 "            <div class=\"row mt-2\">\n" +
                 "                <div class=\"col-6\">\n" +
-                "                    <input type=\"text\" class=\"bg_corner border\" style=\"width:100%\"\n" +
+                "                    <input type=\"text\" class=\"bg_corner border shadow_box p-2\" style=\"width:100%\"\n" +
                 "                           placeholder=\"ราคาถูกสุด\"\n" +
                 "                           name=\"price_low\" required>\n" +
                 "                </div>\n" +
                 "                <div class=\"col-6\">\n" +
-                "                    <input type=\"text\" class=\"bg_corner border\" style=\"width:100%\"\n" +
+                "                    <input type=\"text\" class=\"bg_corner border shadow_box p-2\" style=\"width:100%\"\n" +
                 "                           placeholder=\"ราคาแพงสุด\"\n" +
                 "                           name=\"price_high\" required>\n" +
                 "\n" +
-                "                    <input type=\"text\" name=\"stat_search_option\" hidden value=\"search_nearLocation\">\n" +
+                "                    <input type=\"text\" name=\"stat_search_option shadow_box\" hidden value=\"search_nearLocation\">\n" +
                 "                </div>\n" +
                 "            </div>\n" +
                 "\n" +
                 "\n" +
-                "            <div class=\"row mt-2\">\n" +
+                "            <div class=\"row mt-3\">\n" +
                 "                <div class=\"col-md-6 col-6\">\n" +
-                "                    <select class=\"bg_corner border\" name=\"person_live\" style=\"width: 100%;\" required>\n" +
+                "                    <select class=\"bg_corner border shadow_box custom-select\" name=\"person_live\" style=\"width: 100%;\" required>\n" +
                 "                        <option selected>ผู้อยู่อาศัย</option>\n" +
                 "                        <option value=\"1\">1</option>\n" +
                 "                        <option value=\"2\">2</option>\n" +
@@ -315,29 +317,20 @@ function clickeoptionSearch(numpage) {
                 "                    </select>\n" +
                 "                </div>\n" +
 
-
-                "                <div class=\"row col-md-6\">\n" +
-                "                    <div class=\"col-md-3 col-3\">\n" +
-                "                        <label class=\" btn border\" id=\"radio_car0\">\n" +
-                "                           <img src=\"http://" + window.location.host + "/icon/nohavecar.svg \"   alt=\"\">\n" +
-                "                            <input type=\"radio\" value=\"nothavecar\"\n" +
-                "                                   name=\"optioncar\" class=\"invisible\" onclick=\"optionCar()\" required>\n" +
-                "                        </label>\n" +
-                "                    </div>\n" +
-                "                    <div class=\"col-md-3 col-3\">\n" +
-                "                        <label class=\"btn border\" id=\"radio_car1\">\n" +
-                "                          <img src=\"http://" + window.location.host + "/icon/havecar.svg \" alt=\"\">\n" +
-                "                            <input type=\"radio\" value=\"havecar\"\n" +
-                "                                   name=\"optioncar\" class=\"invisible\" onclick=\"optionCar()\" required>\n" +
-                "                        </label>\n" +
-                "                    </div>\n" +
-                "                    <div class=\"col form-group\">\n" +
+                "                <div class=\"col-md-6 col-6\">\n" +
+                "                    <select class=\"bg_corner border shadow_box custom-select\" name=\"person_live\" style=\"width: 100%;\" required>\n" +
+                "                        <option selected>การเดินทาง</option>\n" +
+                "                        <option value=\"1\">มีรถส่วนตัว</option>\n" +
+                "                        <option value=\"2\">ไม่มีรถส่วนตัว</option>\n" +
+                "                    </select>\n" +
+                "                </div>\n" +
+                "                    <div class=\"col form-group mt-3\">\n" +
                 "                        <button type=\"submit\"\n" +
-                "                                class=\"font-weight-normal text-white btn btn-default btn_green\"\n" +
-                "                                style=\"width: 100%\">ค้นหา\n" +
+                "                                class=\" bg_corner font-weight-light text-white btn btn-default btn_green\"\n" +
+                "                                style=\"width: 100%\">ค้นหาห้องใกล้ที่ทำงาน/มหาวิทยาลัย\n" +
                 "                        </button>\n" +
                 "                    </div>\n" +
-                "                </div>\n" +
+                // "                </div>\n" +
                 "            </div>\n" +
                 "\n" +
                 "        </div>\n" +
@@ -357,12 +350,12 @@ function clickeoptionSearch(numpage) {
                 "            </div>\n" +
                 "            <div class=\"row mt-2\">\n" +
                 "                <div class=\"col-6\">\n" +
-                "                    <input type=\"text\" class=\"bg_corner border\" style=\"width:100%\"\n" +
+                "                    <input type=\"text\" class=\"bg_corner border p-2 shadow_box\" style=\"width:100%\"\n" +
                 "                           placeholder=\"ราคาถูกสุด\"\n" +
                 "                           name=\"price_low\">\n" +
                 "                </div>\n" +
                 "                <div class=\"col-6\">\n" +
-                "                    <input type=\"text\" class=\"bg_corner border\" style=\"width:100%\"\n" +
+                "                    <input type=\"text\" class=\"bg_corner border p-2 shadow_box\" style=\"width:100%\"\n" +
                 "                           placeholder=\"ราคาแพงสุด\"\n" +
                 "                           name=\"price_high\">\n" +
                 "\n" +
@@ -371,9 +364,9 @@ function clickeoptionSearch(numpage) {
                 "            </div>\n" +
                 "\n" +
                 "\n" +
-                "            <div class=\"row mt-2\">\n" +
+                "            <div class=\"row mt-3\">\n" +
                 "                <div class=\"col-md-6 col-6\">\n" +
-                "                    <select class=\"bg_corner border\" name=\"person_live\" style=\"width: 100%;\">\n" +
+                "                    <select class=\"custom-select bg_corner border shadow_box\" name=\"person_live\" style=\"width: 100%;\">\n" +
                 "                        <option selected>จำนวนผู้อยู่อาศัย</option>\n" +
                 "                        <option value=\"1\">1</option>\n" +
                 "                        <option value=\"2\">2</option>\n" +
@@ -383,7 +376,7 @@ function clickeoptionSearch(numpage) {
                 "                    </select>\n" +
                 "                </div>\n" +
                 "                <div class=\"col-md-6 col-6\">\n" +
-                "                    <select class=\"bg_corner border\" name=\"area_zone\" style=\"width: 100%;\">\n" +
+                "                    <select class=\"bg_corner border custom-select shadow_box\" name=\"area_zone\" style=\"width: 100%;\">\n" +
                 "                        <option selected>ใกล้สถานีรถไฟฟ้า</option>\n" +
                 "                        <option value=\"1\">หมอชิต</option>\n" +
                 "                        <option value=\"2\">สะพานควาย</option>\n" +
@@ -423,30 +416,23 @@ function clickeoptionSearch(numpage) {
                 "                    </select>\n" +
                 "                </div>\n" +
                 "            </div>\n" +
-                "                <div class=\"row mt-2\">\n" +
-                "                    <div class=\"col-md-2 col-2\">\n" +
-                "                        <label class=\" btn border\" id=\"radio_car0\">\n" +
-                "                            <img src=\"http://" + window.location.host + "/icon/nohavecar.svg \" alt=\"\">\n" +
-                "                            <input type=\"radio\" value=\"nothavecar\"\n" +
-                "                                   name=\"optioncar\" class=\"invisible\" onclick=\"optionCar()\">\n" +
-                "                        </label>\n" +
-                "                    </div>\n" +
-                "                    <div class=\"col-md-2 col-2\">\n" +
-                "                        <label class=\"btn border\" id=\"radio_car1\">\n" +
-                "                            <img src=\"http://" + window.location.host + "/icon/havecar.svg\" alt=\"\">\n" +
-                "                            <input type=\"radio\" value=\"havecar\"\n" +
-                "                                   name=\"optioncar\" class=\"invisible\" onclick=\"optionCar()\">\n" +
-                "                        </label>\n" +
-                "                    </div>\n" +
-                "                    <div class=\"col-md-8 form-group\">\n" +
+                "<div class='row mt-3'>" +
+                    "<div class=\"col-md-6 col-6\">\n" +
+                "                    <select class=\"bg_corner border shadow_box custom-select\" name=\"optioncar\" style=\"width: 100%;\" required>\n" +
+                "                        <option selected>การเดินทาง</option>\n" +
+                "                        <option value=\"1\">มีรถส่วนตัว</option>\n" +
+                "                        <option value=\"2\">ไม่มีรถส่วนตัว</option>\n" +
+                "                    </select>\n" +
+                "                </div>\n" +
+                "                    <div class=\"col-md-6 col-6 form-group\">\n" +
                 "                        <button type=\"submit\"\n" +
-                "                                class=\"font-weight-normal text-white btn btn-default btn_green\"\n" +
+                "                                class=\"font-weight-light text-white btn btn-default btn_green bg_corner \"\n" +
                 "                                style=\"width: 100%\">ค้นหา\n" +
                 "                        </button>\n" +
                 "                    </div>\n" +
                 "                </div>\n" +
-                "\n" +
-                "        </div>\n" +
+                    "</div>" +
+                "</div>\n" +
                 "\n" +
                 "    </div>";
 
@@ -503,11 +489,10 @@ function contact_room(idroom) {
     });
 
 
-
 }
 
 function clcikeskit(id) {
-    $('#btn_dele'+id).click()
+    $('#btn_dele' + id).click()
 }
 
 

@@ -201,9 +201,10 @@ class ManagerprofileController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Adroom::destroy($id);
 
-        return $id;
+        return redirect()->back();
+
     }
 
     function roomiMg($idroom)

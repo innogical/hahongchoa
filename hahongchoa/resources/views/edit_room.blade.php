@@ -11,27 +11,50 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
-        <h4 class="color-dark-blue-fond mt-2 text-left">แก้ไขห้อง{{$myRoom->name}}</h4>
+        <h4 class="color-dark-blue-fond mt-2 text-left mt-3">แก้ไขข้อมูล ห้อง{{$myRoom->name}}</h4>
 
 
         <form action="/managerroom/{{$myRoom->id}}" method="post" enctype="multipart/form-data">
             @method('PUT')
             @csrf
             <input type="text" name="idroom" hidden value="{{$myRoom->id}}">
+
+
             <div class="row">
-                <div class="col-6 mt-2">
+
+
+                <div class="col-md-3 mt-2">
+                    <label>ประเภทห้องเช่า</label>
+                    <div class="row col-md-auto">
+                        <div>
+                            <label>
+                                <input type="radio" name="typebuild" value="1" class="custom-radio mx-2">
+                                Apartment
+                            </label>
+                            <label>
+                                <input type="radio" name="typebuild" value="2" class="custom-radio mx-2">Condo
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-9 col-12 mt-2">
+                    <label>ชื่ออพาร์ตเมนต์/คอนโด</label>
                     <input type="text" class="form-control bg_corner" name="namecondo" required
                            placeholder="ชื่ออพาร์ตเมนต์/คอนโด" value="{{$myRoom->name}}">
                 </div>
 
-                <div class="col-6 mt-2">
+                <div class="col-md-6 col-12 mt-2">
+                    <label>ที่อยู่อพาร์ตเมนต์/คอนโด</label>
                     <input type="text" class="form-control bg_corner" name="address" value="{{$myRoom->address}}"
                            required placeholder="ที่อยู่">
                 </div>
 
 
-                <div class="col-6 mt-2">
-                    <select id="inputState" class="form-control bg_corner" name="zonearea">
+                <div class="col-md-6 col-6 mt-2">
+                    <label>ใกล้สถานีรถไฟฟ้า</label>
+                    <select id="inputState" class="form-control bg_corner custom-select" name="zonearea">
                         <option value="{{$myRoom->btsstation_id}}" selected></option>
                         {{--@foreach($bts as $index=>$namezone)--}}
                         {{--<option value="{{$index+1}}">{{$namezone}}</option>--}}
@@ -41,8 +64,9 @@
                     {{--<input type="text" class="form-control" name="sizeroom" placeholder="ขนาดห้อง">--}}
                 </div>
 
-                <div class="col-6 mt-2">
-                    <select id="inputState" class="form-control bg_corner" name="lifestyle">
+                <div class="col-md-4 col-6 mt-2">
+                    <label>เหมาะสำหรับ</label>
+                    <select id="inputState" class="form-control bg_corner custom-select" name="lifestyle">
                         <option value="{{$myRoom->stylelife_id}}" selected></option>
                         @foreach($lifestyle as $index=> $lifestyle_name)
                             <option value="{{$index+1}}">{{$lifestyle_name}}</option>
@@ -51,30 +75,24 @@
                 </div>
 
 
-                <div class="form-group col-6 mt-2">
-                    <select id="inputState" class="form-control bg_corner" name="promise">
+                <div class="form-group col-md-4 col-6 mt-2">
+                    <label>ระยะเวลาสัญญาเช่า</label>
+                    <select id="inputState" class="form-control custom-select bg_corner" name="promise">
                         <option value="{{$myRoom->lease_id}}" selected></option>
                         @foreach($promise as $index=> $apromise)
                             <option value="{{$index+1}}">{{$apromise}}</option>
                         @endforeach
                     </select>
                 </div>
-                <div class="col-6 mt-2">
-                    <div class="row">
-                        <div class="col-md-8">
-                            <input type="text" class="form-control  bg_corner"
-                                   placeholder="จุดเด่น กรุณาย่อเนื้อหาจุดเด่นของคุณภายใน 80 ตัวอักษร" name="hilight"
-                                   id="hilight" required
-                                   oninput="counttext()" maxlength="80" value="{{$myRoom->hilight}}">
-                        </div>
-                        <div class="col-4 mb-2">
 
-                            <p></p>
-                            <p><span id="totaltext">0</span>/80 ตัวอักษร</p>
-                        </div>
-                    </div>
+                <div class="col-md-4 col-6 mt-2">
+                    <label>จุดเด่นของห้อง <span class="text-danger font-weight-light" style="font-size: 12px">กรุณาย่อข้อมูลไม่เกิน <span
+                                    id="totaltext"></span> /80 ตัวอักษร</span></label>
+                    <input type="text" class="form-control  bg_corner"
+                           placeholder="จุดเด่น " name="hilight"
+                           id="hilight" required
+                           onkeyup="counttext()" maxlength="80" value="{{$myRoom->hilight}}">
                 </div>
-
                 <div class="col-md-12 col-12 mt-2">
                     <textarea name="detail" placeholder="รายละเอียดห้อง" class="form-control bg_corner" id="" cols="30"
                               rows="10">{{$myRoom->detail}}</textarea>
@@ -84,18 +102,23 @@
             </div>
             <div class="row">
 
-                <div class="col-3 mt-2 bg_corner">
+                <div class="col-md-4 col-4 mt-2 bg_corner">
+                    <label>ขนาดห้อง</label>
+
                     <input type="text" class="form-control bg_corner" name="sizeroom" value="{{$myRoom->size}}"
                            placeholder="ขนาดห้อง">
                 </div>
-                <div class="col-3 mt-2 bg_corner">
+                <div class="col-md-4 col-4 mt-2 bg_corner">
+                    <label>ราคา</label>
+
                     <input type="text" class="form-control bg_corner" placeholder="ราคา/เดือน"
                            value="{{$myRoom->price}}" name="price">
                 </div>
-                <div class="col-3 mt-2 bg_corner">
-                    {{--<input type="text" class="form-control bg_corner" name="amoutroom" required placeholder="จำนวนห้อง">--}}
-                </div>
-                <div class="form-group bg_corner col-3 mt-2">
+                {{--<div class="col-md-4 col-4 mt-2 bg_corner">--}}
+                {{--<input type="text" class="form-control bg_corner" name="amoutroom" required placeholder="จำนวนห้อง">--}}
+
+                <div class="form-group bg_corner col-md-4 col-4 mt-2">
+                    <label>จำนวนผู้อาศัย</label>
                     <input type="number" name="amoutLife" class="form-control bg_corner" value="{{$myRoom->personLive}}"
                            required
                            placeholder="จำนวนผู้อาศัย" style="width: 100%">
@@ -103,27 +126,15 @@
             </div>
 
 
-            <div class="col-12">
+            <div class="col-md-12 col-12 mt-4">
+                <label>ภาพรายละเอียดห้อง</label>
+                <div id="img_drop_edit_img_detail" class="dropzone"
+                     style="border: 2px solid #eaeaea; height: auto; border-radius: 20px;"></div>
 
-                {{--<div class="fallback ">--}}
-                {{--<div class="dropzone bg_corner h-auto" id=""></div>--}}
-                {{--<input name="file[]" type="file" value="" multiple hidden/>--}}
-
-
-                {{--<label for="">ภาพรายละเอียดห้อง</label>--}}
-                {{----}}
-                {{--<div id="image_rooms" class="dropzone"--}}
-                {{--style="border: 2px solid #eaeaea; height: auto; border-radius: 20px;"></div>--}}
-                {{--<input type="file" id="list_room_Images" name="file[]" value="" multiple hidden/>--}}
-
-                <div class="form-group">
-                    <label for="">ภาพรายละเอียดห้อง</label>
-                    <div id="img_drop_edit_img_detail" class="dropzone"
-                         style="border: 2px solid #eaeaea; height: auto; border-radius: 20px;"></div>
-                    <input type="file" id="bannerImg" name="file[]" value="" multiple hidden/>
-                </div>
-
+                <input type="file" id="bannerImg" name="file[]" value="" multiple hidden/>
             </div>
+
+
             <div class="col-md-12 col-12">
 
                 <div class="text-left mt-2">
@@ -132,27 +143,6 @@
 
                 <div class="row d-flex justify-content-between">
                     <input type="text" id="facilityofRoom" value="{{$facility_ofRoom}}" hidden>
-
-                    {{--@foreach($icon as $index => $a_icon)--}}
-                    {{--<div class="col-md-2 col-2 text-center" id="btn_facility">--}}
-                    {{--<label class="btn border bg_corner "--}}
-                    {{--style="border-radius: 100%; width: 46px;height: 46px; padding: 8px "--}}
-                    {{--id="border_faci{{$index}}">--}}
-
-                    {{--<img src="{{asset('/icon/'.$a_icon )}}"--}}
-                    {{--style="height: 36px; bottom: 54px;left: 25px;" class="position-absolute">--}}
-                    {{--<img src="{{asset('/icon/'.$a_icon )}}"--}}
-                    {{--style="height: 30px" width="30px">--}}
-                    {{--<input type="checkbox" value="{{$index+1}}" id="btnCheckbox{{$index+1}}"--}}
-                    {{--name="options_facility" class="invisible"--}}
-                    {{--onclick="selectEditbtnCheckbox({{$index+1}})">--}}
-                    {{--</label>--}}
-
-                    {{--<p class="text-black-50  font-weight-light "--}}
-                    {{--style="font-size: 12px">{{$namefacility[$index]}}</p>--}}
-                    {{--</div>--}}
-                    {{--@endforeach--}}
-                    {{--{{dd($icon)}}--}}
                     @foreach($icon as $index => $a_icon  )
 
                         <div class="col-md-3 col-2 text-center" id="btn_facility">

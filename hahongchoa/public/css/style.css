@@ -39,12 +39,9 @@ a:hover {
 }
 
 .btn-compare {
-    width: 68px;
-    text-align: center;
-    font-size: 10px;
+    width:auto;
+    font-size: 12px;
     margin: 10px;
-    text-align: center;
-    opacity: .8;
     color: white
 }
 
@@ -87,7 +84,7 @@ a:hover {
 }
 
 .color-dark-orange-fond {
-    color: #F44D31;
+    color: #F44D31 !important;
 }
 
 .btn-light-blue {
@@ -261,12 +258,10 @@ a:hover {
 }
 
 .shadow_box {
-
-    box-shadow:0 4px 2px 0 rgba(192, 190, 190, 0.54), 0 6px 20px 0 rgba(176, 176, 176, 0.19);
+    box-shadow:0 3px 2px 0 rgba(192, 190, 190, 0.54), 0 6px 20px 0 rgba(176, 176, 176, 0.19);
 }
 
 .bg_facility {
-    width: 100%;
     padding: 12px;
     height: auto;
     background-color: #f7f7f7;
@@ -319,14 +314,15 @@ a:hover {
     display: block;
 }
 .hover_item_room_select_compare {
-    -webkit-box-shadow: -1px 13px 26px -3px rgba(95, 178, 95, 0.52);
-    -moz-box-shadow: -1px 13px 26px -3px rgba(95, 178, 95, 0.52);
-    box-shadow: -1px 13px 26px -3px rgba(95, 178, 95, 0.52);
+    -webkit-box-shadow: -1px 13px 26px -3px rgba(244, 77, 49, 0.52);
+    -moz-box-shadow: -1px 13px 26px -3px rgba(244, 77, 49, 0.52);
+    box-shadow: -1px 13px 26px -3px rgba(244, 77, 49, 0.52);
 
     -webkit-transition: box-shadow 0.3s linear;
     -moz-transition: box-shadow 0.3s linear;
     transition: box-shadow 0.3s linear;
 }
+
 
 @media only screen and (max-width: 576px) {
 
