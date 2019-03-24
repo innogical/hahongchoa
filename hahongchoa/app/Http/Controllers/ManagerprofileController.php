@@ -28,16 +28,29 @@ class ManagerprofileController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
+
         $arr = [];
         foreach ($myrooms as $detailroom) {
+
+
             $listimg = $this->roomiMg($detailroom->roomid);
-            array_push($arr, $listimg);
+            if ($listimg !=null){
+                array_push($arr, $listimg);
+            }
         }
 
+//        $users = Imageroom::whereIn('roomid', $arr)
+//            ->groupby('roomid')
+//            ->get();
+
+
+
+//        dd($arr);
         $itemArr = [];
         foreach ($arr as $index => $subItem) {
             array_push($itemArr, $subItem->pathimg);
         }
+//        dd($itemArr);
 
         $arrom = $myrooms->transform(function ($item, $key) use ($itemArr) {
 

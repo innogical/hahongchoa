@@ -1,11 +1,5 @@
 <style>
-    .dropzone .dz-preview.dz-error:hover .dz-error-message {
-        display: none;
-    }
 
-    .dz-progress {
-        display: none;
-    }
 </style>
 
 @extends('layouts.app')
@@ -13,8 +7,7 @@
     <div class="container">
         <h4 class="color-dark-blue-fond mt-2 text-left mt-3">แก้ไขข้อมูล ห้อง{{$myRoom->name}}</h4>
 
-
-        <form action="/managerroom/{{$myRoom->id}}" method="post" enctype="multipart/form-data">
+        <form action="/adroom/{{$myRoom->id}}" method="post" enctype="multipart/form-data">
             @method('PUT')
             @csrf
             <input type="text" name="idroom" hidden value="{{$myRoom->id}}">
@@ -22,17 +15,20 @@
 
             <div class="row">
 
-
                 <div class="col-md-3 mt-2">
                     <label>ประเภทห้องเช่า</label>
                     <div class="row col-md-auto">
                         <div>
                             <label>
-                                <input type="radio" name="typebuild" value="1" class="custom-radio mx-2">
+
+                                <input type="radio" id="type_build_1" name="typebuild" value="1"
+                                       class="custom-radio mx-2" @if($myRoom->type_builder == 1) checked @endif >
                                 Apartment
                             </label>
+
                             <label>
-                                <input type="radio" name="typebuild" value="2" class="custom-radio mx-2">Condo
+                                <input type="radio" id="type_build_2" name="typebuild" value="2"
+                                       class="custom-radio mx-2" @if($myRoom->type_builder == 2) checked @endif>Condo
                             </label>
                         </div>
                     </div>
@@ -90,7 +86,7 @@
                                     id="totaltext"></span> /80 ตัวอักษร</span></label>
                     <input type="text" class="form-control  bg_corner"
                            placeholder="จุดเด่น " name="hilight"
-                           id="hilight" required
+                           id="hilight"
                            onkeyup="counttext()" maxlength="80" value="{{$myRoom->hilight}}">
                 </div>
                 <div class="col-md-12 col-12 mt-2">
@@ -103,7 +99,7 @@
             <div class="row">
 
                 <div class="col-md-4 col-4 mt-2 bg_corner">
-                    <label>ขนาดห้อง</label>
+                    <label>ขนาดห้อง /ตร.ม</label>
 
                     <input type="text" class="form-control bg_corner" name="sizeroom" value="{{$myRoom->size}}"
                            placeholder="ขนาดห้อง">
@@ -158,6 +154,8 @@
                                        name="options_facility_edit" class="invisible"
                                        onclick="selectEditbtnCheckbox({{$index+1}})">
                             </label>
+                            <p class="text-black-50  font-weight-light "
+                               style="font-size: 12px">{{str_replace(".svg","",$namefacility[$index])}}</p>
 
                             {{--<p class="text-black-50  font-weight-light "--}}
                             {{--style="font-size: 12px">{{$namefacility[$index]}}</p>--}}
@@ -188,7 +186,7 @@
                     <div class="d-flex justify-content-center col-12">
 
                         <div class="col-md-4">
-                            <button type="reset" class="col btn text-black-50 ">ล้างค่า</button>
+                            <button type="reset" class="col btn text-black-50  bg_corner">ล้างค่า</button>
                         </div>
 
                         <div class="col-md-4">
@@ -215,40 +213,16 @@
         var keep_update_facility = [];
         getOriginal_facility();
 
-        // window.onload = getOriginal_facility()
-        // $('document').ready(function () {
-        //
-        //     console.log("facilities", facilities);
-        //
-        //
-        //     facilities.forEach(function (item, index) {
-        //         // console.log("item_fatilot", item['facility_id']);
-        //         // console.log("border_faci" + item['facility_id']);
-        //
-        //         $('#border_faci' + item['facility_id']).addClass('facilities_active');
-        //         $('#btnCheckbox' + item['facility_id']).prop('checked', true);
-        //
-        //
-        //         // setArr_facility(item['facility_id']);
-        //
-        //
-        //     });
-
-        // var get_dafault_facility = $('#btnCheckbox')
-
-
-        // });
 
         function getOriginal_facility() {
             var facilities = JSON.parse($('#facilityofRoom').val());
 
             facilities.forEach(function (item, index) {
 
-                console.log("item_fatilot", item['facility_id']);
                 // console.log("border_faci" + item['facility_id']);
 
-                $('#border_faci' + item['facility_id']).addClass('facilities_active');
-                $('#btnCheckbox' + item['facility_id']).prop('checked', true);
+                // $('#border_faci' + item['facility_id']).addClass('facilities_active');
+                // $('#btnCheckbox' + item['facility_id']).prop('checked', true);
 
 
                 setArr_facility(item['facility_id']);
@@ -261,44 +235,9 @@
 
         function selectEditbtnCheckbox(id_facility) {
 
-
-            // $('[name="options_facility_edit"]').each(function (i, e) {
-            //
-            //     // console.log("III"+i);
-            //     if ($(e).is(':checked')) {
-            //         $('#border_faci' + i).addClass('facilities_active');
-            //         var comma = areaofinterest.length === 0 ? '' : ',';
-            //         // var facilities = e.value.replace(".svg", '');
-            //         facilities = parseInt(i.value);
-            //         // areaofinterest += (comma + facilities);
-            //         // arrsss.push(facilities);
-            //         // console.log("dadqwe", arrsss);
-            //
-            //
-            //     } else {
-            //         $('#border_faci' + i).removeClass('facilities_active');
-            //
-            //     }
-            //
-            // });
-
-
             console.log("dsaqweclikede", id_facility);
 
             setArr_facility(id_facility);
-
-
-            // $('input[name="options_facility_edit]:checked').each(function (item,index) {
-            //     console.log("valformclicke"+item.val)
-            // });
-            // console.log("clike id", facilities);
-
-
-//bug ครั้งแรก
-//             console.log("kepe", keep_update_facility);
-            // setArr_facility(keep_update_facility);
-            // $('#facility').val(keep_update_facility);
-
 
         }
 
@@ -309,7 +248,8 @@
 
             var index = id_facility - 1;
             if (chx_dataa_id) {
-                var swq = keep_update_facility.splice(keep_update_facility.indexOf(id_facility), 1);
+
+                keep_update_facility.splice(keep_update_facility.indexOf(id_facility), 1);
                 $('#border_faci' + index).removeClass('facilities_active');
 
 
@@ -328,6 +268,10 @@
 
 
         }
+
+        var type = {!! $myRoom->type_builder !!}
+
+        getTypebulder(type);
 
         var value = {!! json_encode($image_ofroom_toResult) !!}
 
@@ -395,6 +339,18 @@
             // });
 
         });
+
+        function getTypebulder(idtype) {
+            console.log("typebulder", idtype);
+
+            // if (idtype == 1) {
+            //     $('#type_build_1').checked.val()
+            // }
+            // else {
+            //     $('#type_build_2').checked.val()
+            //
+            // }
+        }
 
 
     </script>

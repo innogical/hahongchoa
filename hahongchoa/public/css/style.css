@@ -323,6 +323,18 @@ a:hover {
     transition: box-shadow 0.3s linear;
 }
 
+.dropzone .dz-preview.dz-error:hover .dz-error-message {
+    display: none;
+}
+
+.dz-progress {
+    display: none;
+}
+.dz-image img{
+    width: 100%;
+    height: auto;
+}
+
 
 @media only screen and (max-width: 576px) {
 

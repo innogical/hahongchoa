@@ -53,10 +53,6 @@ class RoomController extends Controller
     {
 
 
-
-        //
-//dd($id);
-//        return $id;
         $room = DB::table('room')
             ->select('*', 'bts_station.lat AS bts_lat', 'bts_station.lng AS bts_lng', 'room.lat AS room_lat', 'room.lng AS room_lng')
             ->join('bts_station', 'bts_station.id', '=', 'room.btsstation_id')
@@ -72,6 +68,48 @@ class RoomController extends Controller
         $img_air = Imageroom::where('roomid', '=', $idRoom->id)->get();
         $room_facility = DB::table('room_facility')->where('room_facility.room_id', '=', $idRoom->id)
             ->get();
+
+//        dd(collect($img_air->reverse()->toArray()));
+        $keep_total_image_arr = [];
+
+        foreach ($img_air as $get_image) {
+            array_push($keep_total_image_arr, $get_image->pathimg);
+
+        }
+
+//        dd($keep_total_image_arr);
+
+
+//        $collection = collect($img_air);
+//
+//        $chunk_image_slide = $img_air->chunk(3);
+//
+//
+//        return $chunk_image_slide;
+//        return $chunks;
+//        foreach ($chunks as $key => $sqwe) {
+//            echo $key;
+////            echo $sqwe['img_id']."<br>";
+//        }
+
+//        return "sqwe";
+
+//            $chunks->toArray();
+
+//            $count_pageSilder = sizeof($img_air) % 3;
+////
+////            if ($count_pageSilder == 1){
+////
+////            }
+//
+//
+//                echo $count_pageSilder;
+////
+//            if (($img_air) > 3) {
+//
+//                array_push($keep_total_threeImage,$image_air->pathimg);
+//            }
+//        return "s";
 
         $arr_roomid = [];
         $arr_cal = [];
@@ -109,7 +147,8 @@ class RoomController extends Controller
         $TotelRoom = $mapdata_room->first();
 
 
-        return view('detailroom', compact('TotelRoom', 'img_air', 'mapRoom_detail_facility'));
+//        return $chunk_image_slide;
+        return view('detailroom', compact('TotelRoom', 'img_air', 'mapRoom_detail_facility','img_air'));
     }
 
     /**
@@ -150,7 +189,7 @@ class RoomController extends Controller
     {
 
         $newRoom = DB::table('room')
-            ->select('*', 'bts_station.lat AS btsstation_lat', 'bts_station.lng AS btsstation_lng','room.id AS roomid')
+            ->select('*', 'bts_station.lat AS btsstation_lat', 'bts_station.lng AS btsstation_lng', 'room.id AS roomid')
             ->join('bts_station', 'bts_station.id', '=', 'room.btsstation_id')
             ->join('imageRoom', 'imageRoom.roomid', '=', 'room.id')
             ->join('zone', 'zone.id', '=', 'room.zone_id')

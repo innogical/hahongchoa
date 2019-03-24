@@ -129,38 +129,53 @@
             <div class="row">
                 <div id="carouselExampleControls" class="carousel slide col-12" data-ride="carousel">
                     <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <div class="row">
-                                @foreach($img_air as $a_img_air)
-                                    <img class="d-block w-100 col-md-3 col-6"
-                                         src="{{asset('/images_rooms/'.$a_img_air->pathimg)}}">
-                                @endforeach
+                        {{--<div class="carousel-item active">--}}
+                        {{--<div class="row">--}}
+                        {{--@foreach($chunk_image_slide as $a_img_air)--}}
+                        {{--<div class="col-12">--}}
+
+                        {{--<img class="d-block col-md-4 col-6"--}}
+                        {{--src="{{asset('/images_rooms/'.$a_img_air->pathimg)}}"--}}
+                        {{--style="width: 600px; height: auto">--}}
+                        {{--</div>--}}
+
+
+                        {{--@endforeach--}}
+                        {{--</div>--}}
+
+                        {{--</div>--}}
+
+                        @foreach($img_air->chunk(3) as $key => $silde_is)
+                            @if ($key == 0)
+                                <div class="carousel-item active row">
+                                    <div class="row">
+                                        @foreach($silde_is as $item)
+                                            <img class="d-block w-100 col-4"
+                                                 src="{{asset('images_rooms/'.$item->pathimg)}}" alt="First slide">
+                                        @endforeach
+                                    </div>
+                                </div>
+                                @continue
+                            @endif
+                            <div class="carousel-item row">
+                                <div class="row">
+                                    @foreach($silde_is as $item)
+                                        <img class="d-block w-100 col-4" src="{{asset('images_rooms/'.$item->pathimg)}}" alt="First slide">
+                                    @endforeach
+                                </div>
                             </div>
+                        @endforeach
+                        {{--<div class="carousel-item row">--}}
+                        {{--<div class="row">--}}
+                        {{--<img class="d-block w-100 col-4" src="https://dummyimage.com/600x400/000/fff"--}}
+                        {{--alt="First slide">--}}
+                        {{--<img class="d-block w-100 col-4" src="https://dummyimage.com/600x400/000/fff"--}}
+                        {{--alt="First slide">--}}
+                        {{--<img class="d-block w-100 col-4" src="https://dummyimage.com/600x400/000/fff"--}}
+                        {{--alt="First slide">--}}
+                        {{--</div>--}}
 
-                        </div>
-                        <div class="carousel-item row">
-
-                            <div class="row">
-                                <img class="d-block w-100 col-4" src="https://dummyimage.com/600x400/000/fff"
-                                     alt="First slide">
-                                <img class="d-block w-100 col-4" src="https://dummyimage.com/600x400/000/fff"
-                                     alt="First slide">
-                                <img class="d-block w-100 col-4" src="https://dummyimage.com/600x400/000/fff"
-                                     alt="First slide">
-                            </div>
-
-                        </div>
-                        <div class="carousel-item row">
-                            <div class="row">
-                                <img class="d-block w-100 col-4" src="https://dummyimage.com/600x400/000/fff"
-                                     alt="First slide">
-                                <img class="d-block w-100 col-4" src="https://dummyimage.com/600x400/000/fff"
-                                     alt="First slide">
-                                <img class="d-block w-100 col-4" src="https://dummyimage.com/600x400/000/fff"
-                                     alt="First slide">
-                            </div>
-
-                        </div>
+                        {{--</div>--}}
                     </div>
                     <a class="carousel-control-prev" href="#carouselExampleControls" role="button"
                        data-slide="prev">
@@ -179,41 +194,43 @@
 
             {{--</div>--}}
         </div>
+        <div class="col-md-12 py-5 mt-3" style="background-color: #F1F1EF">
+            <h4 class="text-center">สิ่งอำนวยความสะดวก</h4>
 
-        <div class="row mt-3">
-            <div class="col-md-12 col-12">
-                <h4 class="text-center">สิ่งอำนวยความสะดวก</h4>
+            <div class="row h-auto ">
 
-                <div class="col-auto bg_facility">
-                    <div class="row d-flex justify-content-between">
-                        @foreach($mapRoom_detail_facility as $a_facility)
+                @foreach($mapRoom_detail_facility as $index => $a_icon  )
+                    <div class="col-md-2 col-2 text-center" id="btn_facility">
+                        <label class=" border bg_corner "
+                               style="border-radius: 100%; width: 46px;height: 46px; padding: 8px "
+                               id="border_faci{{$index}}"
+                        >
+                            <img src="{{asset('/icon/'.$a_icon->pathImage.'.svg' )}}"
+                                 style="height: 36px;top:5px; left: 60px" class="position-absolute">
 
-                            <div class="col-md-auto col-3">
+                        </label>
 
-                                <div class=" border img_facility">
-                                    <img src="{{asset('/icon/'.$a_facility->pathImage.".svg")}}" alt=""
-                                         style="width: 60px; height: auto; padding: 8px">
-
-                                </div>
-
-                                <p class="text-center mt-1">{{$a_facility->name}}</p>
-                            </div>
-
-
-                        @endforeach
+                        <p class="text-black-50  font-weight-light "
+                           style="font-size: 12px">{{$a_icon->name}}</p>
                     </div>
+                @endforeach
+                <div class="offset-md-4 offset-4"></div>
 
-                </div>
             </div>
 
 
+            {{--</div>--}}
+
+
         </div>
+        {{--</div>--}}
+
 
         <input type="text" value="{{$TotelRoom->lat}}" id="room_lat" hidden>
         <input type="text" value="{{$TotelRoom->lng}}" id="room_lng" hidden>
 
         {{--<hr class="col-12 ml-2">--}}
-        <div class="col-md-12">
+        <div class="col-md-12 my-2">
 
             <div class="row">
                 <div class="col-md-6 col-12 mt-4">
@@ -243,15 +260,15 @@
                         </div>
                     </div>
                     {{--<div class="col">--}}
-                        {{--<div class="icon_symbol_tranfition">--}}
-                            {{--<div class="img-fluid">--}}
-                                {{--<img src="{{asset('/icon/car_font_view.svg')}}" class="h-auto" style="width: 60px"--}}
-                                     {{--alt="">--}}
-                            {{--</div>--}}
-                            {{--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci amet aut cum--}}
-                                {{--dolorum explicabo hic impedit laudantium maiores nam, nobis possimus quae quibusdam--}}
-                                {{--quidem quos ratione recusandae rerum veniam voluptatum!</p>--}}
-                        {{--</div>--}}
+                    {{--<div class="icon_symbol_tranfition">--}}
+                    {{--<div class="img-fluid">--}}
+                    {{--<img src="{{asset('/icon/car_font_view.svg')}}" class="h-auto" style="width: 60px"--}}
+                    {{--alt="">--}}
+                    {{--</div>--}}
+                    {{--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci amet aut cum--}}
+                    {{--dolorum explicabo hic impedit laudantium maiores nam, nobis possimus quae quibusdam--}}
+                    {{--quidem quos ratione recusandae rerum veniam voluptatum!</p>--}}
+                    {{--</div>--}}
                     {{--</div>--}}
                 </div>
             </div>

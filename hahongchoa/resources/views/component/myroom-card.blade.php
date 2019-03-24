@@ -9,7 +9,7 @@
 
             <div class="card-body border pb-1 pt-0 ">
                 <div class="row">
-                    <p class=" col p-0 m-0 color-dark-blue-fond" style="font-size:18px;">{{$myroom->name}}</p>
+                    <p class=" col p-0 m-0 color-dark-blue-fond threedotother_text" style="font-size:18px;">{{$myroom->name}}</p>
                 </div>
                 <div class="row">
                     <p class="font-weight-light col p-0 m-0 text-black-50"
@@ -49,7 +49,7 @@
                 </div>
 
                 <div class="row d-flex justify-content-between">
-                    <a href="/managerroom/{{$myroom->roomid}}/edit"
+                    <a href="/adroom/{{$myroom->roomid}}/edit"
                        class="btn bg_corner col-md-5 col-5 m-1 btn_green text-white">แก้ไข</a>
 
                     <a class="btn bg_corner col-md-5  col-5 m-1 border-dark text-black-50" data-toggle="modal"

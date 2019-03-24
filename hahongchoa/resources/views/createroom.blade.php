@@ -16,11 +16,11 @@
                     <div class="row col-md-auto">
                         <div>
                             <label>
-                                <input type="radio" name="typebuild" value="1" class="custom-radio mx-2">
+                                <input type="radio" name="typebuild" value="1"  required class="custom-radio mx-2">
                                 Apartment
                             </label>
                             <label>
-                                <input type="radio" name="typebuild" value="2" class="custom-radio mx-2">Condo
+                                <input type="radio" name="typebuild" value="2" required class="custom-radio mx-2">Condo
                             </label>
                         </div>
                     </div>
@@ -73,7 +73,7 @@
                                     id="totaltext"></span> /80 ตัวอักษร</span></label>
                     <input type="text" class="form-control  bg_corner"
                            placeholder="จุดเด่น " name="hilight"
-                           id="hilight" required
+                           id="hilight"
                            onkeyup="counttext()" maxlength="80">
                     {{--<div class="col-4 mb-2">--}}
                     {{--<p></p>--}}
@@ -94,7 +94,7 @@
                     <input type="text" class="form-control bg_corner" name="sizeroom" placeholder="ขนาดห้อง">
                 </div>
                 <div class="col-3 mt-2 bg_corner">
-                    <input type="text" class="form-control bg_corner" placeholder="ราคา/เดือน" name="price">
+                    <input type="number" class="form-control bg_corner" placeholder="ราคา/เดือน" name="price">
                 </div>
                 <div class="col-3 mt-2 bg_corner">
                     <input type="text" class="form-control bg_corner" name="amoutroom" required placeholder="จำนวนห้อง">
