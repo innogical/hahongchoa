@@ -228,7 +228,7 @@
                             <p class="m-0">สถานี{{$TotelRoom->name_station}}<span></span>
                                 ระยะทาง{{number_format($TotelRoom->distance,1,'.','')}}กิโลเมตร <span></span></p>
                             <p class="color-green">ใช้เวลา {{ substr($TotelRoom->time,0,2)}}นาที</p>
-                            <a class="btn bg_corner btn_green text-white" onclick="direction_opGooglemap()">นำทาง</a>
+                            {{--<a class="btn bg_corner btn_green text-white" onclick="direction_opGooglemap()">นำทาง</a>--}}
 
                         </div>
 

@@ -177,7 +177,7 @@
                         @if($img_room1->telephone == null)
 
                         @else
-                            <a href="{{$img_room1->telephone}}" target="_blank" class="btn col-4" role="button"
+                            <a href="tel:{{$img_room1->telephone}}" target="_blank" class="btn col-4" role="button"
                                aria-disabled="true"
                             >
                                 <img src="{{asset('icon/phon_icon.png')}}" alt="" class="w-25 h-auto">

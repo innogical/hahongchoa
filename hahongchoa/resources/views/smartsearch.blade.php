@@ -52,7 +52,7 @@
                         @else
                             <div class="col-md">
 
-                                <lable class="">สถานี</lable>
+                                <lable class="">สถานีรถไฟฟ้า</lable>
                                 {{--<div class="col-md-8 col-8 p-0">--}}
 
                                 <select id="inputState"
@@ -134,11 +134,11 @@
                     <div class="row">
                         <input type="text" value="{{$result}}" hidden name="dataAll">
                         <div class="form-check radio">
-                            <input type="radio" name="sortDistnce" class="custom-radio" value="distaceAsc">
+                            <input type="radio" name="sortDistnce" required class="custom-radio" value="distaceAsc">
                             <label class="form-check-label font-weight-light" for="exampleCheck1">ใกล้ไปไกล</label>
                         </div>
                         <div class="form-check radio">
-                            <input type="radio" name="sortDistnce" class="custom-radio" value="distaceDesc">
+                            <input type="radio" name="sortDistnce"required  class="custom-radio" value="distaceDesc">
                             <label class="form-check-label font-weight-light" for="exampleCheck1">ไกลถึงใกล้</label>
                         </div>
                     </div>
@@ -146,11 +146,11 @@
                     <h6 class="m-2">เรียงลำดับราคา</h6>
                     <div class="row">
                         <div class="form-check radio">
-                            <input type="radio" name="sortPrice" value="priceLow">
+                            <input type="radio" name="sortPrice" required value="priceLow">
                             <label class="form-check-label font-weight-light" for="exampleCheck1">ราคาถูกถึงแพง</label>
                         </div>
                         <div class="form-check radio">
-                            <input type="radio" name="sortPrice" value="priceHigh">
+                            <input type="radio" name="sortPrice"required value="priceHigh">
                             <label class="form-check-label font-weight-light" for="exampleCheck1">ราคาแพงถึงถูก</label>
                         </div>
                     </div>

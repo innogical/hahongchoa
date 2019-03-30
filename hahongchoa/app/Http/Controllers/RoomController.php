@@ -65,7 +65,7 @@ class RoomController extends Controller
 
 
 
-
+//dd($room);
         $idRoom = $room->first(); //new unwrap collection
 
         $img_air = Imageroom::where('roomid', '=',$id)->get();
@@ -84,10 +84,15 @@ class RoomController extends Controller
 
         $arr_roomid = [];
         $arr_cal = [];
+//        return [$room->room_lat, $room->room_lng, $room->bts_lat, $room->bts_lng];
 
 
         $distance_form_roomTobts = $this->calRouteAndTime($idRoom->room_lat, $idRoom->room_lng, $idRoom->bts_lat, $idRoom->bts_lng);
 
+
+//        $distance_form_roomTobts = $this->calRouteAndTime(13.6025, 100.338, $room->bts_lat, $room->bts_lng );
+
+//        dd($distance_form_roomTobts);
         foreach ($room_facility as $Aroom) {
             array_push($arr_roomid, $Aroom->facility_id);
         }
@@ -217,6 +222,8 @@ class RoomController extends Controller
 
         $data = json_decode($res->getBody()->getContents(), true);
         $summaryloop = $data["response"]["route"];
+
+//        dd($data);
 
         foreach ($summaryloop as $item) {
 
