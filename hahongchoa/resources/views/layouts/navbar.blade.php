@@ -1,7 +1,8 @@
 @section('nav')
 
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-light shadow_box " style="padding: 0;height: 70px">
+        <nav class="navbar navbar-expand-md navbar-light bg-light shadow_box border-top "
+             style="padding: 0;height: 70px">
             <div class="container p-md-0">
                 <a class="navbar-brand  p-0" href="{{ url('/') }}">
                     <img src="{{asset('img_view/logo.png')}}" height="auto" alt="logo" class="p-2 size_logo">
@@ -16,25 +17,32 @@
             {{--<div class="collapse navbar-collapse" id="navbarSupportedContent">--}}
             <!-- Left Side Of Navbar -->
                 {{--<ul class="navbar-nav mr-auto">--}}
+
+
+
                 @if(Request::url() =="http://127.0.0.1:8000/roomnearskytrian" && $lifestyle_location != "")
                     {{--<p>ok</p>--}}
-                    <div class="col-10 show_desktop">
+                    <div class="col-md-9 show_desktop">
 
                         <div class="row">
-                            <div class="col-1 p-0">
-                                <p class="color-dark-blue-fond mt-3 text-center">คำค้นหา</p>
+                            <div class="col-md-2 p-0">
+                                <p class="color-dark-blue-fond mt-3 text-center">คำค้นหาสถานที่</p>
                             </div>
-                            <input type="text" name="lifestyleplace"
-                                   class="p-2 col-8 border-0 shadow_box  bg_corner mt-2"
+
+                            <input type="text" id="input_real_lifestyle"
+                                   class="p-2 col-md-6 border-0 shadow_box  bg_corner mt-2"
                                    placeholder="สถานที่ทำงาน / มหาวิทยาลัย" value="{{$lifestyle_location}}"
                                    style="padding: 10px">
                             {{--{{$lifestyle_location}}--}}
                         </div>
+                        <div class="offset-md-10"></div>
+
+
                     </div>
 
                 @endif
 
-                <ul class="navbar-nav ml-auto">
+                <ul class="navbar-nav">
                     {{--{{Request::url()}}--}}
                     @if(Request::url() == "http://127.0.0.1:8000")
                         <div class="btn btn-orange-light mx-2 bg_corner " id="btn_compare">เปรียบเทียบห้อง</div>
@@ -43,9 +51,9 @@
                     @if(\Illuminate\Support\Facades\Auth::User())
 
                         <div class="dropdown">
-                            <button class="btn btn_green bg_corner text-white font-weight-light dropdown-toggle"
+                            <button class="btn color-border-orange color-dark-orange-fond bg_corner text-white font-weight-light dropdown-toggle"
                                     type="button"
-                                    data-toggle="dropdown">
+                                    data-toggle="dropdown" style="background-color: transparent">
                                 {{Auth::User()->username}}
                                 <span class="caret"></span></button>
                             <ul class="dropdown-menu p-1 position-absolute">
@@ -65,8 +73,8 @@
                             {{--<li id="btn_op_form">--}}
                             {{--<a class="nav-link border bg_corner color-border-orange px-2 mr-2 text-black-50">ค้นหาห้องเช่า</a>--}}
                             {{--</li>--}}
-                            <button type="button" class="btn bg_corner color-border-orange text-black-50 show_mobile"
-                                    data-toggle="modal"
+                            <button type="button" class="btn bg_corner color-border-orange text-black-50 show_mobile color-dark-orange-fond"
+                                    data-toggle="modal" style="background-color: transparent"
                                     data-target="#exampleModal">
                                 ค้นหาห้องเช่า
                             </button>
@@ -137,18 +145,28 @@
 
                                                     <div class="col">
                                                         <div class="form-group">
-                                                            <label for="exampleFormControlSelect2">จำนวนผู้อาศัย</label>
+                                                            <label for="exampleFormControlSelect2">ผู้อาศัย</label>
                                                             <select id="inputState"
                                                                     class=" bg_corner border form-control"
                                                                     name="person_live" required>
                                                                 <option value="{{$person_live}}"
                                                                         selected> {{$person_live}}คน
                                                                 </option>
-                                                                <option value="1"> 1คน</option>
-                                                                <option value="2"> 2คน</option>
-                                                                <option value="3"> 3คน</option>
-                                                                <option value="4"> 4คน</option>
-                                                                <option value="5"> 5คน</option>
+                                                                <option value="1" @if($person_live ==1) selected @endif>
+                                                                    1คน
+                                                                </option>
+                                                                <option value="2" @if($person_live ==2) selected @endif>
+                                                                    2คน
+                                                                </option>
+                                                                <option value="3" @if($person_live ==3) selected @endif>
+                                                                    3คน
+                                                                </option>
+                                                                <option value="4" @if($person_live ==4) selected @endif>
+                                                                    4คน
+                                                                </option>
+                                                                <option value="5" @if($person_live ==5) selected @endif>
+                                                                    5คน
+                                                                </option>
                                                             </select>
 
                                                         </div>
@@ -157,6 +175,19 @@
                                                     @if($zone_bts == [] || $zone_bts == null || $zone_bts == "")
 
                                                     @else
+                                                        <lable class="">สถานี</lable>
+                                                        {{--<div class="col-md-8 col-8 p-0">--}}
+
+                                                        <select id="inputState"
+                                                                class="form-control  custom-select bg_corner border col-md-12 col-12 shadow_box"
+                                                                name="area_zone">
+                                                            {{--<option value="{{$area_zone}}" selected>{{$area_zone}}</option>--}}
+                                                            @foreach($zone_bts as $a_zone)
+                                                                <option value="{{$a_zone->id }}"
+                                                                        @if($a_zone->id == $station_bts) selected @endif>{{$a_zone-> name_station }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                        {{----}}
                                                         {{--<div class="col">--}}
                                                         {{--<div class="form-group">--}}
                                                         {{--<label for="exampleFormControlSelect2">สถานีรถไฟฟ้า</label>--}}
@@ -180,10 +211,14 @@
                                                             <select id="inputState"
                                                                     class="form-control bg_corner border col-md-12 col-12"
                                                                     name="optioncar">
-                                                                <option
-                                                                        selected>{{$optioncar}}</option>
-                                                                <option value="nothavecar">ไม่มีรถยนตร์</option>
-                                                                <option value="havecar">มีรถยนตร์</option>
+                                                                <option value="havecar"
+                                                                        @if($optioncar =="havecar") selected @endif>
+                                                                    มีรถส่วนตัว
+                                                                </option>
+                                                                <option value="nothavecar"
+                                                                        @if($optioncar =="nothavecar") selected @endif>
+                                                                    ไม่มีรถส่วนตัว
+                                                                </option>
                                                             </select>
                                                         </div>
 
@@ -214,7 +249,6 @@
                             </div>
                             {{--</div>--}}
                             {{--</div>--}}
-
                         @elseif( Request::url()== "http://127.0.0.1:8000/roomnearskytrian/sortresult")
 
 
@@ -325,11 +359,13 @@
                                                         @csrf
                                                         <div class="row">
                                                             <div class="form-group col-md-6">
-                                                                <input type="email" class="form-control bg_corner w-100" name="mail"
+                                                                <input type="email" class="form-control bg_corner w-100"
+                                                                       name="mail"
                                                                        placeholder="Email" required>
                                                             </div>
                                                             <div class="form-group col-md-6 ">
-                                                                <input type="password" class="form-control bg_corner" placeholder="Password" name="password"
+                                                                <input type="password" class="form-control bg_corner"
+                                                                       placeholder="Password" name="password"
                                                                        required>
                                                             </div>
                                                         </div>
@@ -338,12 +374,14 @@
 
 
                                                             <div class="form-group  col-md-6">
-                                                                <input type="text" class="form-control bg_corner" name="usersurname" placeholder="ชื่อ-สกุล">
+                                                                <input type="text" class="form-control bg_corner"
+                                                                       name="usersurname" placeholder="ชื่อ-สกุล">
                                                             </div>
 
 
                                                             <div class="form-group col-md-6">
-                                                                <input type="tel" class="form-control bg_corner" name="telphone" placeholder="เบอร์โทรศัพท์"
+                                                                <input type="tel" class="form-control bg_corner"
+                                                                       name="telphone" placeholder="เบอร์โทรศัพท์"
                                                                        maxlength="10">
                                                             </div>
 
@@ -352,14 +390,16 @@
 
                                                         <div class="row">
                                                             <div class="form-group col-md-6">
-                                                                <input type="url" class="form-control bg_corner" name="urlfacebook"
+                                                                <input type="url" class="form-control bg_corner"
+                                                                       name="urlfacebook"
                                                                        placeholder="https://www.facebook.com/hongchao"
                                                                 >
                                                             </div>
 
 
                                                             <div class="form-group col-md-6">
-                                                                <input type="url" class="form-control bg_corner" name="linelink"
+                                                                <input type="url" class="form-control bg_corner"
+                                                                       name="linelink"
                                                                        placeholder="https://line.me/R/ti/p/hongchao"
                                                                 >
                                                             </div>
@@ -367,7 +407,8 @@
 
                                                         <div class="row mb-3">
                                                             <div class="col-md-8 offset-md-2">
-                                                                <button type="submit" class="btn btn_green bg_corner w-100 text-white">
+                                                                <button type="submit"
+                                                                        class="btn btn_green bg_corner w-100 text-white">
                                                                     เข้าสู่ระบบ
                                                                 </button>
                                                             </div>
@@ -406,7 +447,7 @@
     <script>
         $('#regis_clicke').click(function () {
             console.log("clicke btn");
-$('#exampleModal').hide();
+            $('#exampleModal').hide();
         });
 
 

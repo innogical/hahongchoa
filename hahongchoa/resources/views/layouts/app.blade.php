@@ -20,8 +20,6 @@
     <script src="{{asset('js/config_dropzone.js') }} "></script>
 
 
-
-
 @stack('scripts')
 
 <!-- Fonts -->
@@ -48,9 +46,9 @@
 </head>
 
 <body>
-@include('layouts.navbar')
 
-    @yield('nav')
+@include('layouts.navbar')
+@yield('nav')
 
 @yield('content')
 </body>

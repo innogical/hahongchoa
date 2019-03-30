@@ -95,8 +95,7 @@
     {{--</label>--}}
     {{--</div>--}}
 
-    {{--<input type="text" name="mylocation_lat" id="mylocation_lat" value="" hidden>--}}
-    {{--<input type="text" name="mylocation_lng" id="mylocation_lng" value="" hidden>--}}
+
 
 
     {{--<div class="col-6 mt-2 form-group pl-2 pr-2 ">--}}

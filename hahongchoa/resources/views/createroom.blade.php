@@ -39,10 +39,10 @@
 
                 <div class="col-md-6 col-6 mt-2">
                     <label>ใกล้สถานีรถไฟฟ้า</label>
-                    <select id="inputState" class="form-control bg_corner custom-select" name="zonearea">
-                        <option value="1" selected>ใกล้รถไฟฟ้า</option>
+                    <select id="inputState" class="form-control bg_corner custom-select" required name="zonearea">
+                        <option selected>ใกล้รถไฟฟ้า</option>
                         @foreach($bts as $index=>$namezone)
-                            <option value="{{$index+1}}">{{$namezone}}</option>
+                            <option value="{{$namezone->id}}">{{$namezone->name_station}}</option>
                         @endforeach
                     </select>
 
@@ -108,7 +108,7 @@
 
             <div class="col-md-12 col-12">
                 <label for="">ภาพรายละเอียดห้อง</label>
-                <div id="image-room" class="dropzone"
+                <div id="image_room" class="dropzone"
                      style="border: 2px solid #eaeaea; height: auto; border-radius: 20px;"></div>
                 <input type="file" id="list_room_Images" name="file[]" value="" multiple hidden/>
 
@@ -183,13 +183,12 @@
     <script>
         Dropzone.autoDiscover = false;
 
-        var myDropzone = new Dropzone("#image-room", {
+        var myDropzone = new Dropzone("#image_room", {
             url: "file/post",
+            acceptedFiles: 'image/*',
             accept: function (file, done) {
                 done(file.name);
             },
-
-            // previewTemplate: renderPreview()
         });
 
         myDropzone.on("complete", function (file) {

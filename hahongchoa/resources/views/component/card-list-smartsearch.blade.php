@@ -35,20 +35,20 @@
 
 
                     <div class="card-body border pb-1 pt-0 ">
-                        <a href="/room/{{$room->id}}">
+                        <a href="/room/{{$room->roomid}}">
 
                             <div class="row">
-                                <p class=" col p-0 m-0  color-dark-blue-fond threedotother_text ">{{$room->name}}</p>
+                                <p class=" col p-0 m-0  text-dark threedotother_text ">{{$room->name}}</p>
                             </div>
                             <div class="row">
-                                <p style="font-size: 12px; " class="text-dark m-0 threedotother_text">{{$room->address}}</p>
+                                <p style="font-size: 12px; " class="text-black-50 m-0 threedotother_text">{{$room->address}}</p>
                             </div>
                             <div class="box-twin-data row mt-1">
                                 <div class="img-fluid col-1 p-0 mr-1">
                                     <img src="{{asset('/icon/trian.svg')}}" alt="" width="30px" height="30px">
                                 </div>
                                 <div class="text-justify col color-dark-blue-fond font-weight-light text-black-50">
-                                    ใกล้สถานีรถไฟฟ้า{{$room->name_station}}
+                                    สถานีรถไฟฟ้า{{$room->name_station}}
                                 </div>
                             </div>
 
@@ -56,7 +56,7 @@
                                 <div class="img-fluid col-1 p-0 mr-1">
                                     <img src="{{asset('/icon/pin.svg')}}" alt="" width="30px" height="30px">
                                 </div>
-                                <div class="text-justify col text-black-50 font-weight-light">ระยะทางประมาณ{{number_format($room->distance,1,'.','')}}
+                                <div class="text-justify col text-black-50 font-weight-light">ระยะทาง{{number_format($room->distance,1,'.','')}}
                                     กิโลเมตร
                                 </div>
                             </div>
@@ -164,7 +164,7 @@
                                 @if($room->telephone == "" ||$room->telephone == null)
                                 @else
                                     <div class="col-auto">
-                                        <a href="{{$room->telephone}}"
+                                        <a href="tel:{{$room->telephone}}"
                                            class="btn text-white  btn-orange-light">Telephone</a>
                                     </div>
                                 @endif

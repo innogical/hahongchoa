@@ -1,5 +1,5 @@
 @section('footer')
-    <div class="border shadow">
+    <div class="border shadow mt-3">
         <div class="container">
             <div class="row">
                 <div class="col-md-12 col-12">

@@ -33,7 +33,7 @@
                 </div>
                 <div class="row m-0">
                     {{--todo:: รอแก้ sql--}}
-                    @yield('room')
+                    @yield('newroom')
                 </div>
 
                 @if(count($mapdataNearby)!= 0 || $mapdataNearby != null)
@@ -48,7 +48,7 @@
                 @endif
 
 
-                @if(session()->get('data'))
+                @if(session()->has('data'))
                     {{session()->get('data')}}
                     <div class="modal fade" id="myModal">
                         <div class="modal-dialog modal-sm">

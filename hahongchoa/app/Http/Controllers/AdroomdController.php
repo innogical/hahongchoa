@@ -5,9 +5,10 @@ namespace App\Http\Controllers;
 use App\Adroom;
 use App\Facilitys;
 use App\Imageroom;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+
+use Intervention\Image\ImageManagerStatic as Image;
 use Intervention\Image\ImageManagerStatic;
 
 class AdroomdController extends Controller
@@ -21,10 +22,14 @@ class AdroomdController extends Controller
     {
         //
         $lifestyle = ['นักศึกษา', 'บุคคลทั่วไป'];
-        $promise = ['3เดือน', '6เดือน', '1ปี'];
-        $bts = ['หมอชิต', 'สะพานควาย	', 'อารีย์', 'สนามเป้า', 'อนุสาวรีย์ชัยสมรภูมิ', 'พญาไท', 'ราชเทวี', 'สยาม', ' ชิดลม',
-            'เพลินจิต', 'นานา', 'อโศก', 'พร้อมพงษ์', ' ทองหล่อ', 'เอกมัย', 'พระโขนง', ' อ่อนนุช', 'บางจาก', ' ปุณณวิถี', ' อุดมสุข', 'บางนา', 'แบริ่ง', 'สนามกีฬา', 'ราชดำริ', ' ศาลาแดง', 'ช่องนนทรี', 'สุรศักดิ์', 'สะพานตากสิน', 'กรุงธนบุรี', 'วงเวียนใหญ่', 'โพธิ์นิมิตร', 'ตลาดพลู', 'วุฒากาศ', 'บางหว้า', 'สำโรง'
-        ];
+        $promise = ['3เดือน', '6เดือน', '12เดือน'];
+//        $bts = ['หมอชิต', 'สะพานควาย	', 'อารีย์', 'สนามเป้า', 'อนุสาวรีย์ชัยสมรภูมิ', 'พญาไท', 'ราชเทวี', 'สยาม', ' ชิดลม',
+//            'เพลินจิต', 'นานา', 'อโศก', 'พร้อมพงษ์', ' ทองหล่อ', 'เอกมัย', 'พระโขนง', ' อ่อนนุช', 'บางจาก', ' ปุณณวิถี', ' อุดมสุข', 'บางนา', 'แบริ่ง', 'สนามกีฬา', 'ราชดำริ', ' ศาลาแดง', 'ช่องนนทรี', 'สุรศักดิ์', 'สะพานตากสิน', 'กรุงธนบุรี', 'วงเวียนใหญ่', 'โพธิ์นิมิตร', 'ตลาดพลู', 'วุฒากาศ', 'บางหว้า', 'สำโรง'
+//        ];
+
+        $bts = DB::table('bts_station')->get();
+
+
 
 //        $icon = ['cctv.svg', 'elavator.svg', 'fitness.svg', 'food.svg', 'furniture.svg', 'park.svg', 'pet.svg', 'skytrian.svg', 'swim.svg', 'washing.svg', 'wifi.svg'];
         $icon = ['cctv.svg', 'elavator.svg', 'fitness.svg', 'food.svg', 'furniture.svg', 'park.svg', 'pet.svg', 'swim.svg', 'washing.svg', 'wifi.svg'];
@@ -105,24 +110,42 @@ class AdroomdController extends Controller
 
         $id = $Addroom->id;
 //
-
-
+        $data = [];
         foreach ($request->file as $image) {
             $timestamp = floor(microtime(true) * 1000);
-            $name = $timestamp . $image->getClientOriginalName();
-//            $image->move(public_path() . '/images_rooms/', $name);
+//            $name = $timestamp . $image->getClientOriginalName();
+
+            $new_name_random = $timestamp . $this->generateRandomString();
+            $filename = $image->getClientOriginalName();
+            $expolr = explode(".", $filename);
+            $extension = end($expolr);
+            $newfilename = $new_name_random . "." . $extension;
 
 
-            $img = ImageManagerStatic::make($image->getRealPath());
-// now you are able to resize the instance
-            $img->resize(532, 370);
-// finally we save the image as a new file
-            $img->save(public_path() . '/images_rooms/' . $name);
-            $data[] = $name;
+            //////// lib resize /////////
+//
+//            $img = ImageManagerStatic::make($image->getRealPath());
+//            $img->resize(532, null, function ($constraint) {
+//                $constraint->aspectRatio();
+//            });
+//            $new_name_random =$timestamp. $this->generateRandomString();
+//            $filename=$image->getClientOriginalName();
+//            $expolr = explode(".", $filename);
+//            $extension=end($expolr);
+//            $newfilename=$new_name_random .".".$extension;
+//            $img->save(realpath(base_path().'/../public_html/images_rooms')."/".$newfilename,100);
+//            array_push($data,$newfilename);
+//        }
+//
+//            //////// lib resize /////////
+            $image->move(public_path() . '/images_rooms/', $newfilename);
+            array_push($data, $newfilename);
+
 //todo:: Resize เมื่องานทุกอย่างเสร็จแล้ว
 
 
         }
+
 
 //        dd($data);
         foreach ($data as $nameimg) {
@@ -134,16 +157,17 @@ class AdroomdController extends Controller
 
         }
 
-        $cutComma = rtrim($facilitys, ",");
-        $FacilityExpolore = explode(",", $cutComma);
-        foreach ($FacilityExpolore as $a_facitltiy) {
-            //my echo code
+        if ($facilitys != null || sizeof($facilitys) == 0 || $facilitys != [] || $facilitys == "") {
 
-            $facility_model = new Facilitys();
-            $facility_model->room_id = $id;
-            $facility_model->facility_id = $a_facitltiy;
-            $facility_model->save();
+            $cutComma = rtrim($facilitys, ",");
+            $FacilityExpolore = explode(",", $cutComma);
+            foreach ($FacilityExpolore as $a_facitltiy) {
+                $facility_model = new Facilitys();
+                $facility_model->room_id = $id;
+                $facility_model->facility_id = $a_facitltiy;
+                $facility_model->save();
 
+            }
         }
 
         return redirect('/managerroom')->with('success');
@@ -183,9 +207,10 @@ class AdroomdController extends Controller
         $image_ofroom = Imageroom::where('roomid', '=', $myRoom->id)->get();
         $facility_ofRoom = DB::table('room_facility')
             ->where('room_id', '=', $myRoom->id)->get();
+        $bts = DB::table('bts_station')->get();
 
 
-//        return $myRoom;
+//        return $bts;
 
 
         foreach ($image_ofroom as $key => $iamge) {
@@ -201,7 +226,7 @@ class AdroomdController extends Controller
 //        return $myRoom;
 
 
-        return view('edit_room', compact('icon', 'namefacility', 'myRoom', 'lifestyle', 'promise', 'image_ofroom_toResult', 'facility_ofRoom'));
+        return view('edit_room', compact('icon', 'namefacility', 'myRoom', 'bts', 'lifestyle', 'promise', 'image_ofroom_toResult', 'facility_ofRoom'));
 
     }
 
@@ -250,7 +275,7 @@ class AdroomdController extends Controller
         $Editroom->hilight = $hilight;
         $Editroom->price = $price;
 
-        $Editroom->save();
+//        $Editroom->save();
 
 
         Imageroom::where('roomid', '=', $idroom)->delete();
@@ -261,25 +286,76 @@ class AdroomdController extends Controller
 //            $img->delete();
 //        }
 
+//        return $facility;
+
+
+        if ($facility != null || sizeof($facility) == 0 || $facility != [] || $facility == "") {
+
+            foreach ($facility as $a_facitltiy) {
+                $facility_model = new Facilitys();
+                $facility_model->room_id = $idroom;
+                $facility_model->facility_id = $a_facitltiy;
+//                $facility_model->save();
+
+            }
+        }
+
         foreach ($file as $a_file) {
             $addnewImage = new Imageroom();
             $addnewImage->roomid = $idroom;
             $timestamp = floor(microtime(true) * 1000);
 
-            $name_image = $timestamp . $a_file->getClientOriginalName();
-            $addnewImage->pathimg = $name_image;
-
             $img = ImageManagerStatic::make($a_file->getRealPath());
-// now you are able to resize the instance
-            $img->resize(532, 370);
-// finally we save the image as a new file
-            $img->save(public_path() . '/images_rooms/' . $name_image);
-            $addnewImage->save();
+
+//            echo $img->filesize()."<br>";
+            $filename = $a_file->getClientOriginalName();
+
+            if ($img->filesize() > 2000000) {
+
+            } else {
+                $img->resize(532, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                });
+
+
+                $new_name_random = $timestamp . $this->generateRandomString();
+
+                $expolr = explode(".", $filename);
+                $extension = end($expolr);
+                $newfilename = $new_name_random . "." . $extension;
+
+                $addnewImage->pathimg = $newfilename;
+                $addnewImage->save();
+                $img->save(public_path() . '/images_rooms' . "/" . $newfilename, 100);
+            }
         }
 
+//        return "s";
+
+//            $a_file->move(public_path() . '/images_rooms/', $name_image);
+
+//
+//            $img = ImageManagerStatic::make($a_file->getRealPath());
+//// now you are able to resize the instance
+//            $img->resize(532, 370);
+//// finally we save the image as a new file
+//            $img->save(public_path() . '/images_rooms/' . $name_image);
+
+
+//            $image_resize = Image::make($a_file->getRealPath());
+//            $image_resize->resize(300, 300);
+//            $image_resize->save(public_path('/images_rooms/' .$name_image));
+//
+//            $addnewImage->save();
+
+
+//            $imae = $this->resize_image(public_path() . '/images_rooms/', $name_image, 532, 200);
+
+        // $img_tomove = this->resize_image(public_path() . '/images_rooms/', $name_image, 532, 200);
+//            $a_file->move(public_path() . '/images_rooms/', $name_image);
+
+
         return redirect('/managerroom');
-
-
     }
 
     /**
@@ -304,4 +380,14 @@ class AdroomdController extends Controller
     }
 
 
+    function generateRandomString()
+    {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < 10; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
+    }
 }

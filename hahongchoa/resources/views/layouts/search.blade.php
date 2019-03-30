@@ -41,6 +41,8 @@
                 </div>
             </div>
 
+            <input type="text" name="mylocation_lat" id="mylocation_lat" value="" hidden>
+            <input type="text" name="mylocation_lng" id="mylocation_lng" value="" hidden>
             <div class="tab-content " id="myTabContent">
             </div>
         </form>
@@ -53,15 +55,35 @@
 
 
     <script>
+
+        var myP_lat;
+        var myP_lng;
         $(document).ready(function () {
-            var myP_lat = $('#mylocation_lat').val();
-            var myP_lng = $('#mylocation_lng').val();
+            myP_lat = $('#mylocation_lat').val();
+            myP_lng = $('#mylocation_lng').val();
 
             if (myP_lat != null && myP_lng != null) {
-                // window.location = "http://127.0.0.1:8000/" + myP_lat + "," + myP_lng;
+                // window.location = "http://127.0.0.1:8000//" + myP_lat + "," + myP_lng;
             }
 
+
             clickeoptionSearch(1);
+
         });
+        //
+        // $('#btn_search').click(function () {
+        //     console.log("dae clicke");
+        //     chx_mylatlng()
+        // });
+
+
+        function chx_mylatlng() {
+
+            if (myP_lat != null && myP_lng != null) {
+                alert("กรุณาเปิดLocation")
+            }
+
+        }
+
     </script>
 @endsection

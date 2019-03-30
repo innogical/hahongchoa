@@ -59,16 +59,21 @@ class RoomController extends Controller
             ->join('lease', 'lease.id', '=', 'room.lease_id')
             ->join('user', 'user.id', '=', 'room.user_id')
             ->join('imageRoom', 'imageRoom.roomid', '=', 'room.id')
+            ->join('type_builder', 'type_builder.id', '=', 'room.type_builder')
             ->groupBy('imageRoom.img_id')
             ->where('room.id', '=', $id)->get();
 
 
+
+
         $idRoom = $room->first(); //new unwrap collection
 
-        $img_air = Imageroom::where('roomid', '=', $idRoom->id)->get();
-        $room_facility = DB::table('room_facility')->where('room_facility.room_id', '=', $idRoom->id)
+        $img_air = Imageroom::where('roomid', '=',$id)->get();
+        $room_facility = DB::table('room_facility')->where('room_facility.room_id', '=', $id)
             ->get();
 
+
+//        dd($room_facility);
 //        dd(collect($img_air->reverse()->toArray()));
         $keep_total_image_arr = [];
 
@@ -77,57 +82,16 @@ class RoomController extends Controller
 
         }
 
-//        dd($keep_total_image_arr);
-
-
-//        $collection = collect($img_air);
-//
-//        $chunk_image_slide = $img_air->chunk(3);
-//
-//
-//        return $chunk_image_slide;
-//        return $chunks;
-//        foreach ($chunks as $key => $sqwe) {
-//            echo $key;
-////            echo $sqwe['img_id']."<br>";
-//        }
-
-//        return "sqwe";
-
-//            $chunks->toArray();
-
-//            $count_pageSilder = sizeof($img_air) % 3;
-////
-////            if ($count_pageSilder == 1){
-////
-////            }
-//
-//
-//                echo $count_pageSilder;
-////
-//            if (($img_air) > 3) {
-//
-//                array_push($keep_total_threeImage,$image_air->pathimg);
-//            }
-//        return "s";
-
         $arr_roomid = [];
         $arr_cal = [];
 
 
-        foreach ($room_facility as $Aroom) {
-            array_push($arr_roomid, $Aroom->facility_id);
-        }
-
-
         $distance_form_roomTobts = $this->calRouteAndTime($idRoom->room_lat, $idRoom->room_lng, $idRoom->bts_lat, $idRoom->bts_lng);
 
-//        array_push($arr_cal, $distance_form_roomTobts[0], $distance_form_roomTobts[1]);
-
-//        return $arr_cal;
         foreach ($room_facility as $Aroom) {
             array_push($arr_roomid, $Aroom->facility_id);
         }
+
 
         $Facilityofroom = DB::table('facility')->whereIn('facility.id', $arr_roomid)->get();
 
@@ -136,6 +100,8 @@ class RoomController extends Controller
             $item->pathImagr_facility = $arr_roomid[$key];
             return $item;
         });
+
+//        dd($mapRoom_detail_facility);
 
         $mapdata_room = $room->transform(function ($item, $key) use ($distance_form_roomTobts) {
             $item->time = $distance_form_roomTobts[0];
@@ -146,9 +112,7 @@ class RoomController extends Controller
 
         $TotelRoom = $mapdata_room->first();
 
-
-//        return $chunk_image_slide;
-        return view('detailroom', compact('TotelRoom', 'img_air', 'mapRoom_detail_facility','img_air'));
+        return view('detailroom', compact('TotelRoom', 'img_air', 'mapRoom_detail_facility', 'img_air'));
     }
 
     /**
@@ -192,21 +156,25 @@ class RoomController extends Controller
             ->select('*', 'bts_station.lat AS btsstation_lat', 'bts_station.lng AS btsstation_lng', 'room.id AS roomid')
             ->join('bts_station', 'bts_station.id', '=', 'room.btsstation_id')
             ->join('imageRoom', 'imageRoom.roomid', '=', 'room.id')
-            ->join('zone', 'zone.id', '=', 'room.zone_id')
+//            ->join('zone', 'zone.id', '=', 'room.zone_id')
             ->join('user', 'user.id', '=', 'room.user_id')
             ->orderBy('room.created_at')
             ->groupBy('imageRoom.roomid')
             ->get();
 
+
         $reccomdRoom = DB::table('room')
             ->select('*', 'bts_station.lat AS btsstation_lat', 'bts_station.lng AS btsstation_lng')
             ->join('bts_station', 'bts_station.id', '=', 'room.btsstation_id')
             ->join('imageRoom', 'imageRoom.roomid', '=', 'room.id')
-            ->join('zone', 'zone.id', '=', 'room.zone_id')
-            ->orderBy('room.price')
+//            ->join('zone', 'zone.id', '=', 'room.zone_id')
+            ->join('user', 'user.id', '=', 'room.user_id')
+            ->orderBy('room.created_at', 'desc')
             ->groupBy('imageRoom.roomid')
             ->get();
+//            ->toSql();
 
+//                dd($reccomdRoom);
 
         $mapdataNearby = [];
 
@@ -342,11 +310,20 @@ class RoomController extends Controller
 
     public function compareRoom($idroom1, $idroom2)
     {
-        $room1 = Adroom::where('id', '=', $idroom1)->get();
-        $room2 = Adroom::where('id', '=', $idroom2)->get();
+        $room1 = Adroom::select('*', 'room.id AS roomid')
+            ->join('user', 'user.id', '=', 'room.user_id')
+            ->where('room.id', '=', $idroom1)->get();
 
-        $idroom1 = $room1[0]->id;
-        $idroom2 = $room2[0]->id;
+        $room2 = Adroom::select('*', 'room.id AS roomid')
+            ->join('user', 'user.id', '=', 'room.user_id')
+            ->where('room.id', '=', $idroom2)->get();
+
+        $idroom1 = $room1[0]->roomid;
+        $idroom2 = $room2[0]->roomid;
+
+
+//        return [$idroom1, $idroom2];
+
 
         $findimg_room1 = DB::table('imageRoom')
             ->where('imageRoom.roomid', '=', $idroom1)
@@ -357,13 +334,14 @@ class RoomController extends Controller
             ->where('imageRoom.roomid', '=', $idroom2)
             ->get();
 
+
         $leas_room1 = DB::table('lease')->where('lease.id', '=', $room1[0]->lease_id)
             ->first();
 
 
         $leas_room2 = DB::table('lease')->where('lease.id', '=', $room2[0]->lease_id)
             ->first();
-//dd($room1[0]->lease_id);
+
 
 //        return [$leas_room1, $leas_room2];
 
@@ -393,8 +371,6 @@ class RoomController extends Controller
             ->get();
 
 
-//        return $leas_room1;
-
         $mapdata_room1 = $room1->transform(function ($item, $key) use ($findimg_room1, $leas_room1) {
 
             $item->imageRoom = $findimg_room1[0];
@@ -403,11 +379,13 @@ class RoomController extends Controller
         });
 
 
-        $mapdata_room2 = $room1->transform(function ($item, $key) use ($findimg_room2, $leas_room2) {
+        $mapdata_room2 = $room2->transform(function ($item, $key) use ($findimg_room2, $leas_room2) {
             $item->imageRoom = $findimg_room2[0];
             $item->lease = $leas_room2->laase_duration;
             return $item;
         });
+
+//                return [$mapdata_room1, $mapdata_room2];
 
 
         $aroom_1 = $room1->first();

@@ -1,16 +1,18 @@
 window.onload = getCurrentlocation();
 
-// initMap
 function getCurrentlocation() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
-    } else {
-        console.log("not open position")
-    }
+
+    navigator.geolocation.getCurrentPosition(function () {
+        navigator.geolocation.getCurrentPosition(showPosition)
+    }, function (err) {
+        defaultMap();
+    });
+
 
     function showPosition(position) {
         console.log("open position" + position.coords.latitude);
         console.log("open position" + position.coords.longitude);
+
 
         $("#inputLat").val(position.coords.latitude);
         $("#inputLng").val(position.coords.longitude);
@@ -27,17 +29,18 @@ function getCurrentlocation() {
         getMypostion(position)
     }
 
-    var map;
-    var marker;
+
+    var uluru;
 
     function initMap(position) {
 
-        var uluru = {lat: position.coords.latitude, lng: position.coords.longitude};
-        map = new google.maps.Map(
+        uluru = {lat: position.coords.latitude, lng: position.coords.longitude};
+
+        var map = new google.maps.Map(
             document.getElementById('map'), {zoom: 10, center: uluru});
 
 
-        marker = new google.maps.Marker({position: uluru, map: map});
+        var marker = new google.maps.Marker({position: uluru, map: map});
 
         map.addListener('click', function (e) {
             if (marker) {
@@ -62,6 +65,39 @@ function getCurrentlocation() {
 
 
 }
+
+
+function defaultMap() {
+    // The location of Uluru
+    var uluru = {lat: 13.7482759, lng: 100.528316};
+    // The map, centered at Uluru
+    var map = new google.maps.Map(
+        document.getElementById('map'), {zoom: 10, center: uluru});
+    // The marker, positioned at Uluru
+    var marker = new google.maps.Marker({position: uluru, map: map});
+
+    map.addListener('click', function (e) {
+        if (marker) {
+            marker.setMap(null);
+        }
+
+        var Position_clike = {
+            lat: e.latLng.lat(),
+            lng: e.latLng.lng()
+        };
+
+        console.log("lat_bymyself" + e.latLng.lat());
+        console.log("lat_bymyself" + e.latLng.lng());
+
+        $("#inputLat").val(e.latLng.lat());
+        $("#inputLng").val(e.latLng.lng());
+
+        marker = new google.maps.Marker({position: Position_clike, map: map})
+
+        // Pinmaker(Position_clike)
+    });
+}
+
 
 function editMap() {
 
@@ -183,7 +219,7 @@ function smartSearch() {
 
 function optionprice() {
     var option = $('#sel1').val();
-    window.location = "http://127.0.0.1:8000/roomnearskytrian/" + option;
+    window.location = "http://127.0.0.1:8000//roomnearskytrian/" + option;
 
     // alert(option)
 }
@@ -300,7 +336,7 @@ function clickeoptionSearch(numpage) {
                 "                           placeholder=\"ราคาแพงสุด\"\n" +
                 "                           name=\"price_high\" required>\n" +
                 "\n" +
-                "                    <input type=\"text\" name=\"stat_search_option shadow_box\" hidden value=\"search_nearLocation\">\n" +
+                "                    <input type=\"text\" name=\"stat_search_option\" hidden value=\"search_nearLocation\">\n" +
                 "                </div>\n" +
                 "            </div>\n" +
                 "\n" +
@@ -318,14 +354,14 @@ function clickeoptionSearch(numpage) {
                 "                </div>\n" +
 
                 "                <div class=\"col-md-6 col-6\">\n" +
-                "                    <select class=\"bg_corner border shadow_box custom-select\" name=\"person_live\" style=\"width: 100%;\" required>\n" +
+                "                    <select class=\"bg_corner border shadow_box custom-select\" name=\"optioncar\" style=\"width: 100%;\" required>\n" +
                 "                        <option selected>การเดินทาง</option>\n" +
-                "                        <option value=\"1\">มีรถส่วนตัว</option>\n" +
-                "                        <option value=\"2\">ไม่มีรถส่วนตัว</option>\n" +
+                "                        <option value=\"havecar\">มีรถส่วนตัว</option>\n" +
+                "                        <option value=\"nothavecar\">ไม่มีรถส่วนตัว</option>\n" +
                 "                    </select>\n" +
                 "                </div>\n" +
                 "                    <div class=\"col form-group mt-3\">\n" +
-                "                        <button type=\"submit\"\n" +
+                "                        <button type=\"submit\" id='btn_search' \n" +
                 "                                class=\" bg_corner font-weight-light text-white btn btn-default btn_green\"\n" +
                 "                                style=\"width: 100%\">ค้นหาห้องใกล้ที่ทำงาน/มหาวิทยาลัย\n" +
                 "                        </button>\n" +
@@ -367,7 +403,7 @@ function clickeoptionSearch(numpage) {
                 "            <div class=\"row mt-3\">\n" +
                 "                <div class=\"col-md-6 col-6\">\n" +
                 "                    <select class=\"custom-select bg_corner border shadow_box\" name=\"person_live\" style=\"width: 100%;\">\n" +
-                "                        <option selected>จำนวนผู้อยู่อาศัย</option>\n" +
+                "                        <option selected>ผู้อยู่อาศัย</option>\n" +
                 "                        <option value=\"1\">1</option>\n" +
                 "                        <option value=\"2\">2</option>\n" +
                 "                        <option value=\"3\">3</option>\n" +
@@ -417,21 +453,21 @@ function clickeoptionSearch(numpage) {
                 "                </div>\n" +
                 "            </div>\n" +
                 "<div class='row mt-3'>" +
-                    "<div class=\"col-md-6 col-6\">\n" +
-                "                    <select class=\"bg_corner border shadow_box custom-select\" name=\"optioncar\" style=\"width: 100%;\" required>\n" +
-                "                        <option selected>การเดินทาง</option>\n" +
-                "                        <option value=\"1\">มีรถส่วนตัว</option>\n" +
-                "                        <option value=\"2\">ไม่มีรถส่วนตัว</option>\n" +
-                "                    </select>\n" +
+                "<div class=\"col-md-6 col-6\">\n" +
+                // "                    <select class=\"bg_corner border shadow_box custom-select\" name=\"optioncar\" style=\"width: 100%;\" required>\n" +
+                // "                        <option selected>การเดินทาง</option>\n" +
+                // "                        <option value=\"havecar\">มีรถส่วนตัว</option>\n" +
+                // "                        <option value=\"nothavecar\">ไม่มีรถส่วนตัว</option>\n" +
+                // "                    </select>\n" +
                 "                </div>\n" +
-                "                    <div class=\"col-md-6 col-6 form-group\">\n" +
+                "                    <div class=\"col-md-12 col-12 form-group\">\n" +
                 "                        <button type=\"submit\"\n" +
                 "                                class=\"font-weight-light text-white btn btn-default btn_green bg_corner \"\n" +
-                "                                style=\"width: 100%\">ค้นหา\n" +
+                "                                style=\"width: 100%\">ค้นหาห้องเช่าใกล้สถานีรถไฟฟ้า\n" +
                 "                        </button>\n" +
                 "                    </div>\n" +
                 "                </div>\n" +
-                    "</div>" +
+                "</div>" +
                 "</div>\n" +
                 "\n" +
                 "    </div>";
@@ -493,6 +529,13 @@ function contact_room(idroom) {
 
 function clcikeskit(id) {
     $('#btn_dele' + id).click()
+}
+
+function direction_opGooglemap() {
+    var lat = parseFloat($('#room_lat').val());
+    var lng = parseFloat($('#room_lng').val());
+
+    window.location.href = "https://www.google.com/maps/@" + lat + ","+ lng+ ",14z"
 }
 
 

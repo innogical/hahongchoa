@@ -9,7 +9,7 @@
                     </div>
                 </div>
 
-                <a href="/room/{{$room->id}}">
+                <a href="/room/{{$room->roomid}}">
 
                     <div class="card-body border pb-1 hover_item_room">
                         <div class="row">
@@ -113,7 +113,7 @@
                                 @if($room->telephone == "")
                                 @else
                                     <div class="col-auto">
-                                        <a href="{{$room->telephone}}"
+                                        <a href="tel:{{$room->telephone}}"
                                            class="btn text-white  btn-orange-light">Telephone</a>
                                     </div>
                                 @endif

@@ -6,14 +6,6 @@ a:hover {
     text-decoration: none;
 }
 
-/*.box-search {*/
-/*height: 336px;*/
-/*background-size: cover;*/
-/*opacity: 0.76;*/
-/*background-position: center;*/
-/*background-image: url("../img_view/background-search.png");*/
-/*}*/
-
 .header-box-search {
     margin-top: 10px;
     padding: 5px;
@@ -39,9 +31,10 @@ a:hover {
 }
 
 .btn-compare {
-    width:auto;
+    width: auto;
     font-size: 12px;
     margin: 10px;
+    border-color: #F44D31 !important;
     color: white
 }
 
@@ -103,10 +96,10 @@ a:hover {
 /*}*/
 
 /*.bg_img_login {*/
-    /*background-image: url("../img_view/bg-login.png");*/
-    /*background-size: cover;*/
-    /*height: 600px;*/
-    /*background-repeat: no-repeat;*/
+/*background-image: url("../img_view/bg-login.png");*/
+/*background-size: cover;*/
+/*height: 600px;*/
+/*background-repeat: no-repeat;*/
 /*}*/
 
 .bg_img_register {
@@ -151,7 +144,14 @@ a:hover {
 /*addNewroom*/
 
 .facilities_active {
-    background-color: #5FB25F !important;
+    -webkit-box-shadow: -1px 14px 6px -3px rgba(244, 77, 49, 0.52);
+    -moz-box-shadow: -1px 14px 6px -3px rgba(244, 77, 49, 0.52);
+    box-shadow: -1px 6px 26px -3px rgba(244, 77, 49, 0.52);
+
+    -webkit-transition: box-shadow 0.3s linear;
+    -moz-transition: box-shadow 0.3s linear;
+    transition: box-shadow 0.3s linear;
+
 }
 
 .no_repeat {
@@ -258,7 +258,7 @@ a:hover {
 }
 
 .shadow_box {
-    box-shadow:0 3px 2px 0 rgba(192, 190, 190, 0.54), 0 6px 20px 0 rgba(176, 176, 176, 0.19);
+    box-shadow: 0 3px 2px 0 rgba(192, 190, 190, 0.54), 0 6px 20px 0 rgba(176, 176, 176, 0.19);
 }
 
 .bg_facility {
@@ -310,9 +310,11 @@ a:hover {
 .show_mobile {
     display: none;
 }
-.screen_desktop{
+
+.screen_desktop {
     display: block;
 }
+
 .hover_item_room_select_compare {
     -webkit-box-shadow: -1px 13px 26px -3px rgba(244, 77, 49, 0.52);
     -moz-box-shadow: -1px 13px 26px -3px rgba(244, 77, 49, 0.52);
@@ -330,7 +332,8 @@ a:hover {
 .dz-progress {
     display: none;
 }
-.dz-image img{
+
+.dz-image img {
     width: 100%;
     height: auto;
 }
@@ -341,7 +344,8 @@ a:hover {
     .show_mobile {
         display: block;
     }
-    .screen_desktop{
+
+    .screen_desktop {
         display: none;
     }
 

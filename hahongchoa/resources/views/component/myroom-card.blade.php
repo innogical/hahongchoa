@@ -9,7 +9,7 @@
 
             <div class="card-body border pb-1 pt-0 ">
                 <div class="row">
-                    <p class=" col p-0 m-0 color-dark-blue-fond threedotother_text" style="font-size:18px;">{{$myroom->name}}</p>
+                    <p class=" col p-0 m-0 color-dark-blue-fond threedotother_text" style="font-size:18px;">{{$myroom->name_typeBuilder}}{{$myroom->name}}</p>
                 </div>
                 <div class="row">
                     <p class="font-weight-light col p-0 m-0 text-black-50"
@@ -20,7 +20,7 @@
                         <img src="{{asset('/icon/trian.svg')}}" alt="" width="30px" height="30px">
                     </div>
                     <div class="text-justify col color-dark-blue-fond">
-                        ใกล้สถานีรถไฟฟ้า{{$myroom->name_station}}
+                        สถานีรถไฟฟ้า{{$myroom->name_station}}
                     </div>
                 </div>
 

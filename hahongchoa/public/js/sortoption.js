@@ -14,8 +14,6 @@ $(document).ready(function () {
 var arrRoomid = [];
 
 function compareRoom(idroom) {
-
-    //
     // if (arrRoomid.length < 2 || arrRoomid.length == 0) {
 
     if (arrRoomid.length < 2 || arrRoomid.includes(idroom)) {

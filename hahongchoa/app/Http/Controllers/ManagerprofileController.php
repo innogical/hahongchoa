@@ -24,40 +24,38 @@ class ManagerprofileController extends Controller
         $myrooms = DB::table('room')
             ->select('*', 'room.id AS roomid')
             ->join('bts_station', 'bts_station.id', '=', 'room.btsstation_id')
+            ->join('type_builder', 'type_builder.id', '=', 'room.type_builder')
             ->where('room.user_id', Auth::user()->id)
             ->orderBy('created_at', 'desc')
             ->get();
 
 
         $arr = [];
+
         foreach ($myrooms as $detailroom) {
-
-
             $listimg = $this->roomiMg($detailroom->roomid);
-            if ($listimg !=null){
+            if ($listimg != null) {
                 array_push($arr, $listimg);
             }
         }
 
-//        $users = Imageroom::whereIn('roomid', $arr)
-//            ->groupby('roomid')
-//            ->get();
+//        return $arr;
+//
+//        $itemArr = [];
+//        foreach ($arr as $index => $subItem) {
+//            array_push($itemArr, $subItem->pathimg);
+//        }
 
 
+        $arrom = $myrooms->transform(function ($item, $key) use ($arr) {
 
-//        dd($arr);
-        $itemArr = [];
-        foreach ($arr as $index => $subItem) {
-            array_push($itemArr, $subItem->pathimg);
-        }
-//        dd($itemArr);
-
-        $arrom = $myrooms->transform(function ($item, $key) use ($itemArr) {
-
-            $item->pathimg = $itemArr[$key];
+//            echo  $arr[$key]->pathimg;
+            $item->pathimg = $arr[$key]->pathimg;
 
             return $item;
         });
+
+//        return "Sdad";
 
 
         $myrooms = $arrom;
@@ -118,6 +116,7 @@ class ManagerprofileController extends Controller
         $image_ofroom = Imageroom::where('roomid', '=', $myRoom->id)->get();
         $facility_ofRoom = DB::table('room_facility')
             ->where('room_id', '=', $myRoom->id)->get();
+        $bts = DB::table('bts_station')->get();
 
 //        dd($facility_ofRoom);
 
@@ -135,7 +134,7 @@ class ManagerprofileController extends Controller
 //        return $myRoom;
 
 
-        return view('edit_room', compact('icon', 'namefacility', 'myRoom', 'lifestyle', 'promise', 'image_ofroom_toResult', 'facility_ofRoom'));
+        return view('edit_room', compact('icon', 'namefacility', 'bts', 'myRoom', 'lifestyle', 'promise', 'image_ofroom_toResult', 'facility_ofRoom'));
         //
     }
 

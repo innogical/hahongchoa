@@ -51,10 +51,11 @@
                 <div class="col-md-6 col-6 mt-2">
                     <label>ใกล้สถานีรถไฟฟ้า</label>
                     <select id="inputState" class="form-control bg_corner custom-select" name="zonearea">
-                        <option value="{{$myRoom->btsstation_id}}" selected></option>
-                        {{--@foreach($bts as $index=>$namezone)--}}
-                        {{--<option value="{{$index+1}}">{{$namezone}}</option>--}}
-                        {{--@endforeach--}}
+                        {{--<option value="{{$myRoom->btsstation_id}}" selected></option>--}}
+                        @foreach($bts as $index=>$namezone)
+                            <option value="{{$namezone->id}}"
+                                    @if($myRoom->btsstation_id == $namezone->id) selected @endif>{{$namezone->name_station}}</option>
+                        @endforeach
                     </select>
 
                     {{--<input type="text" class="form-control" name="sizeroom" placeholder="ขนาดห้อง">--}}
@@ -63,9 +64,8 @@
                 <div class="col-md-4 col-6 mt-2">
                     <label>เหมาะสำหรับ</label>
                     <select id="inputState" class="form-control bg_corner custom-select" name="lifestyle">
-                        <option value="{{$myRoom->stylelife_id}}" selected></option>
                         @foreach($lifestyle as $index=> $lifestyle_name)
-                            <option value="{{$index+1}}">{{$lifestyle_name}}</option>
+                            <option value="{{$index+1}}" @if($myRoom->stylelife_id == $index+1) selected @endif >{{$lifestyle_name}}</option>
                         @endforeach
                     </select>
                 </div>

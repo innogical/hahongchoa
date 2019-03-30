@@ -3,17 +3,16 @@
 
 
     <div class="container">
-        <div class="col-md-12 col-12">
+        <div class="col-md-12 col-12 mt-3">
 
             <div class="row">
-                <div class="col-md-6 col-12 img-fluid border mt-2 p-0" style="height: auto">
-                    <img class="d-block w-100"
+                <div class="col-md-6 col-12 img-fluid mt-2 p-0" style="height: auto">
+                    <img class=" w-100"
                          src="{{asset('images_rooms/'. $TotelRoom->pathimg)}}"/>
-
                 </div>
 
                 <div class="offset-1 col-md-5 col-12 mt-3">
-                    <h4 class="color-dark-blue-fond font-weight-normal">{{$TotelRoom->name}}</h4>
+                    <h5 class="font-weight-normal">{{$TotelRoom->name_typeBuilder}} {{$TotelRoom->name}}</h5>
 
                     <div class="box-twin-data mt-1">
                         {{--<div class="img-fluid col-1">--}}
@@ -32,7 +31,7 @@
                             <img src="{{asset('/icon/trian.svg')}}" alt="" width="30px" height="30px">
                         </div>
                         <div class="col p-0 ml-1">
-                            <p class="color-dark-orange-fond ml-2"> ใกล้สถานีรถไฟฟ้าBTS{{$TotelRoom->name_station}}</p>
+                            <p class="text-black-50 ml-2">สถานีรถไฟฟ้าBTS{{$TotelRoom->name_station}}</p>
                         </div>
                     </div>
                     <div class="box-twin-data row mt-1">
@@ -55,11 +54,9 @@
                         </div>
                     </div>
 
-                    <div class="detailroom row">
-                        <div class="col">
-                            <p class="font-weight-light text-body "><span class="color-dark-blue-fond">รายละเอียด</span>
-                                {{$TotelRoom->detail}} </p>
-                        </div>
+                    <div class="row col-md col">
+                        <p class="font-weight-light">รายละเอียด
+                            {{$TotelRoom->detail}} </p>
 
                     </div>
                     {{--<hr class="col-12 ml-2">--}}
@@ -107,7 +104,8 @@
                                 @if($TotelRoom->telephone == null)
 
                                 @else
-                                    <a href="{{$TotelRoom->telephone}}" target="_blank" class="btn col-4" role="button"
+                                    <a href="tel:{{$TotelRoom->telephone}}" target="_blank" class="btn col-4"
+                                       role="button"
                                        aria-disabled="true"
                                     >
                                         <img src="{{asset('icon/phon_icon.png')}}" alt="" class="w-100 h-auto">
@@ -121,33 +119,31 @@
                 </div>
             </div>
         </div>
+        {{--{{$img_air}}--}}
+        @if($img_air == null || $img_air =="" || sizeof($img_air)== 0 )
 
+        @else
 
-        <div class="col-12 mt-2 p-0">
-            <h4 class="text-center">ภาพบรรยากาศ</h4>
+            <div class="col-12 mt-2 p-0">
+                <h4 class="text-center">ภาพบรรยากาศ</h4>
 
-            <div class="row">
-                <div id="carouselExampleControls" class="carousel slide col-12" data-ride="carousel">
-                    <div class="carousel-inner">
-                        {{--<div class="carousel-item active">--}}
-                        {{--<div class="row">--}}
-                        {{--@foreach($chunk_image_slide as $a_img_air)--}}
-                        {{--<div class="col-12">--}}
-
-                        {{--<img class="d-block col-md-4 col-6"--}}
-                        {{--src="{{asset('/images_rooms/'.$a_img_air->pathimg)}}"--}}
-                        {{--style="width: 600px; height: auto">--}}
-                        {{--</div>--}}
-
-
-                        {{--@endforeach--}}
-                        {{--</div>--}}
-
-                        {{--</div>--}}
-
-                        @foreach($img_air->chunk(3) as $key => $silde_is)
-                            @if ($key == 0)
-                                <div class="carousel-item active row">
+                <div class="row">
+                    <div id="carouselExampleControls" class="carousel slide col-12" data-ride="carousel">
+                        <div class="carousel-inner">
+                            @foreach($img_air->chunk(3) as $key => $silde_is)
+                                @if ($key == 0)
+                                    <div class="carousel-item active row">
+                                        <div class="row">
+                                            @foreach($silde_is as $item)
+                                                <img class="d-block w-100 col-4"
+                                                     src="{{asset('images_rooms/'.$item->pathimg)}}" alt="First slide"
+                                                     style="width: 393px; height: 380px">
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                    @continue
+                                @endif
+                                <div class="carousel-item row">
                                     <div class="row">
                                         @foreach($silde_is as $item)
                                             <img class="d-block w-100 col-4"
@@ -155,74 +151,49 @@
                                         @endforeach
                                     </div>
                                 </div>
-                                @continue
-                            @endif
-                            <div class="carousel-item row">
-                                <div class="row">
-                                    @foreach($silde_is as $item)
-                                        <img class="d-block w-100 col-4" src="{{asset('images_rooms/'.$item->pathimg)}}" alt="First slide">
-                                    @endforeach
-                                </div>
-                            </div>
-                        @endforeach
-                        {{--<div class="carousel-item row">--}}
-                        {{--<div class="row">--}}
-                        {{--<img class="d-block w-100 col-4" src="https://dummyimage.com/600x400/000/fff"--}}
-                        {{--alt="First slide">--}}
-                        {{--<img class="d-block w-100 col-4" src="https://dummyimage.com/600x400/000/fff"--}}
-                        {{--alt="First slide">--}}
-                        {{--<img class="d-block w-100 col-4" src="https://dummyimage.com/600x400/000/fff"--}}
-                        {{--alt="First slide">--}}
-                        {{--</div>--}}
-
-                        {{--</div>--}}
+                            @endforeach
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselExampleControls" role="button"
+                           data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleControls" role="button"
+                           data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
                     </div>
-                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button"
-                       data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="carousel-control-next" href="#carouselExampleControls" role="button"
-                       data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
                 </div>
+                {{--<div class="col-md-12 col-12">--}}
+                {{--<hr class="col-12 m-2">--}}
+
+                {{--</div>--}}
             </div>
-            {{--<div class="col-md-12 col-12">--}}
-            {{--<hr class="col-12 m-2">--}}
+        @endif
 
-            {{--</div>--}}
-        </div>
-        <div class="col-md-12 py-5 mt-3" style="background-color: #F1F1EF">
-            <h4 class="text-center">สิ่งอำนวยความสะดวก</h4>
+        @if($mapRoom_detail_facility == null || $mapRoom_detail_facility =="" || sizeof($mapRoom_detail_facility)==0)
+        @else
+            <div class="col-md-12 py-3 mt-3" style="background-color: #F1F1EF">
+                <h4 class="text-center">สิ่งอำนวยความสะดวก</h4>
 
-            <div class="row h-auto ">
+                <div class="row h-auto mt-3">
 
-                @foreach($mapRoom_detail_facility as $index => $a_icon  )
-                    <div class="col-md-2 col-2 text-center" id="btn_facility">
-                        <label class=" border bg_corner "
-                               style="border-radius: 100%; width: 46px;height: 46px; padding: 8px "
-                               id="border_faci{{$index}}"
-                        >
+                    @foreach($mapRoom_detail_facility as $index => $a_icon  )
+                        <div class="col-md col text-center">
                             <img src="{{asset('/icon/'.$a_icon->pathImage.'.svg' )}}"
-                                 style="height: 36px;top:5px; left: 60px" class="position-absolute">
+                                 class="w-50">
 
-                        </label>
 
-                        <p class="text-black-50  font-weight-light "
-                           style="font-size: 12px">{{$a_icon->name}}</p>
-                    </div>
-                @endforeach
-                <div class="offset-md-4 offset-4"></div>
-
+                            <p class="text-black-50  font-weight-light "
+                               style="font-size: 12px">{{$a_icon->name}}</p>
+                        </div>
+                    @endforeach
+                    <div class="offset-md-4 offset-4"></div>
+                </div>
+                {{--</div>--}}
             </div>
-
-
-            {{--</div>--}}
-
-
-        </div>
+        @endif
         {{--</div>--}}
 
 
@@ -242,7 +213,7 @@
 
                 <div class="col-md-6 col-12 mt-4">
                     <h4>การเดินทาง</h4>
-                    <div class="col">
+                    <div class="col mt-3">
                         <h5 class="color-dark-blue-fond">ที่อยู่:</h5>
                         <p class="text-body font-weight-light">
                             {{$TotelRoom->address}}
@@ -257,7 +228,10 @@
                             <p class="m-0">สถานี{{$TotelRoom->name_station}}<span></span>
                                 ระยะทาง{{number_format($TotelRoom->distance,1,'.','')}}กิโลเมตร <span></span></p>
                             <p class="color-green">ใช้เวลา {{ substr($TotelRoom->time,0,2)}}นาที</p>
+                            <a class="btn bg_corner btn_green text-white" onclick="direction_opGooglemap()">นำทาง</a>
+
                         </div>
+
                     </div>
                     {{--<div class="col">--}}
                     {{--<div class="icon_symbol_tranfition">--}}
