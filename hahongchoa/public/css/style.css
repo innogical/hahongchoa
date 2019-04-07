@@ -34,7 +34,7 @@ a:hover {
     width: auto;
     font-size: 12px;
     margin: 10px;
-    border-color: #F44D31 !important;
+    /*border-color: #F44D31 !important;*/
     color: white
 }
 
@@ -296,7 +296,8 @@ a:hover {
 
 .custom_box_search {
     position: absolute !important;
-    margin-top: 130px;
+    margin-top: 180px;
+    margin-left: 100px;
 }
 
 .img_fordevice {
@@ -375,6 +376,7 @@ a:hover {
     .custom_box_search {
         position: relative !important;
         margin-top: 20px;
+        margin-left: 0px;
 
     }
 

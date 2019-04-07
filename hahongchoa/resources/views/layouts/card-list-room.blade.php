@@ -19,7 +19,7 @@
                     </div>
 
                     <button type="submit"
-                            class="btn text-center  text-white font-weight-light btn-compare position-absolute color-higiht-orange-btn btn-orange-light"
+                            class="btn text-center  font-weight-light btn-compare position-absolute color-dark-blue-fond"
 
                             id="btn_compare{{$room->roomid}}"
                             onclick="compareRoom({{$room->roomid}})">เปรียบเทียบ
@@ -99,7 +99,7 @@
                         {{-->--}}
                         {{--ติดต่อเจ้าของ--}}
                         {{--</button>--}}
-                        <button type="button" class="btn col-md-12 btn_green text-white font-weight-light m-2 bg_corner"
+                        <button type="button" class="btn col-md-12 btn_green text-white font-weight-light my-2 bg_corner"
                                 data-toggle="modal"
                                 data-target="#exampleModal{{$room->roomid}}">
                             ติดต่อเจ้าของ
@@ -197,7 +197,7 @@
 
 
                     <button type="submit"
-                            class="btn text-center  text-white font-weight-light btn-compare position-absolute color-higiht-orange-btn btn-orange-light"
+                            class="btn text-center  font-weight-light btn-compare position-absolute color-dark-blue-fond"
                             id="btn_compare{{$room->roomid}}"
                             onclick="compareRoom({{$room->roomid}})">เปรียบเทียบ
                     </button>
@@ -275,7 +275,7 @@
                         {{-->--}}
                         {{--ติดต่อเจ้าของ--}}
                         {{--</button>--}}
-                        <button type="button" class="btn col-md-12 btn_green text-white font-weight-light m-2 bg_corner"
+                        <button type="button" class="btn col-md-12 btn_green text-white font-weight-light my-2 bg_corner"
                                 data-toggle="modal"
                                 data-target="#exampleModal{{$room->roomid}}">
                             ติดต่อเจ้าของ

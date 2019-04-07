@@ -6,6 +6,8 @@ use App\Adroom;
 use App\Facilitys;
 use App\Imageroom;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 use Intervention\Image\ImageManagerStatic as Image;
@@ -16,7 +18,7 @@ class AdroomdController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -46,7 +48,7 @@ class AdroomdController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -56,8 +58,8 @@ class AdroomdController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return Response
      */
     public
     function store(Request $request)
@@ -82,7 +84,7 @@ class AdroomdController extends Controller
         $promise = $request->promise;
         $lat = $request->lat;
         $lng = $request->lng;
-        $user_token = \Illuminate\Support\Facades\Auth::user()->id;
+        $user_token = Auth::user()->id;
         $facilitys = $request->facility;
 
 
@@ -176,8 +178,8 @@ class AdroomdController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Adroom $adroom
-     * @return \Illuminate\Http\Response
+     * @param Adroom $adroom
+     * @return Response
      */
     public
     function show(Adroom $adroom)
@@ -190,8 +192,8 @@ class AdroomdController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Adroom $adroom
-     * @return \Illuminate\Http\Response
+     * @param Adroom $adroom
+     * @return Response
      */
     public
     function edit($id)
@@ -233,9 +235,9 @@ class AdroomdController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \App\Adroom $adroom
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param Adroom $adroom
+     * @return Response
      */
     public
     function update(Request $request)
@@ -275,7 +277,7 @@ class AdroomdController extends Controller
         $Editroom->hilight = $hilight;
         $Editroom->price = $price;
 
-//        $Editroom->save();
+        $Editroom->save();
 
 
         Imageroom::where('roomid', '=', $idroom)->delete();
@@ -295,7 +297,7 @@ class AdroomdController extends Controller
                 $facility_model = new Facilitys();
                 $facility_model->room_id = $idroom;
                 $facility_model->facility_id = $a_facitltiy;
-//                $facility_model->save();
+                $facility_model->save();
 
             }
         }
@@ -361,8 +363,8 @@ class AdroomdController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Adroom $adroom
-     * @return \Illuminate\Http\Response
+     * @param Adroom $adroom
+     * @return Response
      */
     public
     function destroy(Adroom $adroom)

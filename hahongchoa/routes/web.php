@@ -34,3 +34,11 @@ Route::get('/roomnearskytrian/compare/{idroom1}/{idroom2}','RoomController@compa
 //Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('/managerroom', 'ManagerprofileController')->middleware('auth');
 Route::resource('/adroom','AdroomdController')->middleware('auth');
+
+
+// test move animate//
+
+Route::get('animate_test', function () {
+    return view('component.animate_trian');
+});
+

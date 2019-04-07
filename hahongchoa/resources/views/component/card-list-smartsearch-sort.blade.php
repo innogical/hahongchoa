@@ -68,7 +68,7 @@
                 </a>
 
                         <div class="row">
-                            <button type="button" class="btn col-md-12 btn_green text-white font-weight-light m-2 bg_corner"
+                            <button type="button" class="btn col-md-12 btn_green text-white font-weight-light my-2 bg_corner"
                                     data-toggle="modal"
                                     data-target="#exampleModal{{$room->id}}">
                                 ติดต่อเจ้าของ

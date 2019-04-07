@@ -2,22 +2,25 @@
 @section('content')
 
     {{--<div class="show_mobile">--}}
-        {{--@include('layouts.search')--}}
-        {{--@yield('search')--}}
+    {{--@include('layouts.search')--}}
+    {{--@yield('search')--}}
     {{--</div>--}}
 
 
+    {{--    <main class="container">--}}
+    <div class="col-12">
+        <input type="text" name="mylat" id="mylat" hidden>
+        <input type="text" name="mylng" id="mylng" hidden>
+
+        <div class="row ">
+            @include('layouts.search')
+            @yield('search')
+        </div>
+    </div>
+    {{--@yield('orderfilter')--}}
     <main class="container">
         <div class="col-12">
-            <input type="text" name="mylat" id="mylat" hidden>
-            <input type="text" name="mylng" id="mylng" hidden>
 
-            <div class="row ">
-                @include('layouts.search')
-                @yield('search')
-            </div>
-
-            {{--@yield('orderfilter')--}}
             @include('layouts.card-list-room')
             <div class="col-md-12 col-12 p-0 ">
 
