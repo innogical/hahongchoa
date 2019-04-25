@@ -4,7 +4,7 @@
         <div class="col-md-4 col-12 card  mt-4 border-0" style="height:auto;">
             <div class="hover_item_room" id="select_com{{$room->roomid}}">
 
-                <div class="card-img bg-dark" style="height:auto; width: 100%">
+                <div class="card-img bg-dark" style="height:auto; width: 100%">composer require socialiteproviders
                     <div class="row">
                         <label class="mb-0">
                             <input type="checkbox" name="chsx_compare_room" hidden>
@@ -18,12 +18,13 @@
 
                     </div>
 
-                    <button type="submit"
-                            class="btn text-center  font-weight-light btn-compare position-absolute color-dark-blue-fond"
+                        <button type="submit"
+                                class="btn text-center shadow font-weight-light btn-compare position-absolute color-dark-blue-fond"
 
-                            id="btn_compare{{$room->roomid}}"
-                            onclick="compareRoom({{$room->roomid}})">เปรียบเทียบ
-                    </button>
+                                id="btn_compare{{$room->roomid}}"
+                                onclick="compareRoom({{$room->roomid}})"
+                        style="right: 20px">เปรียบเทียบ
+                        </button>
 
 
                     <img src="{{asset('/images_rooms/'.$room->pathimg)}}" alt="{{$room->pathimg}}"
@@ -37,7 +38,7 @@
                     <a href="/room/{{$room->roomid}}">
 
                         <div class="row">
-                            <p class=" col p-0 m-0 text-black threedotother_text ">{{$room->name}}</p>
+                            <p class=" col p-0 m-0 threedotother_text color-dark-blue-fond">{{$room->name}}</p>
                         </div>
                         <div class="row">
                             <p style="font-size: 12px; " class="text-dark m-0 threedotother_text">{{$room->address}}</p>
@@ -52,19 +53,21 @@
                         </div>
 
                         {{--<div class="box-twin-data row mt-1">--}}
-                            {{--<div class="img-fluid col-1 p-0 mr-1">--}}
-                                {{--<img src="{{asset('/icon/hilight.svg')}}" alt="" width="30px" height="30px">--}}
-                            {{--</div>--}}
-                            {{--<div class="text-justify col color-dark-orange-fond font-weight-light">--}}
-                                {{--{{$room->hilight}}--}}
-                            {{--</div>--}}
+                        {{--<div class="img-fluid col-1 p-0 mr-1">--}}
+                        {{--<img src="{{asset('/icon/hilight.svg')}}" alt="" width="30px" height="30px">--}}
+                        {{--</div>--}}
+                        {{--<div class="text-justify col color-dark-orange-fond font-weight-light">--}}
+                        {{--{{$room->hilight}}--}}
+                        {{--</div>--}}
                         {{--</div>--}}
 
                         <div class="box-twin-data row mt-1">
                             <div class="img-fluid col-1 p-0 mr-1">
                                 <img src="{{asset('/icon/person.svg')}}" alt="" width="30px" height="30px">
                             </div>
-                            <div class="text-justify col color-dark-blue-fond font-weight-light text-black-50">{{$room->personLive}}คน</div>
+                            <div class="text-justify col color-dark-blue-fond font-weight-light text-black-50">{{$room->personLive}}
+                                คน
+                            </div>
                         </div>
 
                         <div class=" row mt-1">
@@ -99,7 +102,8 @@
                         {{-->--}}
                         {{--ติดต่อเจ้าของ--}}
                         {{--</button>--}}
-                        <button type="button" class="btn col-md-12 btn_green text-white font-weight-light my-2 bg_corner"
+                        <button type="button"
+                                class="btn col-md-12 btn_green text-white font-weight-light my-2 bg_corner"
                                 data-toggle="modal"
                                 data-target="#exampleModal{{$room->roomid}}">
                             ติดต่อเจ้าของ
@@ -199,7 +203,9 @@
                     <button type="submit"
                             class="btn text-center  font-weight-light btn-compare position-absolute color-dark-blue-fond"
                             id="btn_compare{{$room->roomid}}"
-                            onclick="compareRoom({{$room->roomid}})">เปรียบเทียบ
+                            onclick="compareRoom({{$room->roomid}})"
+                            style="right: 20px"
+                    >เปรียบเทียบ
                     </button>
 
                     <img src="{{asset('/images_rooms/'.$room->pathimg)}}" alt="{{$room->pathimg}}"
@@ -228,19 +234,21 @@
                         </div>
 
                         {{--<div class="box-twin-data row mt-1">--}}
-                            {{--<div class="img-fluid col-1 p-0 mr-1">--}}
-                                {{--<img src="{{asset('/icon/hilight.svg')}}" alt="" width="30px" height="30px">--}}
-                            {{--</div>--}}
-                            {{--<div class="text-justify col color-dark-orange-fond font-weight-light">--}}
-                                {{--{{$room->hilight}}--}}
-                            {{--</div>--}}
+                        {{--<div class="img-fluid col-1 p-0 mr-1">--}}
+                        {{--<img src="{{asset('/icon/hilight.svg')}}" alt="" width="30px" height="30px">--}}
+                        {{--</div>--}}
+                        {{--<div class="text-justify col color-dark-orange-fond font-weight-light">--}}
+                        {{--{{$room->hilight}}--}}
+                        {{--</div>--}}
                         {{--</div>--}}
 
                         <div class="box-twin-data row mt-1">
                             <div class="img-fluid col-1 p-0 mr-1">
                                 <img src="{{asset('/icon/person.svg')}}" alt="" width="30px" height="30px">
                             </div>
-                            <div class="text-justify col color-dark-blue-fond font-weight-light text-black-50">{{$room->personLive}}คน</div>
+                            <div class="text-justify col color-dark-blue-fond font-weight-light text-black-50">{{$room->personLive}}
+                                คน
+                            </div>
                         </div>
 
                         <div class=" row mt-1">
@@ -275,7 +283,8 @@
                         {{-->--}}
                         {{--ติดต่อเจ้าของ--}}
                         {{--</button>--}}
-                        <button type="button" class="btn col-md-12 btn_green text-white font-weight-light my-2 bg_corner"
+                        <button type="button"
+                                class="btn col-md-12 btn_green text-white font-weight-light my-2 bg_corner"
                                 data-toggle="modal"
                                 data-target="#exampleModal{{$room->roomid}}">
                             ติดต่อเจ้าของ

@@ -2,7 +2,7 @@
     {{--    <div class="container">--}}
     {{--        <div class="" style="background-color:#adccd4">--}}
 
-    <div class="embed-responsive embed-responsive-16by9 vdo_desktop">
+    <div class="embed-responsive embed-responsive-16by9 vdo_desktop" style="z-index: 0">
         <video width="100%" loop autoplay>
             <source src="{{asset('vdo/screen_backdrop.mp4')}}" type="video/mp4">
         </video>

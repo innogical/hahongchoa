@@ -1,6 +1,6 @@
 @section('nav')
 
-    <div id="app">
+    <div id="app" class="position-fixed col-12 p-0" style="z-index: 1">
         <nav class="navbar navbar-expand-md navbar-light bg-light shadow_box border-top "
              style="padding: 0;height: 70px">
             <div class="container p-md-0">
@@ -254,7 +254,7 @@
 
                         @else
                             <li>
-                                <a class="nav-link border screen_desktop bg_corner color-border-orang font-weight-light px-2 mr-2 color-dark-orange-fond"
+                                <a class="nav-link border screen_desktop bg_corner color-border-orange font-weight-light px-2 mr-2 color-dark-orange-fond"
                                    href="{{url('/login')}}">ลงประกาศห้อง</a>
                             </li>
                             {{--version Moblie--}}

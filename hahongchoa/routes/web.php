@@ -21,6 +21,8 @@ Route::resource('/loginend', 'LoginController');
 Route::resource('/roomnearskytrian','SearchController');
 
 
+
+
 //----------------API---------------
 
 Route::get('/room/query/{txtquery}', 'RoomController@querySeach');
@@ -41,4 +43,11 @@ Route::resource('/adroom','AdroomdController')->middleware('auth');
 Route::get('animate_test', function () {
     return view('component.animate_trian');
 });
+
+// login social
+Route::get('login/{provider}', 'LoginController@loginsocial');
+Route::get('login/{provider}/callback','LoginController@Callback');
+
+// login social
+
 
