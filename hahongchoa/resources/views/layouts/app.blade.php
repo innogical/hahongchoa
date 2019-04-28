@@ -17,6 +17,8 @@
     <script src="{{asset('js/popper.min.js') }} " defer></script>
     <script src="{{asset('js/multipleitem.js') }} " defer></script>
     <script src="{{asset('js/dropzone.js') }} "></script>
+    <script src="{{asset('js/dropzone.js') }} "></script>
+    <script src="{{asset('js/all.js') }} "></script>
     <script src="{{asset('js/config_dropzone.js') }} "></script>
 
 
@@ -25,9 +27,13 @@
 <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Mitr:300,400,500" rel="stylesheet">
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/bootstrap-social.css') }}" rel="stylesheet">
+{{--    <link href="{{ asset('css/fontawesome.min.css') }}" rel="stylesheet">--}}
+{{--    <link href="{{ asset('css/fontawesome.css') }}" rel="stylesheet">--}}
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/all.css') }}" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="slick/slick.css"/>
+
     <link rel="stylesheet" type="text/css" href="slick/slick-theme.css"/>
     <link href="{{asset('/css/dropzone.css')}}" rel="stylesheet" type="text/css">
 

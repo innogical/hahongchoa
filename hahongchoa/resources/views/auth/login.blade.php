@@ -45,10 +45,12 @@
 
                 </form>
                 <div class="row">
-                    <div class="col-md-12">
-                        <div class="col-md-6">
-                            <a href="{{ url('/login/facebook') }}">Login with facebook</a>
-                        </div>
+                    <div class="col-md-8 offset-md-2 mt-2">
+                        <a href="{{ url('/login/facebook') }}"
+                           class="btn  btn-block bg_corner  btn-social btn-facebook text-center pl-0">
+{{--                            <i class="fab fa-facebook"></i>--}}
+                            เข้าสู่ระบบด้วย Facebook
+                        </a>
 
                     </div>
                 </div>

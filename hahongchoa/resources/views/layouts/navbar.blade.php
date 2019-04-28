@@ -1,7 +1,7 @@
 @section('nav')
 
     <div id="app" class="position-fixed col-12 p-0" style="z-index: 1">
-        <nav class="navbar navbar-expand-md navbar-light bg-light shadow_box border-top "
+        <nav class="navbar navbar-expand-md navbar-light bg-light shadow_box  "
              style="padding: 0;height: 70px">
             <div class="container p-md-0">
                 <a class="navbar-brand  p-0" href="{{ url('/') }}">
