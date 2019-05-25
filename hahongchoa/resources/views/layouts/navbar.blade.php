@@ -1,6 +1,15 @@
 @section('nav')
 
-    <div id="app" class="position-fixed col-12 p-0" style="z-index: 1">
+    <div id="app" class="
+                        @if(Request::url() == "http://127.0.0.1")
+
+            position-fixed col-12 p-0
+
+        @else
+    @endif
+            "
+
+         style="z-index: 1">
         <nav class="navbar navbar-expand-md navbar-light bg-light shadow_box  "
              style="padding: 0;height: 70px">
             <div class="container p-md-0">
@@ -73,7 +82,8 @@
                             {{--<li id="btn_op_form">--}}
                             {{--<a class="nav-link border bg_corner color-border-orange px-2 mr-2 text-black-50">ค้นหาห้องเช่า</a>--}}
                             {{--</li>--}}
-                            <button type="button" class="btn bg_corner color-border-orange text-black-50 show_mobile color-dark-orange-fond"
+                            <button type="button"
+                                    class="btn bg_corner color-border-orange text-black-50 show_mobile color-dark-orange-fond"
                                     data-toggle="modal" style="background-color: transparent"
                                     data-target="#exampleModal">
                                 ค้นหาห้องเช่า

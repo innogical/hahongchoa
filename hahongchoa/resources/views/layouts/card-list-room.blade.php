@@ -4,7 +4,7 @@
         <div class="col-md-4 col-12 card  mt-4 border-0" style="height:auto;">
             <div class="hover_item_room" id="select_com{{$room->roomid}}">
 
-                <div class="card-img bg-dark" style="height:auto; width: 100%">composer require socialiteproviders
+                <div class="card-img bg-dark" style="height:auto; width: 100%">
                     <div class="row">
                         <label class="mb-0">
                             <input type="checkbox" name="chsx_compare_room" hidden>

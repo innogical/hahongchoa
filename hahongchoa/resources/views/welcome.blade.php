@@ -1,13 +1,7 @@
 @extends('layouts.app')
 @section('content')
 
-    {{--<div class="show_mobile">--}}
-    {{--@include('layouts.search')--}}
-    {{--@yield('search')--}}
-    {{--</div>--}}
 
-
-    {{--    <main class="container">--}}
     <div class="col-12">
         <input type="text" name="mylat" id="mylat" hidden>
         <input type="text" name="mylng" id="mylng" hidden>

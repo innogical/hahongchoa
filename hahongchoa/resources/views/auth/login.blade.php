@@ -1,19 +1,29 @@
 @extends('layouts.app')
 @section('content')
 
+    {{--    <div class="embed-responsive embed-responsive-16by9 vdo_desktop" style="z-index: 0">--}}
+    {{--        <video width="100%" loop autoplay>--}}
+    {{--            <source src="{{asset('vdo/screen_backdrop.mp4')}}" type="video/mp4">--}}
+    {{--        </video>--}}
+    {{--    </div>--}}
+    {{--    --}}
+    <div class="col-12">
 
-    <div class="container-fluid p-0 position-absolute">
-        <div class="embed-responsive embed-responsive-16by9">
-            <video width="100%" height="100%" loop autoplay>
-                <source src="vdo/screen_login.mp4" type="video/mp4">
-            </video>
+        <div class="row">
+            <div class="container-fluid p-0 position-absolute">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <video width="100%" height="100%" loop autoplay>
+                        <source src="vdo/screen_login.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
         </div>
     </div>
 
 
     <div class="container ">
-        <div class="row justify-content-center mt-3">
-            <div class="col-md-6 col-12  box-background-manager-login bg_corner h-auto">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-12  box-background-manager-login bg_corner h-auto" style="margin-top: 100px">
                 <div class="row">
                     <div class="col p-2">
                         <h5 class="text-white text-center">เข้าสู่ระบบ</h5>

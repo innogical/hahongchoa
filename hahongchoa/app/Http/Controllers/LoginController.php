@@ -130,7 +130,7 @@ class LoginController extends Controller
 
         $chk_user = User::where('email', '=', $email)->first();
 
-        return $userSocial;
+//        return $userSocial;
 
         if ($chk_user) {
 
