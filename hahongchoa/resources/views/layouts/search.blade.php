@@ -27,8 +27,6 @@
                             <li class="nav-item col-6  col-md-auto text-center pr-0 bg-active_tab_search"
                                 id="search-tab-nearlocation"
                                 onclick="clickeoptionSearch(1)">
-
-
                                 <a class="nav-link active  text-black-50 bg-transparent border-0"
                                    data-toggle="tab"
                                    href="#home" role="tab"

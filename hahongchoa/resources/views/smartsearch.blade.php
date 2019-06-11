@@ -25,7 +25,7 @@
                         <div class="col-md">
                             <lable class="mt-2">ถึง</lable>
                             <div class="col-md col-8 p-0">
-                                <input type="text" class=" bg_corner bg_corner border form-control shadow_box"
+                                <input type="text" class=" bg_corner border form-control shadow_box"
                                        value="{{$price_high}}" name="price_high">
                             </div>
                         </div>
@@ -97,6 +97,17 @@
 
     </nav>
 
+
+
+    <div class="col-12 position-fixed fixed-bottom " style="z-index: 10;" id="btn_compare">
+        <div class="btn-orange-light text-center text-white font-weight-light bg_border_corner_right_and_left mt-2">
+            เปรียบเทียบ
+        </div>
+    </div>
+
+
+
+
     <div class="container mt-3">
         {{--<div class="col-md-12">--}}
         {{--<div class="row mt-2">--}}
@@ -138,7 +149,7 @@
                             <label class="form-check-label font-weight-light" for="exampleCheck1">ใกล้ไปไกล</label>
                         </div>
                         <div class="form-check radio">
-                            <input type="radio" name="sortDistnce"required  class="custom-radio" value="distaceDesc">
+                            <input type="radio" name="sortDistnce" required class="custom-radio" value="distaceDesc">
                             <label class="form-check-label font-weight-light" for="exampleCheck1">ไกลถึงใกล้</label>
                         </div>
                     </div>
@@ -150,7 +161,7 @@
                             <label class="form-check-label font-weight-light" for="exampleCheck1">ราคาถูกถึงแพง</label>
                         </div>
                         <div class="form-check radio">
-                            <input type="radio" name="sortPrice"required value="priceHigh">
+                            <input type="radio" name="sortPrice" required value="priceHigh">
                             <label class="form-check-label font-weight-light" for="exampleCheck1">ราคาแพงถึงถูก</label>
                         </div>
                     </div>
@@ -170,10 +181,13 @@
                 @include('component.card-list-smartsearch')
                 @yield('cardzone')
             </div>
+
+
         </div>
+
     </div>
 
-    <footer>
+    <footer class="footer">
         @include('layouts.footer')
         @yield('footer')
     </footer>

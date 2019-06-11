@@ -69,7 +69,7 @@
                     </select>
                 </div>
                 <div class="col-md-4 col-6 mt-2">
-                    <label>จุดเด่นของห้อง <span class="text-danger font-weight-light" style="font-size: 12px">กรุณาย่อข้อมูลไม่เกิน <span
+                    <label>จุดเด่นห้อง <span class="text-danger font-weight-light" style="font-size: 12px">ตัวอักษรไม่เกิน <span
                                     id="totaltext"></span> /80 ตัวอักษร</span></label>
                     <input type="text" class="form-control  bg_corner"
                            placeholder="จุดเด่น " name="hilight"
@@ -213,7 +213,7 @@
 
     </script>
 
-    <footer>
+    <footer class="footer">
         @include('layouts.footer')
         @yield('footer')
     </footer>

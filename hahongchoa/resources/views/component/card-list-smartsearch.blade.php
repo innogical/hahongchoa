@@ -2,7 +2,7 @@
     @if(count($result)>0)
         @foreach($result as $room)
 
-            <div class="col-md-4 col-12 card  mt-4 border-0" style="height:auto;">
+            <div class="col-md-4 col-12 card  mt-4 border-0" style="height:auto;" >
                 <div class="hover_item_room" id="select_com{{$room->roomid}}">
 
                     <div class="card-img bg-dark" style="height:auto; width: 100%">
@@ -20,12 +20,13 @@
                         </div>
 
 
-                        {{--<button type="submit"--}}
-                                {{--class="btn text-center text-white-50 font-weight-light color-dark-orange-fond   btn-compare position-absolute"--}}
-                                {{--style="background-color: #1E4159;"--}}
-                                {{--id="btn_compare{{$room->roomid}}"--}}
-                                {{--onclick="compareRoom({{$room->roomid}})">เปรียบเทียบ--}}
-                        {{--</button>--}}
+                        <button type="submit"
+                                class="btn text-center shadow font-weight-light btn-compare position-absolute color-dark-blue-fond"
+
+                                id="btn_compare{{$room->roomid}}"
+                                onclick="compareRoom({{$room->roomid}})"
+                                style="right: 20px">เปรียบเทียบ
+                        </button>
 
                         <img src="{{asset('/images_rooms/'.$room->imgRoomF)}}" alt="{{$room->imgRoomF}}"
                              class="img-fluid"

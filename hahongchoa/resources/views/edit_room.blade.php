@@ -356,7 +356,7 @@
     </script>
 
 
-    <footer>
+    <footer class="footer">
         @include('layouts.footer')
         @yield('footer')
     </footer>

@@ -52,7 +52,7 @@ function compareRoom(idroom) {
     // }
 
     if (arrRoomid.length == 2) {
-        $('#btn_compare').show();
+        $('#btn_compare').show(100);
         $('#btn_compare').click(function () {
             gocomPareroom(arrRoomid[0], arrRoomid[1])
         });

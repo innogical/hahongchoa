@@ -35,7 +35,7 @@ class RoomController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -46,7 +46,7 @@ class RoomController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -64,11 +64,21 @@ class RoomController extends Controller
             ->where('room.id', '=', $id)->get();
 
 
+        $roomsame = Adroom::select('*', 'bts_station.lat AS bts_lat', 'bts_station.lng AS bts_lng', 'room.lat AS room_lat', 'room.lng AS room_lng')
+            ->join('bts_station', 'bts_station.id', '=', 'room.btsstation_id')
+            ->join('lease', 'lease.id', '=', 'room.lease_id')
+            ->join('user', 'user.id', '=', 'room.user_id')
+            ->join('imageRoom', 'imageRoom.roomid', '=', 'room.id')
+            ->join('type_builder', 'type_builder.id', '=', 'room.type_builder')
+            ->groupBy('imageRoom.img_id')
+            ->limit(3)
+            ->get();
 
-//dd($room);
+
+
         $idRoom = $room->first(); //new unwrap collection
 
-        $img_air = Imageroom::where('roomid', '=',$id)->get();
+        $img_air = Imageroom::where('roomid', '=', $id)->get();
         $room_facility = DB::table('room_facility')->where('room_facility.room_id', '=', $id)
             ->get();
 
@@ -79,7 +89,6 @@ class RoomController extends Controller
 
         foreach ($img_air as $get_image) {
             array_push($keep_total_image_arr, $get_image->pathimg);
-
         }
 
         $arr_roomid = [];
@@ -117,13 +126,16 @@ class RoomController extends Controller
 
         $TotelRoom = $mapdata_room->first();
 
-        return view('detailroom', compact('TotelRoom', 'img_air', 'mapRoom_detail_facility', 'img_air'));
+//        dd($roomsame);
+
+
+        return view('detailroom', compact('TotelRoom', 'img_air', 'mapRoom_detail_facility', 'img_air','roomsame'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -134,8 +146,8 @@ class RoomController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -146,7 +158,7 @@ class RoomController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

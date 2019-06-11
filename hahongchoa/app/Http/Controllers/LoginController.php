@@ -61,9 +61,17 @@ class LoginController extends Controller
      * @param User $user
      * @return Response
      */
-    public function show(User $user)
+    public function show($userid)
     {
+
+        $user = User::find($userid);
+
+
+//        return $user;
+        return view('auth.manager-edit_profile',compact('user'));
+
         //
+
     }
 
     /**
@@ -72,7 +80,7 @@ class LoginController extends Controller
      * @param User $user
      * @return Response
      */
-    public function edit(User $user)
+    public function edit()
     {
         //
     }
@@ -84,9 +92,32 @@ class LoginController extends Controller
      * @param User $user
      * @return Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, $iduser)
     {
         //
+        $email = $request->mail;
+//        $pass = $request->password;
+        $username = $request->usersurname;
+        $phone = $request->telphone;
+        $urlfacebook = $request->urlfacebook;
+        $linelink = $request->linelink;
+
+
+
+//        return $request;
+
+        $user = User::find($iduser);
+        $user->username = $username;
+        $user->telephone = $phone;
+        $user->url_facebook = $urlfacebook;
+        $user->line_qrcode = $linelink;
+        $user->email = $email;
+
+
+        $user->save();
+
+        return redirect('/managerroom');
+
     }
 
     /**
@@ -153,27 +184,6 @@ class LoginController extends Controller
             return redirect('/managerroom');
         }
 
-
-//
-
-//        dd($userSocial);
-//
-//        if ($users) {
-//            Auth::login($users);
-//            return redirect('/');
-//        } else {
-//
-//            $user = User::create([
-//                'name' => $userSocial->getName(),
-//                'email' => $userSocial->getEmail(),
-//                'image' => $userSocial->getAvatar(),
-//                'provider_id' => $userSocial->getId(),
-//                'provider' => $provider,
-//            ]);
-//            return $user;
-
-//            return redirect()->route('home');
-//        }
     }
 
 

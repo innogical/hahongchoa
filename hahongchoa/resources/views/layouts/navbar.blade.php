@@ -69,6 +69,8 @@
                                 <li><a href="{{'/adroom'}}" class="color-dark-blue-fond">ลงประกาศห้อง</a></li>
                                 <li><a href="{{'/managerroom'}}" class="color-dark-blue-fond">จัดการห้อง</a>
                                 </li>
+                                <li><a href="{{'/loginend/'.Auth::User()->id}}" class="color-dark-blue-fond">แก้ไขข้อมูลส่วนตัว</a>
+                                </li>
                                 <li><a href="{{'/logout'}}" class="color-dark-blue-fond">ออกจากระบบ</a></li>
                             </ul>
                         </div>
@@ -83,7 +85,7 @@
                             {{--<a class="nav-link border bg_corner color-border-orange px-2 mr-2 text-black-50">ค้นหาห้องเช่า</a>--}}
                             {{--</li>--}}
                             <button type="button"
-                                    class="btn bg_corner color-border-orange text-black-50 show_mobile color-dark-orange-fond"
+                                    class="btn bg_corner color-border-orange text-black-50 show_mobile color-dark-orange-fond mr-2"
                                     data-toggle="modal" style="background-color: transparent"
                                     data-target="#exampleModal">
                                 ค้นหาห้องเช่า
@@ -141,12 +143,6 @@
                                                     <input type="text" name="stat_search_option" hidden required
                                                            value="search_nearLocation">
 
-
-                                                    {{--<lable class="mt-2">ถึง</lable>--}}
-                                                    {{--<div class="col-6">--}}
-                                                    {{--<input type="text" class=" bg_corner border form-control"--}}
-                                                    {{--value="{{$price_high}}">--}}
-                                                    {{--</div>--}}
                                                 </div>
                                                 {{----}}
 
@@ -157,11 +153,8 @@
                                                         <div class="form-group">
                                                             <label for="exampleFormControlSelect2">ผู้อาศัย</label>
                                                             <select id="inputState"
-                                                                    class=" bg_corner border form-control"
+                                                                    class=" bg_corner border form-control custom-select"
                                                                     name="person_live" required>
-                                                                <option value="{{$person_live}}"
-                                                                        selected> {{$person_live}}คน
-                                                                </option>
                                                                 <option value="1" @if($person_live ==1) selected @endif>
                                                                     1คน
                                                                 </option>
@@ -189,7 +182,7 @@
                                                         {{--<div class="col-md-8 col-8 p-0">--}}
 
                                                         <select id="inputState"
-                                                                class="form-control  custom-select bg_corner border col-md-12 col-12 shadow_box"
+                                                                class="form-control  custom-select bg_corner border col-md-12 col-12 shadow_box custom-select"
                                                                 name="area_zone">
                                                             {{--<option value="{{$area_zone}}" selected>{{$area_zone}}</option>--}}
                                                             @foreach($zone_bts as $a_zone)
@@ -197,29 +190,13 @@
                                                                         @if($a_zone->id == $station_bts) selected @endif>{{$a_zone-> name_station }}</option>
                                                             @endforeach
                                                         </select>
-                                                        {{----}}
-                                                        {{--<div class="col">--}}
-                                                        {{--<div class="form-group">--}}
-                                                        {{--<label for="exampleFormControlSelect2">สถานีรถไฟฟ้า</label>--}}
-                                                        {{--<select id="inputState"--}}
-                                                        {{--class="form-control bg_corner border col-md-12 col-12"--}}
-                                                        {{--name="area_zone" required>--}}
-                                                        {{--<option value="{{$name_bts_select->id}}"--}}
-                                                        {{--selected>{{$name_bts_select->name_station}}</option>--}}
-                                                        {{--@foreach($zone_bts as $a_zone)--}}
-                                                        {{--<option value="{{$a_zone->id}}">{{$a_zone-> name_station }}</option>--}}
-                                                        {{--@endforeach--}}
-                                                        {{--</select>--}}
-                                                        {{--</div>--}}
-
-                                                        {{--</div>--}}
                                                     @endif
 
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="exampleFormControlSelect2">การเดินทาง</label>
                                                             <select id="inputState"
-                                                                    class="form-control bg_corner border col-md-12 col-12"
+                                                                    class="form-control bg_corner border col-md-12 col-12 custom-select"
                                                                     name="optioncar">
                                                                 <option value="havecar"
                                                                         @if($optioncar =="havecar") selected @endif>
