@@ -24,20 +24,28 @@
 
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <div class="row col-12 p-0 m-0">
-                            <li class="nav-item col-6  col-md-auto text-center pr-0 bg-active_tab_search"
-                                id="search-tab-nearlocation"
-                                onclick="clickeoptionSearch(1)">
+{{--                            <li class="nav-item col-6  col-md-auto text-center pr-0 bg-active_tab_search border-0">--}}
+{{--                                <a class="nav-link active text-black-50 bg-active_tab_search bg-transparent" id="search-tab-nearlocation" data-toggle="tab" href="#home" role="tab" aria-controls="home" onclick="clickeoptionSearch(1)" aria-selected="true">ใกล้ออฟฟิศ/มหาวิทยาลัย</a>--}}
+{{--                            </li>--}}
+
+
+                            <li class="nav-item col-6  col-md-auto text-center pr-0"
+                                onclick="clickeoptionSearch(1)"
+                                id="bg_search-tab-nearlocation"
+                            >
                                 <a class="nav-link active  text-black-50 bg-transparent border-0"
                                    data-toggle="tab"
                                    href="#home" role="tab"
                                    aria-controls="home"
+                                   id="search-tab-nearlocation"
                                    aria-selected="true">ค้นหาใกล้ออฟฟิศ/มหาวิทยาลัย</a>
                             </li>
                             <li class="nav-item col-6 col-md-6 text-center pl-0"
                                 onclick="clickeoptionSearch(2)"
-                                id="search-tab-near_station" >
+                                 >
                                 <a class="nav-link text-black-50 bg-transparent border-0" data-toggle="tab"
                                    href="#profile"
+                                   id="search-tab-near_station"
                                    role="tab"
                                    aria-controls="profile" aria-selected="false">ค้นหาใกล้สถานีรถไฟฟ้า</a>
                             </li>

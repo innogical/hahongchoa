@@ -18,13 +18,13 @@
 
                     </div>
 
-                        <button type="submit"
-                                class="btn text-center shadow font-weight-light btn-compare position-absolute color-dark-blue-fond"
+{{--                        <button type="submit"--}}
+{{--                                class="btn text-center shadow font-weight-light btn-compare position-absolute color-dark-blue-fond"--}}
 
-                                id="btn_compare{{$room->roomid}}"
-                                onclick="compareRoom({{$room->roomid}})"
-                        style="right: 20px">เปรียบเทียบ
-                        </button>
+{{--                                id="btn_compare{{$room->roomid}}"--}}
+{{--                                onclick="compareRoom({{$room->roomid}})"--}}
+{{--                        style="right: 20px">เปรียบเทียบ--}}
+{{--                        </button>--}}
 
 
                     <img src="{{asset('/images_rooms/'.$room->pathimg)}}" alt="{{$room->pathimg}}"

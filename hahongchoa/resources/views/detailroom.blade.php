@@ -266,7 +266,7 @@
             {{--</div>--}}
             {{--@endif--}}
         </div>
-        <div class="col-12">
+        <div class="col-12 mt-4">
             <h4 class="font-weight-bold color-dark-blue-fond text-center">ห้องพักที่น่าสนใจ</h4>
             <div class="row">
                 @if(count($roomsame)>0)
@@ -463,7 +463,7 @@
 
 
 
-    <footer class="footer">
+    <footer>
         @include('layouts.footer')
         @yield('footer')
     </footer>

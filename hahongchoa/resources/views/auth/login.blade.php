@@ -58,7 +58,7 @@
                     <div class="col-md-8 offset-md-2 mt-2">
                         <a href="{{ url('/login/facebook') }}"
                            class="btn  btn-block bg_corner  btn-social btn-facebook text-center pl-0">
-{{--                            <i class="fab fa-facebook"></i>--}}
+                            <i class="fab fa-facebook mt-1 ml-2"></i>
                             เข้าสู่ระบบด้วย Facebook
                         </a>
 

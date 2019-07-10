@@ -15,7 +15,7 @@
             <div class="col-md-8 col-8  box-background-manager-login bg_corner h-auto">
                 <div class="row">
                     <div class="col p-2">
-                        <h5 class="text-white text-center">สมัครสมาชิก</h5>
+                        <h5 class="text-white text-center">แก้ไขข้อมูลส่วนตัว</h5>
                     </div>
                 </div>
 
@@ -23,16 +23,6 @@
 
                     @csrf
                     @method('PUT')
-                    <div class="row">
-                        <div class="form-group col-md-6">
-                            <input type="email" class="form-control bg_corner w-100" name="mail"
-                                   placeholder="Email" required value="{{$user->email}}">
-                        </div>
-{{--                        <div class="form-group col-md-6 ">--}}
-{{--                            <input type="password" class="form-control bg_corner" placeholder="Password" name="password"--}}
-{{--                                   required value="{{$user->}}">--}}
-{{--                        </div>--}}
-                    </div>
 
                     <div class="row ">
 

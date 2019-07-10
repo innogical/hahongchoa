@@ -1,12 +1,17 @@
 $(document).ready(function () {
     //
     $('#btn_compare').hide();
+
     $('#show_option_filter').hide();
     $('#btn_filter').click(function () {
         $('#show_option_filter').toggle("slow", function () {
 
         });
 
+    });
+
+    $('#close_popup').click(function () {
+        $('#show_option_filter').hide(100);
     });
 
 });

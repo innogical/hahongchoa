@@ -26,7 +26,7 @@
         </div>
     </div>
 
-    <footer class="footer">
+  <footer>
         @include('layouts.footer')
         @yield('footer')
     </footer>

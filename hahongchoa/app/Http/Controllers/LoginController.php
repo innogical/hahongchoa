@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Socialite;
+use Laravel\Socialite\Facades\Socialite;
 
 class LoginController extends Controller
 {
@@ -68,7 +68,7 @@ class LoginController extends Controller
 
 
 //        return $user;
-        return view('auth.manager-edit_profile',compact('user'));
+        return view('auth.manager-edit_profile', compact('user'));
 
         //
 
@@ -101,7 +101,6 @@ class LoginController extends Controller
         $phone = $request->telphone;
         $urlfacebook = $request->urlfacebook;
         $linelink = $request->linelink;
-
 
 
 //        return $request;

@@ -64,6 +64,11 @@ class RoomController extends Controller
             ->where('room.id', '=', $id)->get();
 
 
+        if ($room == null || sizeof($room) == 0) {
+            return redirect('/')->with('data', "มีบางอย่างผิดพลาด");
+        }
+
+
         $roomsame = Adroom::select('*', 'bts_station.lat AS bts_lat', 'bts_station.lng AS bts_lng', 'room.lat AS room_lat', 'room.lng AS room_lng')
             ->join('bts_station', 'bts_station.id', '=', 'room.btsstation_id')
             ->join('lease', 'lease.id', '=', 'room.lease_id')
@@ -73,7 +78,6 @@ class RoomController extends Controller
             ->groupBy('imageRoom.img_id')
             ->limit(3)
             ->get();
-
 
 
         $idRoom = $room->first(); //new unwrap collection
@@ -129,7 +133,7 @@ class RoomController extends Controller
 //        dd($roomsame);
 
 
-        return view('detailroom', compact('TotelRoom', 'img_air', 'mapRoom_detail_facility', 'img_air','roomsame'));
+        return view('detailroom', compact('TotelRoom', 'img_air', 'mapRoom_detail_facility', 'img_air', 'roomsame'));
     }
 
     /**
@@ -329,6 +333,8 @@ class RoomController extends Controller
 
     public function compareRoom($idroom1, $idroom2)
     {
+
+
         $room1 = Adroom::select('*', 'room.id AS roomid')
             ->join('user', 'user.id', '=', 'room.user_id')
             ->where('room.id', '=', $idroom1)->get();
@@ -337,8 +343,19 @@ class RoomController extends Controller
             ->join('user', 'user.id', '=', 'room.user_id')
             ->where('room.id', '=', $idroom2)->get();
 
+
+//        return [$room1,$room2];
+
+        if ($room1 == null || sizeof($room1) == 0 || $room2 == null || sizeof($room2) == 0) {
+            return redirect('/')->with('data', "มีบางอย่างผิดพลาด");
+        }
+
+
         $idroom1 = $room1[0]->roomid;
         $idroom2 = $room2[0]->roomid;
+
+
+//        return [$idroom1,$idroom2];
 
 
 //        return [$idroom1, $idroom2];
@@ -403,6 +420,7 @@ class RoomController extends Controller
             $item->lease = $leas_room2->laase_duration;
             return $item;
         });
+
 
 //                return [$mapdata_room1, $mapdata_room2];
 

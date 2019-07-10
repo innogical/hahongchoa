@@ -510,7 +510,7 @@ class SearchController extends Controller
         $price_high = $request->price_high;
         $person_live = $request->person_live;
         $area_zone = $request->area_zone;
-        $lifestyle_location = $request->lifestyle_location;
+        $lifestyle_location = $request->lifestyleplace;
         $optioncar = $request->optioncar;
         $stat_search_option = $request->stat_search_option;
 

@@ -65,7 +65,8 @@
                     <label>เหมาะสำหรับ</label>
                     <select id="inputState" class="form-control bg_corner custom-select" name="lifestyle">
                         @foreach($lifestyle as $index=> $lifestyle_name)
-                            <option value="{{$index+1}}" @if($myRoom->stylelife_id == $index+1) selected @endif >{{$lifestyle_name}}</option>
+                            <option value="{{$index+1}}"
+                                    @if($myRoom->stylelife_id == $index+1) selected @endif >{{$lifestyle_name}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -356,7 +357,7 @@
     </script>
 
 
-    <footer class="footer">
+    <footer>
         @include('layouts.footer')
         @yield('footer')
     </footer>

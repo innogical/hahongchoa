@@ -283,22 +283,28 @@ function clickSelectLocation(obj) {
 
 function clickeoptionSearch(numpage) {
 
+
+    // alert(numpage);
+    if(numpage == 1 ){
+        $('#search-tab-nearlocation').addClass('bg-active_tab_search');
+    }
+
+
     $('#search-tab-nearlocation').click(function () {
 
 
-        if ($('#search-tab-nearlocation').hasClass('active_tab_search')) {
-            $('#search-tab-nearlocation').removeClass('bg-active_tab_search');
 
 
-        } else {
+        $('#search-tab-nearlocation').addClass('bg-active_tab_search');
+        $('#search-tab-near_station').removeClass('bg-active_tab_search');
 
-            $('#search-tab-nearlocation').addClass('bg-active_tab_search');
-            $('#search-tab-near_station').removeClass('bg-active_tab_search');
-        }
     });
 
 
     $('#search-tab-near_station').click(function () {
+
+
+
         $('#search-tab-near_station').addClass('bg-active_tab_search');
         $('#search-tab-nearlocation').removeClass('bg-active_tab_search');
 

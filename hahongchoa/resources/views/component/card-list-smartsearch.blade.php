@@ -22,7 +22,6 @@
 
                         <button type="submit"
                                 class="btn text-center shadow font-weight-light btn-compare position-absolute color-dark-blue-fond"
-
                                 id="btn_compare{{$room->roomid}}"
                                 onclick="compareRoom({{$room->roomid}})"
                                 style="right: 20px">เปรียบเทียบ

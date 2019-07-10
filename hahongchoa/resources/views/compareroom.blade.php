@@ -15,25 +15,25 @@
 
 
                 <tbody>
-                <tr class="col text-center">
-                    <th scope="row">1</th>
-                    {{--<td>--}}
-                    {{--{{$img_room1->pathimg}}--}}
-                    {{--</td>--}}
-                    <td>
-                        <div class=" card-img">
-                            <img src="{{asset('/images_rooms/'.$img_room1['imageRoom']->pathimg)}}" class="w-50"
-                                 alt="">
-                        </div>
-                    </td>
-                    <td>
-                        <div class=" card-img">
-                            <img src="{{asset('/images_rooms/'.$img_room2['imageRoom']->pathimg)}}" class="w-50"
-                                 alt="">
-                        </div>
-                    </td>
+{{--                <tr class="col text-center">--}}
+{{--                    <th scope="row">1</th>--}}
+{{--                    --}}{{--<td>--}}
+{{--                    --}}{{--{{$img_room1->pathimg}}--}}
+{{--                    --}}{{--</td>--}}
+{{--                    <td>--}}
+{{--                        <div class=" card-img">--}}
+{{--                            <img src="{{asset('/images_rooms/'.$img_room1['imageRoom']->pathimg)}}" class="w-50"--}}
+{{--                                 alt="">--}}
+{{--                        </div>--}}
+{{--                    </td>--}}
+{{--                    <td>--}}
+{{--                        <div class=" card-img">--}}
+{{--                            <img src="{{asset('/images_rooms/'.$img_room2['imageRoom']->pathimg)}}" class="w-50"--}}
+{{--                                 alt="">--}}
+{{--                        </div>--}}
+{{--                    </td>--}}
 
-                </tr>
+{{--                </tr>--}}
                 <tr class="col text-center">
                     <td>
                         ขนาด

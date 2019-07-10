@@ -46,7 +46,7 @@
 
 
                 @if(session()->has('data'))
-                    {{session()->get('data')}}
+                    {{--                    {{session()->get('data')}}--}}
                     <div class="modal fade" id="myModal">
                         <div class="modal-dialog modal-sm">
                             <div class="modal-content">
@@ -59,17 +59,19 @@
 
                                 <!-- Modal body -->
                                 <div class="modal-body">
-                                    <p class="text-center">กรุณาค้นหาใหม่อีกครั้ง</p>
+                                    <p class="text-center">{{session()->get('data')}}</p>
                                 </div>
 
                                 <!-- Modal footer -->
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                </div>
+{{--                                <div class="modal-footer">--}}
+{{--                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>--}}
+{{--                                </div>--}}
 
                             </div>
                         </div>
                     </div>
+                @elseif(session()->get('data'))
+
                 @endif
 
 
@@ -86,7 +88,7 @@
             $("#myModal").modal()
         });
     </script>
-    <footer class="footer">
+    <footer>
         @include('layouts.footer')
         @yield('footer')
     </footer>

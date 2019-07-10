@@ -99,7 +99,7 @@
 
 
 
-    <div class="col-12 position-fixed fixed-bottom " style="z-index: 10;" id="btn_compare">
+    <div class="col-12 position-fixed fixed-bottom hover_compare_room" style="z-index: 10;" id="btn_compare">
         <div class="btn-orange-light text-center text-white font-weight-light bg_border_corner_right_and_left mt-2">
             เปรียบเทียบ
         </div>
@@ -126,7 +126,7 @@
         </div>
 
 
-        <div class="offset-md-8  offset-2 col-md-4 col-10">
+        <div class="offset-md-8  offset-2 col-md-4 col-10 mt-2">
             <form action="/roomnearskytrian/sortresult" method="post" class="form-group m-0">
                 @csrf
                 <div class="bg_corner bg_popver_filter col-md-12 col-12 p-2" id="show_option_filter">
@@ -141,7 +141,11 @@
 
                     </div>
 
-                    <h6 class="m-2">เรียงลำดับระยะทาง</h6>
+                    <div class="row justify-content-sm-between">
+                        <h6 class="m-2">เรียงลำดับระยะทาง</h6>
+                        <p id="close_popup" class="mr-3 text-black-50-50">X</p>
+                    </div>
+
                     <div class="row">
                         <input type="text" value="{{$result}}" hidden name="dataAll">
                         <div class="form-check radio">
@@ -187,7 +191,7 @@
 
     </div>
 
-    <footer class="footer">
+    <footer>
         @include('layouts.footer')
         @yield('footer')
     </footer>

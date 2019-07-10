@@ -49,12 +49,31 @@
 
                     </div>
 
+                @elseif(Request::url() =="http://127.0.0.1:8000/roomnearskytrian/sortresult" && $lifestyle_location != "")
+
+                    <div class="col-md-9 show_desktop">
+
+                        <div class="row">
+                            <div class="col-md-2 p-0">
+                                <p class="color-dark-blue-fond mt-3 text-center">คำค้นหาสถานที่</p>
+                            </div>
+
+                            <input type="text" id="input_real_lifestyle"
+                                   class="p-2 col-md-6 border-0 shadow_box  bg_corner mt-2"
+                                   placeholder="สถานที่ทำงาน / มหาวิทยาลัย" value="{{$lifestyle_location}}"
+                                   style="padding: 10px">
+                            {{--{{$lifestyle_location}}--}}
+                        </div>
+                        <div class="offset-md-10"></div>
+
+
+                    </div>
                 @endif
 
                 <ul class="navbar-nav">
                     {{--{{Request::url()}}--}}
                     @if(Request::url() == "http://127.0.0.1:8000")
-                        <div class="btn btn-orange-light mx-2 bg_corner " id="btn_compare">เปรียบเทียบห้อง</div>
+                        {{--                        <div class="btn btn-orange-light mx-2 bg_corner " id="btn_compare">เปรียบเทียบห้อง</div>--}}
                     @endif
 
                     @if(\Illuminate\Support\Facades\Auth::User())
@@ -77,7 +96,7 @@
                     @else
                         {{--<li><a class="nav-link" href="{{url('/login')}}">เข้าสู่ระบบ</a></li>--}}
 
-                        @if(Request::url() == "http://127.0.0.1:8000/adroom/"  || Request::url() == "http://127.0.0.1:8000/register"  )
+                        @if(Request::url() == "http://127.0.0.1:8000/adroom/"  || Request::url() == "http://127.0.0.1:8000/register")
 
 
                         @elseif( Request::url() == "http://127.0.0.1:8000/roomnearskytrian" )
@@ -246,7 +265,7 @@
                             </li>
                             {{--version Moblie--}}
                             <li>
-                                <a class="nav-link border  show_mobile bg_corner color-border-orang font-weight-light px-2 mr-2 color-dark-orange-fond"
+                                <a class="nav-link border  show_mobile bg_corner color-border-orange font-weight-light px-2 mr-2 color-dark-orange-fond"
                                    href="{{url('/login')}}" id="regis_clicke" data-toggle="modal"
                                    data-target="#exampleModal">ลงประกาศห้อง</a>
                             </li>
@@ -314,6 +333,12 @@
                                                    href="{{url('/login')}}" id="regis_clicke" data-toggle="modal"
                                                    data-target="#exampleModal_regis">สมัครสมาชิกที่นี่</a>
 
+                                                <a href="{{ url('/login/facebook') }}"
+                                                   class="btn  btn-block bg_corner  btn-social btn-facebook text-center pl-0">
+                                                    <i class="fab fa-facebook mt-1 ml-2"></i>
+                                                    เข้าสู่ระบบด้วย Facebook
+                                                </a>
+
 
                                                 {{--<a href="{{'/register'}}" class="font-weight-light color-green ml-1">สมัครสมาชิกที่นี่</a>--}}
                                             </div>
@@ -341,7 +366,6 @@
                                             {{--<div class="row m-2">--}}
                                             <div class="row">
                                                 <div class="col-md-12">
-
                                                     <form action="/register" method="post">
                                                         @csrf
                                                         <div class="row">
